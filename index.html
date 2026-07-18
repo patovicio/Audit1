@@ -267,7 +267,7 @@ const CONFIG = {
   // URL del JSON de clientes en GitHub Pages
   CLIENTES_URL: "https://patovicio.github.io/Audit1/clientes_maestro.json",
   // URL del Google Apps Script web app
-  SHEETS_API_URL: "https://script.google.com/macros/s/AKfycbwzGvM07UUXbQNcaITqTJHRD6tnjpbOVc-njxMga9p2eX3WAP_ZQ16vix5lxjKOXytN/exec",
+  SHEETS_API_URL: "https://script.google.com/macros/s/AKfycbwdFTYU9OPm6AI3CjIeWRa71wpaR1EcqyPxXQZQATwVsW6fholi08LC_aFKzMmJvvUL/exec",
 };
 
 // ===================================================================
@@ -599,17 +599,16 @@ function generarTextoWhatsApp() {
 // GUARDAR AUDITORÍA - Google Sheets + offline queue
 // ===================================================================
 async function enviarAGoogleSheets(datos) {
-  // Usar XMLHttpRequest que maneja mejor los redirects de Apps Script
-  return new Promise((resolve, reject) => {
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', CONFIG.SHEETS_API_URL);
-    xhr.setRequestHeader('Content-Type', 'text/plain');
-    xhr.onload = () => resolve({ status: "ok" });
-    xhr.onerror = () => reject(new Error('Error de red'));
-    xhr.ontimeout = () => reject(new Error('Timeout'));
-    xhr.timeout = 15000;
-    xhr.send(JSON.stringify(datos));
+  // Google Apps Script requiere no-cors por el redirect 302
+  await fetch(CONFIG.SHEETS_API_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    redirect: 'follow',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify(datos)
   });
+  // Con no-cors no podemos leer la respuesta, pero el dato llega
+  return { status: "ok" };
 }
 
 async function guardarAuditoria() {
