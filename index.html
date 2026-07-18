@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Auditoría Friosur</title>
+<meta name="description" content="App de auditoría comercial Friosur - Control de activos y visitas"/>
+<meta name="theme-color" content="#004ac6"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<link rel="manifest" href="manifest.json"/>
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png"/>
+<link rel="apple-touch-icon" href="icons/icon-192.png"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "primary": "#004ac6",
+        "on-primary": "#ffffff",
+        "primary-container": "#2563eb",
+        "on-primary-container": "#eeefff",
+        "secondary": "#006c49",
+        "on-secondary": "#ffffff",
+        "secondary-container": "#6cf8bb",
+        "on-secondary-container": "#00714d",
+        "tertiary": "#ab0b1c",
+        "error": "#ba1a1a",
+        "on-error": "#ffffff",
+        "error-container": "#ffdad6",
+        "on-error-container": "#93000a",
+        "background": "#f8f9ff",
+        "on-background": "#0b1c30",
+        "surface": "#f8f9ff",
+        "on-surface": "#0b1c30",
+        "on-surface-variant": "#434655",
+        "outline": "#737686",
+        "outline-variant": "#c3c6d7",
+        "surface-container-lowest": "#ffffff",
+        "surface-container-low": "#eff4ff",
+        "surface-container": "#e5eeff",
+        "surface-container-high": "#dce9ff",
+        "surface-container-highest": "#d3e4fe",
+      },
+      spacing: { "xs":"4px","sm":"8px","md":"16px","lg":"24px","xl":"32px","touch":"44px","safe":"16px" },
+      fontFamily: { "inter": ["Inter","system-ui","sans-serif"] },
+    }
+  }
+}
+</script>
+<style>
+*{font-family:'Inter',system-ui,sans-serif}
+body{-webkit-tap-highlight-color:transparent}
+.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;vertical-align:middle}
+.filled{font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24}
+.hide-scrollbar::-webkit-scrollbar{display:none}
+.hide-scrollbar{-ms-overflow-style:none;scrollbar-width:none}
+.card-shadow{box-shadow:0 4px 6px -1px rgba(0,0,0,0.08),0 2px 4px -1px rgba(0,0,0,0.04)}
+input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+input[type=number]{-moz-appearance:textfield}
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);padding:12px 24px;border-radius:12px;font-size:13px;font-weight:600;z-index:999;animation:toastIn .3s ease}
+@keyframes toastIn{from{opacity:0;transform:translateX(-50%) translateY(20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+</style>
+</head>
+<body class="bg-background text-on-surface min-h-screen pb-4">
+<!-- HEADER -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-primary shadow-md h-[52px] flex justify-between items-center px-safe">
+  <div class="flex items-center gap-sm">
+    <span class="material-symbols-outlined text-on-primary">fact_check</span>
+    <h1 class="text-[17px] font-bold text-on-primary tracking-tight">Auditoría Friosur</h1>
+  </div>
+  <div class="flex items-center gap-sm">
+    <div id="statusIndicator" class="w-2 h-2 rounded-full bg-green-400 animate-pulse" title="Online"></div>
+    <div id="contadorVisitas" class="bg-white/15 px-3 py-1 rounded-full">
+      <span class="text-[11px] font-semibold text-on-primary uppercase">0 hoy</span>
+    </div>
+    <button id="btnVolver" class="hidden bg-white/20 px-3 py-1.5 rounded-lg text-[12px] font-bold text-on-primary active:scale-95 transition-transform" onclick="mostrarListaClientes()">
+      <span class="material-symbols-outlined text-[16px] align-middle">arrow_back</span> Volver
+    </button>
+  </div>
+</header>
+
+<main class="mt-[60px] max-w-lg mx-auto">
+
+<!-- ============ PANTALLA LISTA ============ -->
+<div id="pantallaLista" class="px-safe space-y-md pb-8">
+  <div class="relative">
+    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+      <span class="material-symbols-outlined text-outline">search</span>
+    </div>
+    <input type="text" id="inputBusqueda" placeholder="Buscar cliente, comercio o ID..."
+      class="w-full h-12 bg-surface-container-lowest border border-outline-variant rounded-xl pl-11 pr-4 text-[15px] focus:ring-2 focus:ring-primary focus:border-primary outline-none shadow-sm"
+      oninput="filtrarClientes()"/>
+  </div>
+
+  <div class="flex gap-2 overflow-x-auto hide-scrollbar -mx-safe px-safe py-1" id="chipsCiudad">
+    <button onclick="filtrarPorCiudad('')" class="chip-ciudad flex-shrink-0 px-4 py-2 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-primary text-on-primary active:scale-95 transition-transform">Todos</button>
+    <button onclick="filtrarPorCiudad('RIO GALLEGOS')" class="chip-ciudad flex-shrink-0 px-4 py-2 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-surface-container-high text-on-surface-variant active:scale-95 transition-transform">Río Gallegos</button>
+    <button onclick="filtrarPorCiudad('EL CALAFATE')" class="chip-ciudad flex-shrink-0 px-4 py-2 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-surface-container-high text-on-surface-variant active:scale-95 transition-transform">El Calafate</button>
+    <button onclick="filtrarPorCiudad('RIO TURBIO')" class="chip-ciudad flex-shrink-0 px-4 py-2 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-surface-container-high text-on-surface-variant active:scale-95 transition-transform">Río Turbio</button>
+    <button onclick="filtrarPorCiudad('28 DE NOVIEMBRE')" class="chip-ciudad flex-shrink-0 px-4 py-2 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-surface-container-high text-on-surface-variant active:scale-95 transition-transform">28 Nov</button>
+    <button onclick="filtrarPorCiudad('PTO SAN JULIAN')" class="chip-ciudad flex-shrink-0 px-4 py-2 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-surface-container-high text-on-surface-variant active:scale-95 transition-transform">San Julián</button>
+    <button onclick="filtrarPorCiudad('PIEDRABUENA')" class="chip-ciudad flex-shrink-0 px-4 py-2 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-surface-container-high text-on-surface-variant active:scale-95 transition-transform">Piedrabuena</button>
+    <button onclick="filtrarPorCiudad('GOB. GREGORES')" class="chip-ciudad flex-shrink-0 px-4 py-2 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-surface-container-high text-on-surface-variant active:scale-95 transition-transform">Gregores</button>
+    <button onclick="filtrarPorCiudad('PTO SANTA CRUZ')" class="chip-ciudad flex-shrink-0 px-4 py-2 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-surface-container-high text-on-surface-variant active:scale-95 transition-transform">Sta. Cruz</button>
+  </div>
+
+  <div class="flex justify-between items-center">
+    <span id="contadorResultados" class="text-[12px] font-semibold text-on-surface-variant"></span>
+    <button onclick="sincronizarPendientes()" id="btnSync" class="hidden text-[11px] font-bold text-primary flex items-center gap-1 active:scale-95">
+      <span class="material-symbols-outlined text-[16px]">sync</span> Enviar pendientes
+    </button>
+  </div>
+
+  <div id="listaClientes" class="space-y-3 max-h-[65vh] overflow-y-auto hide-scrollbar pb-4"></div>
+</div>
+<!-- ============ PANTALLA FORMULARIO ============ -->
+<div id="pantallaFormulario" class="hidden px-safe space-y-lg pb-8">
+
+  <!-- Info cliente -->
+  <section class="bg-surface-container-lowest rounded-xl p-md shadow-sm border border-outline-variant/30">
+    <div class="flex justify-between items-start">
+      <div class="flex-1">
+        <h2 id="frmNombre" class="text-[17px] font-bold text-primary leading-tight"></h2>
+        <p id="frmComercio" class="text-[13px] font-medium text-on-surface-variant mt-1"></p>
+      </div>
+      <div class="bg-surface-container-high p-2 rounded-lg"><span class="material-symbols-outlined text-primary">storefront</span></div>
+    </div>
+    <div class="mt-3 pt-3 border-t border-outline-variant flex items-center gap-2">
+      <span class="material-symbols-outlined text-[16px] text-outline">location_on</span>
+      <p id="frmDireccion" class="text-[13px] text-on-surface-variant"></p>
+    </div>
+    <div class="flex gap-2 mt-2">
+      <span id="frmId" class="text-[10px] bg-surface-container-high px-2 py-0.5 rounded font-bold text-on-surface-variant uppercase"></span>
+      <span id="frmVend" class="text-[10px] bg-secondary-container px-2 py-0.5 rounded font-bold text-on-secondary-container uppercase"></span>
+    </div>
+  </section>
+
+  <!-- Timestamp -->
+  <div class="flex justify-between">
+    <span class="text-[11px] font-semibold text-primary uppercase tracking-wider">Auditoría en curso</span>
+    <span id="frmTimestamp" class="text-[11px] text-on-surface-variant"></span>
+  </div>
+
+  <!-- ACTIVOS -->
+  <section class="space-y-3">
+    <div class="flex items-center gap-2">
+      <span class="material-symbols-outlined text-primary filled">kitchen</span>
+      <h3 class="text-[16px] font-bold text-on-surface">Control de Activos</h3>
+    </div>
+    <div id="contenedorActivos" class="space-y-3"></div>
+  </section>
+
+  <!-- COBERTURA -->
+  <section class="space-y-3">
+    <div class="flex items-center gap-2">
+      <span class="material-symbols-outlined text-primary filled">inventory</span>
+      <h3 class="text-[16px] font-bold text-on-surface">Cobertura de Productos</h3>
+    </div>
+    <!-- Marfrig -->
+    <div class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant overflow-hidden">
+      <div class="p-md flex justify-between items-center bg-surface-container-low">
+        <div><span class="text-[11px] font-semibold text-primary uppercase">Marca</span><p class="text-[16px] font-bold">Marfrig</p></div>
+        <div class="flex bg-surface-container-high rounded-lg p-1 gap-0.5">
+          <button id="btn-marfrig-hay" onclick="setCoberturaEstado('marfrig','hay')" class="px-4 py-2 rounded-md text-[11px] font-bold uppercase transition-all text-on-surface-variant">Hay</button>
+          <button id="btn-marfrig-nc" onclick="setCoberturaEstado('marfrig','nc')" class="px-4 py-2 rounded-md text-[11px] font-bold uppercase transition-all bg-surface-container text-on-surface-variant">NC</button>
+        </div>
+      </div>
+      <div id="sub-marfrig" class="hidden px-md pb-md pt-3">
+        <div class="space-y-1 border-l-4 border-primary pl-4">
+          <label class="flex justify-between items-center py-2.5 border-b border-outline-variant/30 cursor-pointer"><span class="text-[14px]">Salchichas</span><input type="checkbox" id="chk-marfrig-salchicha" class="w-5 h-5 rounded border-outline text-primary focus:ring-primary"/></label>
+          <label class="flex justify-between items-center py-2.5 border-b border-outline-variant/30 cursor-pointer"><span class="text-[14px]">Hamburguesas</span><input type="checkbox" id="chk-marfrig-hamburguesa" class="w-5 h-5 rounded border-outline text-primary focus:ring-primary"/></label>
+          <label class="flex justify-between items-center py-2.5 cursor-pointer"><span class="text-[14px]">Otros</span><input type="checkbox" id="chk-marfrig-otros" class="w-5 h-5 rounded border-outline text-primary focus:ring-primary"/></label>
+        </div>
+      </div>
+    </div>
+    <!-- Froneri -->
+    <div class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant overflow-hidden">
+      <div class="p-md flex justify-between items-center bg-surface-container-low">
+        <div><span class="text-[11px] font-semibold text-primary uppercase">Marca</span><p class="text-[16px] font-bold">Froneri</p></div>
+        <div class="flex bg-surface-container-high rounded-lg p-1 gap-0.5">
+          <button id="btn-froneri-hay" onclick="setCoberturaEstado('froneri','hay')" class="px-4 py-2 rounded-md text-[11px] font-bold uppercase transition-all text-on-surface-variant">Hay</button>
+          <button id="btn-froneri-nc" onclick="setCoberturaEstado('froneri','nc')" class="px-4 py-2 rounded-md text-[11px] font-bold uppercase transition-all bg-surface-container text-on-surface-variant">NC</button>
+        </div>
+      </div>
+      <div id="sub-froneri" class="hidden px-md pb-md pt-3">
+        <div class="space-y-1 border-l-4 border-primary pl-4">
+          <label class="flex justify-between items-center py-2.5 border-b border-outline-variant/30 cursor-pointer"><span class="text-[14px]">Impulso</span><input type="checkbox" id="chk-froneri-impulso" class="w-5 h-5 rounded border-outline text-primary focus:ring-primary"/></label>
+          <label class="flex justify-between items-center py-2.5 border-b border-outline-variant/30 cursor-pointer"><span class="text-[14px]">Bandejas</span><input type="checkbox" id="chk-froneri-bandejas" class="w-5 h-5 rounded border-outline text-primary focus:ring-primary"/></label>
+          <label class="flex justify-between items-center py-2.5 cursor-pointer"><span class="text-[14px]">Otros</span><input type="checkbox" id="chk-froneri-otros" class="w-5 h-5 rounded border-outline text-primary focus:ring-primary"/></label>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- PRECIOS -->
+  <section class="space-y-3">
+    <div class="flex items-center gap-2">
+      <span class="material-symbols-outlined text-primary filled">payments</span>
+      <h3 class="text-[16px] font-bold text-on-surface">Precios de Competencia</h3>
+    </div>
+    <div class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant overflow-hidden">
+      <div class="grid grid-cols-12 bg-primary/5 p-3 border-b border-outline-variant">
+        <div class="col-span-7 text-[11px] font-semibold text-on-surface-variant uppercase">Producto</div>
+        <div class="col-span-5 text-right text-[11px] font-semibold text-on-surface-variant uppercase">Precio $</div>
+      </div>
+      <div class="divide-y divide-outline-variant/30" id="contenedorPrecios"></div>
+    </div>
+  </section>
+
+  <!-- COMPETENCIA -->
+  <section class="space-y-3">
+    <div class="flex items-center gap-2">
+      <span class="material-symbols-outlined text-primary filled">dresser</span>
+      <h3 class="text-[16px] font-bold text-on-surface">Activos de Competencia</h3>
+    </div>
+    <div class="grid grid-cols-2 gap-3" id="contenedorCompetencia"></div>
+  </section>
+
+  <!-- FOTOS -->
+  <section class="space-y-3">
+    <div class="flex items-center gap-2">
+      <span class="material-symbols-outlined text-primary filled">add_a_photo</span>
+      <h3 class="text-[16px] font-bold text-on-surface">Fotos de la Visita</h3>
+    </div>
+    <label class="border-2 border-dashed border-outline-variant rounded-xl p-6 flex flex-col items-center justify-center cursor-pointer active:scale-95 transition-transform hover:bg-surface-container-low">
+      <span class="material-symbols-outlined text-primary text-[40px] mb-1">add_a_photo</span>
+      <span class="text-[14px] font-bold text-primary">Tomar o Seleccionar Foto</span>
+      <span class="text-[12px] text-on-surface-variant text-center mt-1">Hasta 4 fotos por visita</span>
+      <input type="file" id="inputFotos" accept="image/*" capture="environment" multiple class="hidden" onchange="agregarFotos(this)"/>
+    </label>
+    <div id="gridFotos" class="grid grid-cols-2 gap-2 hidden"></div>
+  </section>
+
+  <!-- NOTAS -->
+  <section class="space-y-3">
+    <div class="flex items-center gap-2">
+      <span class="material-symbols-outlined text-primary filled">edit_note</span>
+      <h3 class="text-[16px] font-bold text-on-surface">Notas de la Visita</h3>
+    </div>
+    <textarea id="notasVisita" rows="3" placeholder="Acuerdos, reclamos o comentarios..."
+      class="w-full p-3 border border-outline-variant rounded-xl text-[14px] bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary outline-none resize-none"></textarea>
+  </section>
+
+  <!-- BOTONES -->
+  <section class="space-y-3 pt-2 pb-8">
+    <button onclick="guardarAuditoria()" class="w-full h-14 bg-primary text-on-primary rounded-xl text-[15px] font-bold shadow-lg active:scale-95 transition-transform flex items-center justify-center gap-2">
+      <span class="material-symbols-outlined">cloud_upload</span>
+      Guardar Auditoría
+    </button>
+    <button onclick="guardarYWhatsApp()" class="w-full h-12 border-2 border-primary text-primary rounded-xl text-[13px] font-bold active:scale-95 transition-transform flex items-center justify-center gap-2">
+      <span class="material-symbols-outlined">send</span>
+      Guardar + Enviar WhatsApp
+    </button>
+  </section>
+
+</div><!-- fin pantallaFormulario -->
+</main>
+<script>
+// ===================================================================
+// CONFIGURACIÓN - Modificar estas URLs después del deploy
+// ===================================================================
+const CONFIG = {
+  // URL del JSON de clientes en GitHub Pages (cambiar por tu URL real)
+  CLIENTES_URL: "https://TU-USUARIO.github.io/friosur-audit/clientes_maestro.json",
+  // URL del Google Apps Script web app (cambiar después de publicar)
+  SHEETS_API_URL: "https://script.google.com/macros/s/TU-SCRIPT-ID/exec",
+};
+
+// ===================================================================
+// ESTADO GLOBAL
+// ===================================================================
+let clientes = [];
+let clienteSeleccionado = null;
+let ciudadFiltro = "";
+let auditoriaActivos = {};
+let coberturaEstado = { marfrig: "nc", froneri: "nc" };
+let fotosBase64 = [];
+let competenciaEstado = {};
+
+const PRODUCTOS_PRECIOS = [
+  { id: "sal-swift6", label: "Salchicha Swift x6", step: 50 },
+  { id: "sal-swift12", label: "Salchicha Swift x12", step: 50 },
+  { id: "sal-casona", label: "Salchicha La Casona x6", step: 50 },
+  { id: "sal-panchin", label: "Salchicha Panchin x6", step: 50 },
+  { id: "ham-swift4", label: "Hamburguesa Swift x4", step: 50 },
+  { id: "ham-burger4", label: "Hamburguesa Swift Burger x4", step: 50 },
+];
+const MARCAS_COMPETENCIA = [
+  { id: "freezer-propio", label: "Freezer Propio", icon: "kitchen" },
+  { id: "freezer-arcor", label: "Freezer Arcor", icon: "kitchen" },
+  { id: "freezer-icecream", label: "Freezer Ice Cream", icon: "kitchen" },
+  { id: "freezer-grido", label: "Freezer Grido", icon: "kitchen" },
+];
+const NIVELES_STOCK = ["Lleno", "Medio", "Bajo", "Vacío"];
+// ===================================================================
+// INICIALIZACIÓN
+// ===================================================================
+async function inicializarApp() {
+  actualizarEstadoConexion();
+  window.addEventListener('online', actualizarEstadoConexion);
+  window.addEventListener('offline', actualizarEstadoConexion);
+
+  // Cargar clientes: primero intenta remoto, luego cache local
+  try {
+    const resp = await fetch(CONFIG.CLIENTES_URL);
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    clientes = await resp.json();
+    localStorage.setItem('clientes_cache', JSON.stringify(clientes));
+    console.log(`Clientes cargados desde servidor: ${clientes.length}`);
+  } catch(e) {
+    console.warn('No se pudo cargar desde servidor, usando cache local:', e.message);
+    const cached = localStorage.getItem('clientes_cache');
+    if (cached) {
+      clientes = JSON.parse(cached);
+    } else {
+      mostrarToast('Sin conexión y sin datos en cache', 'error');
+      return;
+    }
+  }
+
+  renderizarLista(clientes);
+  renderizarPrecios();
+  renderizarCompetencia();
+  actualizarContadorVisitas();
+  verificarPendientes();
+
+  // Registrar Service Worker
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js').catch(e => console.warn('SW:', e));
+  }
+}
+
+function actualizarEstadoConexion() {
+  const ind = document.getElementById('statusIndicator');
+  if (navigator.onLine) {
+    ind.className = 'w-2 h-2 rounded-full bg-green-400 animate-pulse';
+    ind.title = 'Online';
+  } else {
+    ind.className = 'w-2 h-2 rounded-full bg-red-400';
+    ind.title = 'Offline';
+  }
+}
+
+function mostrarToast(msg, tipo = 'success') {
+  const colors = { success: 'bg-secondary text-on-secondary', error: 'bg-error text-on-error', info: 'bg-primary text-on-primary' };
+  const toast = document.createElement('div');
+  toast.className = `toast ${colors[tipo] || colors.info}`;
+  toast.textContent = msg;
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 3000);
+}
+// ===================================================================
+// LISTA DE CLIENTES
+// ===================================================================
+function renderizarLista(lista) {
+  const cont = document.getElementById("listaClientes");
+  cont.innerHTML = "";
+  document.getElementById("contadorResultados").textContent = `${lista.length} clientes`;
+  lista.forEach(c => {
+    const totalActivos = (c.freezers?.length || 0) + (c.cafe_maquinas?.length || 0);
+    const div = document.createElement("div");
+    div.className = "bg-surface-container-lowest rounded-xl border border-outline-variant/50 card-shadow p-3 active:scale-[0.98] transition-transform cursor-pointer";
+    div.onclick = () => seleccionarCliente(c);
+    div.innerHTML = `
+      <div class="flex items-start gap-3">
+        <div class="bg-surface-container-high text-on-surface-variant text-[11px] font-bold font-mono px-2 py-1.5 rounded-lg min-w-[50px] text-center">${c.idcli}</div>
+        <div class="flex-1 min-w-0">
+          <p class="text-[14px] font-bold text-on-surface leading-tight truncate">${c.nombre_comercio || c.cliente}</p>
+          <p class="text-[12px] text-on-surface-variant mt-0.5 truncate">${c.cliente}</p>
+          <p class="text-[11px] text-outline mt-0.5 flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">location_on</span>${c.direccion}</p>
+        </div>
+        <div class="flex flex-col items-end gap-1">
+          <span class="text-[9px] bg-surface-container-high px-2 py-0.5 rounded-full font-semibold text-on-surface-variant uppercase">${c.ciudad.length>12?c.ciudad.substring(0,12):c.ciudad}</span>
+          ${totalActivos>0?`<span class="text-[9px] bg-secondary-container px-2 py-0.5 rounded-full font-semibold text-on-secondary-container">${totalActivos} activo${totalActivos>1?'s':''}</span>`:''}
+        </div>
+      </div>`;
+    cont.appendChild(div);
+  });
+}
+
+function filtrarClientes() {
+  const t = document.getElementById("inputBusqueda").value.toLowerCase().trim();
+  let f = clientes;
+  if (t) f = f.filter(c => c.cliente.toLowerCase().includes(t) || (c.nombre_comercio||'').toLowerCase().includes(t) || c.direccion.toLowerCase().includes(t) || c.idcli.toString().includes(t));
+  if (ciudadFiltro) f = f.filter(c => c.ciudad === ciudadFiltro);
+  renderizarLista(f);
+}
+
+function filtrarPorCiudad(ciudad) {
+  ciudadFiltro = ciudad;
+  document.querySelectorAll('.chip-ciudad').forEach(btn => { btn.classList.remove('bg-primary','text-on-primary'); btn.classList.add('bg-surface-container-high','text-on-surface-variant'); });
+  event.currentTarget.classList.remove('bg-surface-container-high','text-on-surface-variant');
+  event.currentTarget.classList.add('bg-primary','text-on-primary');
+  filtrarClientes();
+}
+// ===================================================================
+// SELECCIÓN DE CLIENTE + NAVEGACIÓN
+// ===================================================================
+function seleccionarCliente(cliente) {
+  clienteSeleccionado = cliente;
+  document.getElementById("pantallaLista").classList.add("hidden");
+  document.getElementById("pantallaFormulario").classList.remove("hidden");
+  document.getElementById("btnVolver").classList.remove("hidden");
+  document.getElementById("frmNombre").textContent = cliente.nombre_comercio || cliente.cliente;
+  document.getElementById("frmComercio").textContent = cliente.cliente;
+  document.getElementById("frmDireccion").textContent = `${cliente.direccion} (${cliente.ciudad})`;
+  document.getElementById("frmId").textContent = `ID: ${cliente.idcli}`;
+  document.getElementById("frmVend").textContent = `Vendedor: ${cliente.idvend}`;
+  document.getElementById("frmTimestamp").textContent = new Date().toLocaleString('es-AR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
+  resetFormulario();
+  renderizarActivos(cliente);
+}
+
+function mostrarListaClientes() {
+  document.getElementById("pantallaLista").classList.remove("hidden");
+  document.getElementById("pantallaFormulario").classList.add("hidden");
+  document.getElementById("btnVolver").classList.add("hidden");
+  clienteSeleccionado = null;
+}
+
+// ===================================================================
+// CONTROL DE ACTIVOS
+// ===================================================================
+function renderizarActivos(cliente) {
+  const cont = document.getElementById("contenedorActivos");
+  cont.innerHTML = "";
+  auditoriaActivos = {};
+  cliente.freezers.forEach((s,i) => crearCardActivo("Freezer",s,`frz-${i}`,cont));
+  cliente.cafe_maquinas.forEach((s,i) => crearCardActivo("Máquina Café",s,`cfe-${i}`,cont));
+  const btn = document.createElement("button");
+  btn.className = "w-full border-2 border-dashed border-outline-variant rounded-xl h-14 flex items-center justify-center gap-2 text-on-surface-variant active:scale-95 transition-transform";
+  btn.innerHTML = `<span class="material-symbols-outlined">add_circle</span><span class="text-[12px] font-bold uppercase tracking-wider">Agregar activo no registrado</span>`;
+  btn.onclick = () => { const tipo = confirm("¿Es Máquina de Café?\n(Aceptar=Café / Cancelar=Freezer)") ? "Máquina Café" : "Freezer"; crearCardActivo(tipo,"",`extra-${Date.now()}`,cont,true); cont.appendChild(btn); };
+  cont.appendChild(btn);
+}
+
+function crearCardActivo(tipo, serie, uid, cont, esExtra=false) {
+  auditoriaActivos[uid] = { tipo, serieOriginal:serie, serieReal:serie, estado:"pendiente", obs:"" };
+  const icon = tipo==="Freezer"?"kitchen":"coffee_maker";
+  const card = document.createElement("article");
+  card.className = "bg-surface-container-lowest rounded-xl border-l-4 border-outline-variant card-shadow p-3 space-y-3 transition-all";
+  card.id = `card-${uid}`;
+  card.innerHTML = `
+    <div class="flex items-start gap-3">
+      <div class="w-10 h-10 bg-surface-container rounded-lg flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-primary text-[24px]">${icon}</span></div>
+      <div class="flex-1"><p class="text-[14px] font-bold">${tipo}</p><p class="text-[11px] font-mono text-on-surface-variant mt-0.5">${serie?'S/N: '+serie:'⚠️ No registrado'}</p></div>
+    </div>
+    <div class="grid grid-cols-2 gap-2">
+      <button onclick="setEstadoActivo('${uid}','ok')" id="btnOk-${uid}" class="h-touch flex items-center justify-center gap-1 rounded-lg border-2 border-outline-variant text-[11px] font-bold uppercase text-on-surface-variant active:scale-95 transition-all"><span class="material-symbols-outlined text-[18px]">check_circle</span>OK</button>
+      <button onclick="setEstadoActivo('${uid}','disc')" id="btnDisc-${uid}" class="h-touch flex items-center justify-center gap-1 rounded-lg border-2 border-outline-variant text-[11px] font-bold uppercase text-on-surface-variant active:scale-95 transition-all"><span class="material-symbols-outlined text-[18px]">error</span>Discrepancia</button>
+    </div>
+    <div id="detalle-${uid}" class="hidden space-y-2">
+      <input type="text" id="serie-${uid}" placeholder="Serie real..." value="${serie}" oninput="auditoriaActivos['${uid}'].serieReal=this.value" class="w-full h-touch bg-surface-container-low border border-outline rounded-lg px-3 text-[13px] font-mono focus:border-primary focus:ring-1 focus:ring-primary outline-none"/>
+      <input type="text" id="obs-${uid}" placeholder="Observaciones..." oninput="auditoriaActivos['${uid}'].obs=this.value" class="w-full h-10 bg-surface-container-low border border-outline rounded-lg px-3 text-[13px] focus:border-primary outline-none"/>
+    </div>`;
+  cont.appendChild(card);
+  if (esExtra) setEstadoActivo(uid,'disc');
+}
+
+function setEstadoActivo(uid, estado) {
+  auditoriaActivos[uid].estado = estado;
+  const card=document.getElementById(`card-${uid}`), bOk=document.getElementById(`btnOk-${uid}`), bD=document.getElementById(`btnDisc-${uid}`), det=document.getElementById(`detalle-${uid}`);
+  bOk.className = "h-touch flex items-center justify-center gap-1 rounded-lg border-2 border-outline-variant text-[11px] font-bold uppercase text-on-surface-variant active:scale-95 transition-all";
+  bD.className = bOk.className;
+  card.classList.remove("border-secondary","border-error"); card.classList.add("border-outline-variant");
+  if (estado==='ok') { bOk.classList.remove("border-outline-variant","text-on-surface-variant"); bOk.classList.add("border-secondary","bg-secondary-container","text-on-secondary-container"); card.classList.replace("border-outline-variant","border-secondary"); det.classList.add("hidden"); auditoriaActivos[uid].serieReal=auditoriaActivos[uid].serieOriginal; }
+  else { bD.classList.remove("border-outline-variant","text-on-surface-variant"); bD.classList.add("border-error","bg-error-container","text-on-error-container"); card.classList.replace("border-outline-variant","border-error"); det.classList.remove("hidden"); }
+}
+// ===================================================================
+// COBERTURA, PRECIOS, COMPETENCIA, FOTOS
+// ===================================================================
+function setCoberturaEstado(marca, estado) {
+  coberturaEstado[marca] = estado;
+  const bH=document.getElementById(`btn-${marca}-hay`), bN=document.getElementById(`btn-${marca}-nc`), sub=document.getElementById(`sub-${marca}`);
+  bH.className = "px-4 py-2 rounded-md text-[11px] font-bold uppercase transition-all " + (estado==='hay'?'bg-primary text-on-primary shadow-sm':'text-on-surface-variant');
+  bN.className = "px-4 py-2 rounded-md text-[11px] font-bold uppercase transition-all " + (estado==='nc'?'bg-error text-on-error shadow-sm':'text-on-surface-variant');
+  if (estado==='hay') sub.classList.remove("hidden");
+  else { sub.classList.add("hidden"); sub.querySelectorAll('input[type=checkbox]').forEach(c=>c.checked=false); }
+}
+
+function renderizarPrecios() {
+  const cont = document.getElementById("contenedorPrecios"); cont.innerHTML = "";
+  PRODUCTOS_PRECIOS.forEach(p => {
+    const row = document.createElement("div"); row.className = "grid grid-cols-12 p-3 items-center";
+    row.innerHTML = `<div class="col-span-7"><p class="text-[13px] font-semibold">${p.label}</p></div>
+      <div class="col-span-5 flex items-center justify-end gap-1">
+        <button onclick="ajustarPrecio('${p.id}',-${p.step})" class="w-9 h-9 flex items-center justify-center bg-surface-container-high rounded-lg text-primary active:scale-90 transition-transform"><span class="material-symbols-outlined text-[18px]">remove</span></button>
+        <input type="number" id="precio-${p.id}" value="" placeholder="—" class="w-[70px] text-center border-none bg-transparent text-[16px] font-medium focus:ring-0 p-0"/>
+        <button onclick="ajustarPrecio('${p.id}',${p.step})" class="w-9 h-9 flex items-center justify-center bg-surface-container-high rounded-lg text-primary active:scale-90 transition-transform"><span class="material-symbols-outlined text-[18px]">add</span></button>
+      </div>`;
+    cont.appendChild(row);
+  });
+}
+function ajustarPrecio(id,delta){ const i=document.getElementById(`precio-${id}`); i.value=Math.max(0,(parseInt(i.value)||0)+delta); }
+
+function renderizarCompetencia() {
+  const cont = document.getElementById("contenedorCompetencia"); cont.innerHTML = "";
+  MARCAS_COMPETENCIA.forEach(m => {
+    competenciaEstado[m.id] = { activo:false, nivel:"" };
+    const card = document.createElement("div");
+    card.className = "p-3 rounded-xl border border-outline-variant bg-surface-container-lowest flex flex-col gap-2 cursor-pointer transition-all";
+    card.id = `comp-${m.id}`;
+    card.innerHTML = `<div class="flex justify-between items-start"><span class="material-symbols-outlined text-on-surface-variant">${m.icon}</span><div class="w-5 h-5 rounded-full border-2 border-outline-variant flex items-center justify-center" id="check-${m.id}"><div class="w-2 h-2 rounded-full bg-primary hidden" id="dot-${m.id}"></div></div></div>
+      <span class="comp-label text-[12px] font-bold text-on-surface">${m.label}</span>
+      <div id="niveles-${m.id}" class="hidden space-y-1"><span class="text-[10px] font-semibold text-on-surface-variant uppercase">Stock:</span><div class="grid grid-cols-2 gap-1" id="grid-nivel-${m.id}"></div></div>`;
+    card.querySelector('.flex.justify-between').onclick = () => toggleCompetencia(m.id);
+    card.querySelector('.comp-label').onclick = () => toggleCompetencia(m.id);
+    cont.appendChild(card);
+  });
+}
+function toggleCompetencia(id) {
+  const e=competenciaEstado[id]; e.activo=!e.activo;
+  const card=document.getElementById(`comp-${id}`), dot=document.getElementById(`dot-${id}`), chk=document.getElementById(`check-${id}`), niv=document.getElementById(`niveles-${id}`);
+  if(e.activo){dot.classList.remove("hidden");chk.classList.add("border-primary");card.classList.add("border-primary","bg-primary/5");niv.classList.remove("hidden");renderizarNiveles(id);}
+  else{dot.classList.add("hidden");chk.classList.remove("border-primary");card.classList.remove("border-primary","bg-primary/5");niv.classList.add("hidden");e.nivel="";}
+}
+function renderizarNiveles(id) {
+  const grid=document.getElementById(`grid-nivel-${id}`); grid.innerHTML="";
+  const colores={"Lleno":"bg-secondary text-on-secondary","Medio":"bg-secondary-container text-on-secondary-container","Bajo":"bg-amber-400 text-amber-900","Vacío":"bg-error text-on-error"};
+  NIVELES_STOCK.forEach(n=>{const b=document.createElement("button");b.className=`py-1.5 rounded text-[10px] font-bold transition-all active:scale-95 ${competenciaEstado[id].nivel===n?colores[n]:'bg-surface-container-high text-on-surface-variant opacity-60'}`;b.textContent=n;b.onclick=ev=>{ev.stopPropagation();competenciaEstado[id].nivel=n;renderizarNiveles(id);};grid.appendChild(b);});
+}
+
+function agregarFotos(input) {
+  if(!input.files)return;
+  Array.from(input.files).forEach(file=>{if(fotosBase64.length>=4)return;const r=new FileReader();r.onload=e=>{fotosBase64.push(e.target.result);actualizarGridFotos();};r.readAsDataURL(file);});
+  input.value="";
+}
+function actualizarGridFotos() {
+  const g=document.getElementById("gridFotos");
+  if(!fotosBase64.length){g.classList.add("hidden");return;}
+  g.classList.remove("hidden");g.innerHTML="";
+  fotosBase64.forEach((src,i)=>{const d=document.createElement("div");d.className="relative rounded-lg overflow-hidden";d.innerHTML=`<img src="${src}" class="w-full h-24 object-cover"/><button onclick="eliminarFoto(${i})" class="absolute top-1 right-1 w-6 h-6 bg-error text-on-error rounded-full flex items-center justify-center text-[12px] font-bold shadow active:scale-90">✕</button>`;g.appendChild(d);});
+}
+function eliminarFoto(i){fotosBase64.splice(i,1);actualizarGridFotos();}
+// ===================================================================
+// RESET + REPORTE
+// ===================================================================
+function resetFormulario() {
+  coberturaEstado={marfrig:"nc",froneri:"nc"};setCoberturaEstado('marfrig','nc');setCoberturaEstado('froneri','nc');
+  fotosBase64=[];actualizarGridFotos();document.getElementById("notasVisita").value="";
+  PRODUCTOS_PRECIOS.forEach(p=>{const el=document.getElementById(`precio-${p.id}`);if(el)el.value="";});
+  MARCAS_COMPETENCIA.forEach(m=>{competenciaEstado[m.id]={activo:false,nivel:""};});renderizarCompetencia();
+}
+
+function construirDatosReporte() {
+  const c = clienteSeleccionado;
+  // Precios
+  const precios = {};
+  PRODUCTOS_PRECIOS.forEach(p => { const v=document.getElementById(`precio-${p.id}`)?.value; if(v) precios[p.label]=parseInt(v); });
+  // Cobertura detalle
+  const coberturaDetalle = {};
+  ['marfrig','froneri'].forEach(m => {
+    if(coberturaEstado[m]==='hay'){const items=[];document.querySelectorAll(`[id^="chk-${m}-"]`).forEach(chk=>{if(chk.checked)items.push(chk.parentElement.querySelector('span').textContent);});coberturaDetalle[m]=items;}
+    else coberturaDetalle[m]='NC';
+  });
+  // Competencia
+  const comp = {};
+  for(let id in competenciaEstado){if(competenciaEstado[id].activo){const marca=MARCAS_COMPETENCIA.find(m=>m.id===id);comp[marca.label]=competenciaEstado[id].nivel||'S/E';}}
+
+  return {
+    timestamp: new Date().toISOString(),
+    fecha: new Date().toLocaleDateString('es-AR'),
+    hora: new Date().toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'}),
+    clienteId: c.idcli,
+    cliente: c.cliente,
+    comercio: c.nombre_comercio || '',
+    direccion: c.direccion,
+    ciudad: c.ciudad,
+    vendedor: c.idvend,
+    activos: auditoriaActivos,
+    cobertura: coberturaDetalle,
+    precios: precios,
+    competencia: comp,
+    notas: document.getElementById("notasVisita").value.trim(),
+    fotosCount: fotosBase64.length
+  };
+}
+
+function generarTextoWhatsApp() {
+  const d = construirDatosReporte();
+  let t = `📌 *REPORTE VISITA*\n📅 ${d.fecha} ${d.hora}\n🏢 *${d.comercio||d.cliente}*\n👤 ${d.cliente}\n📍 ${d.direccion} (${d.ciudad})\n🆔 ID:${d.clienteId} | 👔 Vend:${d.vendedor}\n\n`;
+  t += `🛡️ *ACTIVOS:*\n`;
+  for(let uid in d.activos){const a=d.activos[uid];if(a.estado==='ok')t+=`• ${a.tipo}(${a.serieOriginal||'S/N'}): ✔️ OK\n`;else if(a.estado==='disc'){if(!a.serieOriginal)t+=`• ⚠️ EXTRA: ${a.tipo} serie:${a.serieReal||'N/E'}\n`;else t+=`• ❌ DISC: ${a.tipo} ${a.serieOriginal}→${a.serieReal||'N/L'}\n`;}else t+=`• ${a.tipo}(${a.serieOriginal||'S/N'}): ⏳\n`;if(a.obs)t+=`  └─${a.obs}\n`;}
+  t += `\n📦 *COBERTURA:*\n`;
+  for(let m in d.cobertura){const label=m==='marfrig'?'Marfrig':'Froneri';if(d.cobertura[m]==='NC')t+=`• ${label}: ⚪ N/C\n`;else t+=`• ✅ ${label}: ${d.cobertura[m].join(', ')||'Sin detalle'}\n`;}
+  t += `\n💲 *PRECIOS:*\n`;
+  if(Object.keys(d.precios).length===0)t+=`• No relevados\n`;else for(let k in d.precios)t+=`• ${k}: $${d.precios[k]}\n`;
+  t += `\n⚔️ *COMPETENCIA:*\n`;
+  if(Object.keys(d.competencia).length===0)t+=`• No observados\n`;else for(let k in d.competencia)t+=`• ${k}: ${d.competencia[k]}\n`;
+  if(d.fotosCount>0)t+=`\n📷 ${d.fotosCount} foto(s)\n`;
+  if(d.notas)t+=`\n📝 ${d.notas}\n`;
+  return t;
+}
+// ===================================================================
+// GUARDAR AUDITORÍA - Google Sheets + offline queue
+// ===================================================================
+async function enviarAGoogleSheets(datos) {
+  const resp = await fetch(CONFIG.SHEETS_API_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain' },
+    body: JSON.stringify(datos)
+  });
+  if (!resp.ok) throw new Error('Error del servidor: ' + resp.status);
+  return await resp.json();
+}
+
+async function guardarAuditoria() {
+  if (!clienteSeleccionado) return;
+  const datos = construirDatosReporte();
+
+  // Guardar en historial local siempre
+  guardarEnHistorialLocal(datos);
+
+  // Intentar enviar a Google Sheets
+  if (navigator.onLine && CONFIG.SHEETS_API_URL.includes('script.google.com')) {
+    try {
+      await enviarAGoogleSheets(datos);
+      mostrarToast('Auditoría guardada en la nube');
+    } catch(e) {
+      console.error('Error enviando a Sheets:', e);
+      guardarEnColaPendiente(datos);
+      mostrarToast('Guardada local. Se enviará cuando haya conexión', 'info');
+    }
+  } else {
+    guardarEnColaPendiente(datos);
+    mostrarToast('Guardada localmente (sin conexión)', 'info');
+  }
+
+  actualizarContadorVisitas();
+  verificarPendientes();
+}
+
+async function guardarYWhatsApp() {
+  if (!clienteSeleccionado) return;
+  await guardarAuditoria();
+  const texto = generarTextoWhatsApp();
+  window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(texto)}`, '_blank');
+}
+
+function guardarEnHistorialLocal(datos) {
+  let h = JSON.parse(localStorage.getItem('auditorias_historial') || '[]');
+  h.unshift(datos);
+  if (h.length > 200) h = h.slice(0, 200);
+  localStorage.setItem('auditorias_historial', JSON.stringify(h));
+}
+
+function guardarEnColaPendiente(datos) {
+  let cola = JSON.parse(localStorage.getItem('auditorias_pendientes') || '[]');
+  cola.push(datos);
+  localStorage.setItem('auditorias_pendientes', JSON.stringify(cola));
+}
+
+function verificarPendientes() {
+  const cola = JSON.parse(localStorage.getItem('auditorias_pendientes') || '[]');
+  const btn = document.getElementById('btnSync');
+  if (cola.length > 0) { btn.classList.remove('hidden'); btn.textContent = `Enviar ${cola.length} pendiente${cola.length>1?'s':''}`; }
+  else btn.classList.add('hidden');
+}
+
+async function sincronizarPendientes() {
+  if (!navigator.onLine) { mostrarToast('Sin conexión', 'error'); return; }
+  let cola = JSON.parse(localStorage.getItem('auditorias_pendientes') || '[]');
+  if (cola.length === 0) return;
+
+  let enviados = 0;
+  const fallidos = [];
+  for (const datos of cola) {
+    try { await enviarAGoogleSheets(datos); enviados++; }
+    catch(e) { fallidos.push(datos); }
+  }
+  localStorage.setItem('auditorias_pendientes', JSON.stringify(fallidos));
+  mostrarToast(`${enviados} auditoría(s) sincronizada(s)`);
+  verificarPendientes();
+}
+
+function actualizarContadorVisitas() {
+  const h = JSON.parse(localStorage.getItem('auditorias_historial') || '[]');
+  const hoy = new Date().toISOString().split('T')[0];
+  const n = h.filter(r => r.timestamp.startsWith(hoy)).length;
+  document.getElementById("contadorVisitas").innerHTML = `<span class="text-[11px] font-semibold text-on-primary uppercase">${n} hoy</span>`;
+}
+
+// Auto-sync cuando vuelve la conexión
+window.addEventListener('online', () => { setTimeout(sincronizarPendientes, 2000); });
+
+// ===================================================================
+// ARRANQUE
+// ===================================================================
+window.onload = inicializarApp;
+</script>
+</body>
+</html>
