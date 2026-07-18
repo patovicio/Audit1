@@ -599,13 +599,17 @@ function generarTextoWhatsApp() {
 // GUARDAR AUDITORÍA - Google Sheets + offline queue
 // ===================================================================
 async function enviarAGoogleSheets(datos) {
-  const resp = await fetch(CONFIG.SHEETS_API_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'text/plain' },
-    body: JSON.stringify(datos)
+  // Usar XMLHttpRequest que maneja mejor los redirects de Apps Script
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', CONFIG.SHEETS_API_URL);
+    xhr.setRequestHeader('Content-Type', 'text/plain');
+    xhr.onload = () => resolve({ status: "ok" });
+    xhr.onerror = () => reject(new Error('Error de red'));
+    xhr.ontimeout = () => reject(new Error('Timeout'));
+    xhr.timeout = 15000;
+    xhr.send(JSON.stringify(datos));
   });
-  if (!resp.ok) throw new Error('Error del servidor: ' + resp.status);
-  return await resp.json();
 }
 
 async function guardarAuditoria() {
@@ -616,7 +620,7 @@ async function guardarAuditoria() {
   guardarEnHistorialLocal(datos);
 
   // Intentar enviar a Google Sheets
-  if (navigator.onLine && CONFIG.SHEETS_API_URL.includes('script.google.com')) {
+  if (navigator.onLine) {
     try {
       await enviarAGoogleSheets(datos);
       mostrarToast('Auditoría guardada en la nube');
