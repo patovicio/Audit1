@@ -599,16 +599,43 @@ function generarTextoWhatsApp() {
 // GUARDAR AUDITORÍA - Google Sheets + offline queue
 // ===================================================================
 async function enviarAGoogleSheets(datos) {
-  // Google Apps Script requiere no-cors por el redirect 302
-  await fetch(CONFIG.SHEETS_API_URL, {
-    method: 'POST',
-    mode: 'no-cors',
-    redirect: 'follow',
-    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-    body: JSON.stringify(datos)
+  // Método que funciona con Apps Script: crear iframe + form oculto
+  return new Promise((resolve, reject) => {
+    const iframe = document.createElement('iframe');
+    iframe.name = 'submitFrame_' + Date.now();
+    iframe.style.display = 'none';
+    document.body.appendChild(iframe);
+
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = CONFIG.SHEETS_API_URL;
+    form.target = iframe.name;
+    form.style.display = 'none';
+
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = 'data';
+    input.value = JSON.stringify(datos);
+    form.appendChild(input);
+
+    document.body.appendChild(form);
+
+    iframe.onload = () => {
+      setTimeout(() => { iframe.remove(); form.remove(); }, 1000);
+      resolve({ status: "ok" });
+    };
+    iframe.onerror = () => {
+      iframe.remove(); form.remove();
+      reject(new Error('Error enviando'));
+    };
+
+    // Timeout por si no responde
+    setTimeout(() => {
+      if (document.body.contains(iframe)) { iframe.remove(); form.remove(); resolve({ status: "ok" }); }
+    }, 10000);
+
+    form.submit();
   });
-  // Con no-cors no podemos leer la respuesta, pero el dato llega
-  return { status: "ok" };
 }
 
 async function guardarAuditoria() {
