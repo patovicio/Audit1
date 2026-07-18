@@ -668,7 +668,16 @@ async function guardarYWhatsApp() {
   if (!clienteSeleccionado) return;
   await guardarAuditoria();
   const texto = generarTextoWhatsApp();
-  window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(texto)}`, '_blank');
+  // Intentar abrir WhatsApp Business primero
+  const urlWABusiness = `https://wa.me/?text=${encodeURIComponent(texto)}`;
+  // En Android, intentar abrir directamente WhatsApp Business con intent
+  const isAndroid = /android/i.test(navigator.userAgent);
+  if (isAndroid) {
+    const intentUrl = `intent://send?text=${encodeURIComponent(texto)}#Intent;package=com.whatsapp.w4b;scheme=whatsapp;end`;
+    window.location.href = intentUrl;
+  } else {
+    window.open(urlWABusiness, '_blank');
+  }
 }
 
 function guardarEnHistorialLocal(datos) {
