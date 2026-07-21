@@ -211,12 +211,27 @@ input[type=number]{-moz-appearance:textfield}
     </div>
   </section>
 
+  <!-- OFERTAS / PRECIOS ESPECIALES -->
+  <section class="space-y-3">
+    <div class="flex items-center gap-2">
+      <span class="material-symbols-outlined text-primary filled">sell</span>
+      <h3 class="text-[16px] font-bold text-on-surface">Ofertas / Precios Especiales</h3>
+    </div>
+    <p class="text-[12px] text-on-surface-variant">Anotá ofertas o precios destacados que encuentres en el punto de venta.</p>
+    <div id="contenedorOfertas" class="space-y-2"></div>
+    <button onclick="agregarOferta()" class="w-full border-2 border-dashed border-outline-variant rounded-xl h-12 flex items-center justify-center gap-2 text-on-surface-variant active:scale-95 transition-transform">
+      <span class="material-symbols-outlined text-[18px]">add_circle</span>
+      <span class="text-[12px] font-bold uppercase tracking-wider">Agregar oferta</span>
+    </button>
+  </section>
+
   <!-- COMPETENCIA -->
   <section class="space-y-3">
     <div class="flex items-center gap-2">
       <span class="material-symbols-outlined text-primary filled">dresser</span>
       <h3 class="text-[16px] font-bold text-on-surface">Activos de Competencia</h3>
     </div>
+    <p class="text-[12px] text-on-surface-variant">Indicar volumen de mercadería encontrado en cada activo de la competencia.</p>
     <div class="grid grid-cols-2 gap-3" id="contenedorCompetencia"></div>
   </section>
 
@@ -226,12 +241,19 @@ input[type=number]{-moz-appearance:textfield}
       <span class="material-symbols-outlined text-primary filled">add_a_photo</span>
       <h3 class="text-[16px] font-bold text-on-surface">Fotos de la Visita</h3>
     </div>
-    <label class="border-2 border-dashed border-outline-variant rounded-xl p-6 flex flex-col items-center justify-center cursor-pointer active:scale-95 transition-transform hover:bg-surface-container-low">
-      <span class="material-symbols-outlined text-primary text-[40px] mb-1">add_a_photo</span>
-      <span class="text-[14px] font-bold text-primary">Tomar o Seleccionar Foto</span>
-      <span class="text-[12px] text-on-surface-variant text-center mt-1">Hasta 4 fotos por visita</span>
-      <input type="file" id="inputFotos" accept="image/*" capture="environment" multiple class="hidden" onchange="agregarFotos(this)"/>
-    </label>
+    <div class="grid grid-cols-2 gap-2">
+      <label class="border-2 border-dashed border-outline-variant rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer active:scale-95 transition-transform hover:bg-surface-container-low">
+        <span class="material-symbols-outlined text-primary text-[32px] mb-1">photo_camera</span>
+        <span class="text-[12px] font-bold text-primary">Cámara</span>
+        <input type="file" accept="image/*" capture="environment" class="hidden" onchange="agregarFotos(this)"/>
+      </label>
+      <label class="border-2 border-dashed border-outline-variant rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer active:scale-95 transition-transform hover:bg-surface-container-low">
+        <span class="material-symbols-outlined text-primary text-[32px] mb-1">photo_library</span>
+        <span class="text-[12px] font-bold text-primary">Galería</span>
+        <input type="file" accept="image/*" multiple class="hidden" onchange="agregarFotos(this)"/>
+      </label>
+    </div>
+    <p class="text-[11px] text-on-surface-variant text-center">Hasta 4 fotos por visita</p>
     <div id="gridFotos" class="grid grid-cols-2 gap-2 hidden"></div>
   </section>
 
@@ -360,11 +382,30 @@ function renderizarLista(lista) {
   const cont = document.getElementById("listaClientes");
   cont.innerHTML = "";
   document.getElementById("contadorResultados").textContent = `${lista.length} clientes`;
+  
+  // Obtener historial para marcar visitados
+  const historial = JSON.parse(localStorage.getItem('auditorias_historial') || '[]');
+  const visitasPorCliente = {};
+  historial.forEach(r => {
+    if (!visitasPorCliente[r.clienteId] || r.timestamp > visitasPorCliente[r.clienteId].timestamp) {
+      visitasPorCliente[r.clienteId] = r;
+    }
+  });
+
   lista.forEach(c => {
     const totalActivos = (c.freezers?.length || 0) + (c.cafe_maquinas?.length || 0);
+    const ultimaVisita = visitasPorCliente[c.idcli];
     const div = document.createElement("div");
-    div.className = "bg-surface-container-lowest rounded-xl border border-outline-variant/50 card-shadow p-3 active:scale-[0.98] transition-transform cursor-pointer";
+    div.className = `bg-surface-container-lowest rounded-xl border card-shadow p-3 active:scale-[0.98] transition-transform cursor-pointer ${ultimaVisita ? 'border-secondary/50' : 'border-outline-variant/50'}`;
     div.onclick = () => seleccionarCliente(c);
+    
+    let visitaBadge = '';
+    if (ultimaVisita) {
+      const fecha = new Date(ultimaVisita.timestamp);
+      const fechaStr = fecha.toLocaleDateString('es-AR', {day:'2-digit', month:'2-digit'});
+      visitaBadge = `<span class="text-[9px] bg-secondary-container px-2 py-0.5 rounded-full font-semibold text-on-secondary-container flex items-center gap-0.5"><span class="material-symbols-outlined text-[10px]">check_circle</span>${fechaStr}</span>`;
+    }
+
     div.innerHTML = `
       <div class="flex items-start gap-3">
         <div class="bg-surface-container-high text-on-surface-variant text-[11px] font-bold font-mono px-2 py-1.5 rounded-lg min-w-[50px] text-center">${c.idcli}</div>
@@ -375,7 +416,8 @@ function renderizarLista(lista) {
         </div>
         <div class="flex flex-col items-end gap-1">
           <span class="text-[9px] bg-surface-container-high px-2 py-0.5 rounded-full font-semibold text-on-surface-variant uppercase">${c.ciudad.length>12?c.ciudad.substring(0,12):c.ciudad}</span>
-          ${totalActivos>0?`<span class="text-[9px] bg-secondary-container px-2 py-0.5 rounded-full font-semibold text-on-secondary-container">${totalActivos} activo${totalActivos>1?'s':''}</span>`:''}
+          ${totalActivos>0?`<span class="text-[9px] bg-primary-container px-2 py-0.5 rounded-full font-semibold text-on-primary-container">${totalActivos} activo${totalActivos>1?'s':''}</span>`:''}
+          ${visitaBadge}
         </div>
       </div>`;
     cont.appendChild(div);
@@ -524,6 +566,52 @@ function renderizarNiveles(id) {
   NIVELES_STOCK.forEach(n=>{const b=document.createElement("button");b.className=`py-1.5 rounded text-[10px] font-bold transition-all active:scale-95 ${competenciaEstado[id].nivel===n?colores[n]:'bg-surface-container-high text-on-surface-variant opacity-60'}`;b.textContent=n;b.onclick=ev=>{ev.stopPropagation();competenciaEstado[id].nivel=n;renderizarNiveles(id);};grid.appendChild(b);});
 }
 
+// ===================================================================
+// OFERTAS
+// ===================================================================
+let ofertas = [];
+let ofertaCounter = 0;
+
+function agregarOferta() {
+  ofertaCounter++;
+  const id = `oferta-${ofertaCounter}`;
+  ofertas.push({ id, texto: "" });
+  renderizarOfertas();
+}
+
+function eliminarOferta(id) {
+  ofertas = ofertas.filter(o => o.id !== id);
+  renderizarOfertas();
+}
+
+function renderizarOfertas() {
+  const cont = document.getElementById("contenedorOfertas");
+  cont.innerHTML = "";
+  ofertas.forEach((o, i) => {
+    const div = document.createElement("div");
+    div.className = "flex gap-2 items-start";
+    div.innerHTML = `
+      <div class="flex-1">
+        <label class="text-[11px] font-semibold text-primary uppercase tracking-wider">Oferta ${i + 1}</label>
+        <input type="text" id="${o.id}" value="${o.texto}" placeholder="Ej: Salchicha Swift x6 a $890, 2x1 hamburguesas..."
+          oninput="actualizarOferta('${o.id}', this.value)"
+          class="w-full h-touch bg-surface-container-low border border-outline rounded-lg px-3 mt-1 text-[13px] focus:border-primary focus:ring-1 focus:ring-primary outline-none"/>
+      </div>
+      <button onclick="eliminarOferta('${o.id}')" class="mt-5 w-9 h-9 flex items-center justify-center bg-error-container rounded-lg text-on-error-container active:scale-90 transition-transform">
+        <span class="material-symbols-outlined text-[18px]">close</span>
+      </button>`;
+    cont.appendChild(div);
+  });
+}
+
+function actualizarOferta(id, valor) {
+  const oferta = ofertas.find(o => o.id === id);
+  if (oferta) oferta.texto = valor;
+}
+
+// ===================================================================
+// FOTOS
+// ===================================================================
 function agregarFotos(input) {
   if(!input.files)return;
   Array.from(input.files).forEach(file=>{if(fotosBase64.length>=4)return;const r=new FileReader();r.onload=e=>{fotosBase64.push(e.target.result);actualizarGridFotos();};r.readAsDataURL(file);});
@@ -542,6 +630,7 @@ function eliminarFoto(i){fotosBase64.splice(i,1);actualizarGridFotos();}
 function resetFormulario() {
   coberturaEstado={marfrig:"nc",froneri:"nc"};setCoberturaEstado('marfrig','nc');setCoberturaEstado('froneri','nc');
   fotosBase64=[];actualizarGridFotos();document.getElementById("notasVisita").value="";
+  ofertas=[];ofertaCounter=0;renderizarOfertas();
   PRODUCTOS_PRECIOS.forEach(p=>{const el=document.getElementById(`precio-${p.id}`);if(el)el.value="";});
   MARCAS_COMPETENCIA.forEach(m=>{competenciaEstado[m.id]={activo:false,nivel:""};});renderizarCompetencia();
 }
@@ -575,6 +664,7 @@ function construirDatosReporte() {
     cobertura: coberturaDetalle,
     precios: precios,
     competencia: comp,
+    ofertas: ofertas.filter(o => o.texto.trim()),
     notas: document.getElementById("notasVisita").value.trim(),
     fotosCount: fotosBase64.length
   };
@@ -589,8 +679,9 @@ function generarTextoWhatsApp() {
   for(let m in d.cobertura){const label=m==='marfrig'?'Marfrig':'Froneri';if(d.cobertura[m]==='NC')t+=`• ${label}: ⚪ N/C\n`;else t+=`• ✅ ${label}: ${d.cobertura[m].join(', ')||'Sin detalle'}\n`;}
   t += `\n💲 *PRECIOS:*\n`;
   if(Object.keys(d.precios).length===0)t+=`• No relevados\n`;else for(let k in d.precios)t+=`• ${k}: $${d.precios[k]}\n`;
-  t += `\n⚔️ *COMPETENCIA:*\n`;
+  t += `\n⚔️ *COMPETENCIA (volumen en activo):*\n`;
   if(Object.keys(d.competencia).length===0)t+=`• No observados\n`;else for(let k in d.competencia)t+=`• ${k}: ${d.competencia[k]}\n`;
+  if(d.ofertas && d.ofertas.length>0){t+=`\n🏷️ *OFERTAS:*\n`;d.ofertas.forEach((o,i)=>{t+=`• Oferta ${i+1}: ${o.texto}\n`;});}
   if(d.fotosCount>0)t+=`\n📷 ${d.fotosCount} foto(s)\n`;
   if(d.notas)t+=`\n📝 ${d.notas}\n`;
   return t;
@@ -599,43 +690,15 @@ function generarTextoWhatsApp() {
 // GUARDAR AUDITORÍA - Google Sheets + offline queue
 // ===================================================================
 async function enviarAGoogleSheets(datos) {
-  // Método que funciona con Apps Script: crear iframe + form oculto
-  return new Promise((resolve, reject) => {
-    const iframe = document.createElement('iframe');
-    iframe.name = 'submitFrame_' + Date.now();
-    iframe.style.display = 'none';
-    document.body.appendChild(iframe);
-
-    const form = document.createElement('form');
-    form.method = 'POST';
-    form.action = CONFIG.SHEETS_API_URL;
-    form.target = iframe.name;
-    form.style.display = 'none';
-
-    const input = document.createElement('input');
-    input.type = 'hidden';
-    input.name = 'data';
-    input.value = JSON.stringify(datos);
-    form.appendChild(input);
-
-    document.body.appendChild(form);
-
-    iframe.onload = () => {
-      setTimeout(() => { iframe.remove(); form.remove(); }, 1000);
-      resolve({ status: "ok" });
-    };
-    iframe.onerror = () => {
-      iframe.remove(); form.remove();
-      reject(new Error('Error enviando'));
-    };
-
-    // Timeout por si no responde
-    setTimeout(() => {
-      if (document.body.contains(iframe)) { iframe.remove(); form.remove(); resolve({ status: "ok" }); }
-    }, 10000);
-
-    form.submit();
-  });
+  // Método GET con datos en URL - evita todos los problemas de CORS/redirect de Apps Script
+  const jsonData = encodeURIComponent(JSON.stringify(datos));
+  const url = `${CONFIG.SHEETS_API_URL}?action=guardar&data=${jsonData}`;
+  
+  const resp = await fetch(url, { redirect: 'follow' });
+  if (!resp.ok) throw new Error('HTTP ' + resp.status);
+  const result = await resp.json();
+  if (result.status !== 'ok') throw new Error(result.message || 'Error del servidor');
+  return result;
 }
 
 async function guardarAuditoria() {
