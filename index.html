@@ -690,14 +690,34 @@ function generarTextoWhatsApp() {
 // GUARDAR AUDITORÍA - Google Sheets + offline queue
 // ===================================================================
 async function enviarAGoogleSheets(datos) {
-  // Método GET con datos en URL - evita todos los problemas de CORS/redirect de Apps Script
-  const jsonData = encodeURIComponent(JSON.stringify(datos));
-  const url = `${CONFIG.SHEETS_API_URL}?action=guardar&data=${jsonData}`;
+  // Crear copia sin datos pesados para no exceder límite de URL
+  const datosLigeros = { ...datos };
+  delete datosLigeros.fotosBase64; // no enviar fotos por URL
   
-  const resp = await fetch(url, { redirect: 'follow' });
+  const jsonData = encodeURIComponent(JSON.stringify(datosLigeros));
+  
+  // Verificar que no exceda límite de URL (~8000 chars seguros)
+  const url = `${CONFIG.SHEETS_API_URL}?action=guardar&data=${jsonData}`;
+  if (url.length > 8000) {
+    // Si es muy largo, enviar versión resumida
+    const resumen = {
+      timestamp: datos.timestamp, fecha: datos.fecha, hora: datos.hora,
+      clienteId: datos.clienteId, cliente: datos.cliente, comercio: datos.comercio,
+      direccion: datos.direccion, ciudad: datos.ciudad, vendedor: datos.vendedor,
+      activos: datos.activos, cobertura: datos.cobertura,
+      precios: datos.precios, competencia: datos.competencia,
+      ofertas: datos.ofertas, notas: datos.notas, fotosCount: datos.fotosCount
+    };
+    const urlResumen = `${CONFIG.SHEETS_API_URL}?action=guardar&data=${encodeURIComponent(JSON.stringify(resumen))}`;
+    const resp = await fetch(urlResumen);
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    return await resp.json();
+  }
+  
+  const resp = await fetch(url);
   if (!resp.ok) throw new Error('HTTP ' + resp.status);
   const result = await resp.json();
-  if (result.status !== 'ok') throw new Error(result.message || 'Error del servidor');
+  if (result.status === 'error') throw new Error(result.message);
   return result;
 }
 
