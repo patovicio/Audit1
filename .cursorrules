@@ -1,0 +1,60 @@
+# Friosur Auditoría — Cursor Rules
+
+## Arquitectura del proyecto
+
+Este proyecto es una **PWA single-file** (HTML + JS + CSS todo en `index.html`).
+El backend es **Google Apps Script** (`Codigo.gs`), sin servidores propios.
+
+## Reglas obligatorias
+
+- **NO sugerir** React, Vue, Angular, Next.js, Vite, ni ningún bundler/framework JS.
+- **NO agregar** `package.json`, `node_modules`, ni pasos de build.
+- Todo el código de lógica debe estar dentro de `<script>` en `index.html`.
+- Usar **Vanilla JS ES6+** (arrow functions, async/await, destructuring, template literals).
+- Usar **TailwindCSS vía CDN** (`https://cdn.tailwindcss.com`). No instalar Tailwind como paquete.
+- Respetar los **tokens de Material Design 3** ya definidos en `tailwind.config` dentro del `<script>` de configuración.
+
+## Stack permitido
+
+| Capa | Tecnología |
+|------|-----------|
+| Frontend | HTML5 + Vanilla JS ES6+ |
+| Estilos | TailwindCSS CDN + tokens MD3 |
+| Íconos | Material Symbols Outlined (Google Fonts CDN) |
+| Fuente | Inter (Google Fonts CDN) |
+| Backend | Google Apps Script (Codigo.gs) vía fetch GET/POST |
+| Storage offline | localStorage + Service Worker (sw.js) |
+| Hosting | GitHub Pages |
+
+## Prioridades de diseño
+
+1. **Offline-first**: toda auditoría se guarda en localStorage primero, luego se sincroniza.
+2. **Mobile-first**: la app corre en celulares Android/iPhone de vendedores en campo.
+3. **Sin dependencias de red para funcionar**: el SW cachea HTML, íconos y fuentes.
+4. **Sincronización con Google Sheets** vía `CONFIG.SHEETS_API_URL` (Apps Script Web App).
+
+## Estructura de archivos (no modificar sin razón)
+
+```
+index.html        ← TODA la app (UI + JS + estilos inline)
+sw.js             ← Service Worker (caché offline)
+manifest.json     ← Config PWA
+Codigo.gs         ← Backend Google Apps Script
+clientes_maestro.json ← Base de datos de clientes (473 registros)
+icons/            ← Íconos PWA (192 y 512px)
+```
+
+## Convenciones de código
+
+- Funciones en camelCase en español (ej: `renderizarLista`, `guardarAuditoria`).
+- IDs de HTML en camelCase (ej: `pantallaLista`, `contenedorActivos`).
+- Constantes globales en SCREAMING_SNAKE_CASE (ej: `CONFIG`, `PRODUCTOS_PRECIOS`).
+- Estado global con variables `let` al inicio del `<script>`.
+- No usar clases ES6; preferir funciones sueltas y estado global simple.
+
+## Integración con Google Apps Script
+
+- La app envía datos vía `fetch(CONFIG.SHEETS_API_URL + '?action=guardar&data=...')` (GET).
+- El `Codigo.gs` maneja `doGet()` y `doPost()`.
+- Las fotos en base64 NO se envían a Sheets (se eliminan del payload antes de enviar).
+- Si el payload supera ~8000 chars, se envía una versión resumida.

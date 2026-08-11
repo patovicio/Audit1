@@ -1,0 +1,5392 @@
+[
+  {
+    "idcli": 30003,
+    "cliente": "CHAMORRO MARIA - CRISTINA (RG)",
+    "nombre_comercio": "ALMACEN CRISTINA",
+    "direccion": "10 E/ 21y20 LOS ALAMOS",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2132889"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30005,
+    "cliente": "CARDENAS VICTOR- SIGLO 21 (RG)",
+    "nombre_comercio": "KIOSCO SIGLO 21",
+    "direccion": "PJE. ZUCARINO 148",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2065845"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30007,
+    "cliente": "VERA FERNANDO - FRAGOS ( RG )",
+    "nombre_comercio": "KIOSCO FRAGOS",
+    "direccion": "ALCORTA 402",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2081274"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30009,
+    "cliente": "TAPIA MABEL - P. MORENO ( RG )",
+    "nombre_comercio": "KIOSCO PERITO MORENO",
+    "direccion": "PERITO MORENO 145",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2111644"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30012,
+    "cliente": "TRU - LA S.R.L. - TRU-LA 3 ( RG )",
+    "nombre_comercio": "KIOSCO TRU-LA 3",
+    "direccion": "SAN MARTIN Y URQUIZA",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2171845"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30021,
+    "cliente": "NAVARRO A. - ALEJANDRITO ( RG )",
+    "nombre_comercio": "ALMACEN ALEJANDRITO",
+    "direccion": "J. INGENIEROS 1251",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2068572"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30022,
+    "cliente": "BOTELLA PABLO - CACIQUE ( RG )",
+    "nombre_comercio": "ALMACEN CACIQUE",
+    "direccion": "J. INGENIEROS 2230",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2071048",
+      "2065862"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30033,
+    "cliente": "RODRIGUEZ ZAHN GUSTAVO- 1 (RG)",
+    "nombre_comercio": "ALMACEN RODRIGUEZ",
+    "direccion": "MARIANO MORENO 498",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30035,
+    "cliente": "NEILL MARIA - EL GAUCHO ( RG )",
+    "nombre_comercio": "ALMACEN EL GAUCHO",
+    "direccion": "B. LOS ALAMOS",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2171811"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30038,
+    "cliente": "GOMEZ PATRICIA - T. FRUTTY ( RG )",
+    "nombre_comercio": "KIOSCO TUTTI FRUTTY",
+    "direccion": "TUCUMAN 924",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30043,
+    "cliente": "MAIDANA PABLO - LUISITO ( RG )",
+    "nombre_comercio": "ALMACEN LUISITO",
+    "direccion": "SAN J. OBRERO 595",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2170872"
+    ],
+    "cafe_maquinas": [
+      "20134240872"
+    ]
+  },
+  {
+    "idcli": 30049,
+    "cliente": "OLIVERA SERGIO - BRENDA ( RG )",
+    "nombre_comercio": "KIOSKO BRENDA",
+    "direccion": "GORRITI 1577",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2111656"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30073,
+    "cliente": "CULUN PEREZ - N. HORIZONTE (RG)",
+    "nombre_comercio": "ALMACEN NUEVO HORIZONTE",
+    "direccion": "AMEGHINO 795",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2132871"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30076,
+    "cliente": "CARCAMO HOMERO - 3 HNOS. ( RG )",
+    "nombre_comercio": "ALMACEN LOS 3 HERMANOS",
+    "direccion": "PABLO NERUDA 456",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2132909"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30079,
+    "cliente": "MAYORGA S. - FIAMBRERIA 1 (RG)",
+    "nombre_comercio": "FIAMBRERIA MI FIAMBRERIA 1",
+    "direccion": "MENDOZA 167",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2181810"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30085,
+    "cliente": "FERNANDEZ RUTH- EL TIMON (RG)",
+    "nombre_comercio": "ALMACEN EL TIMON",
+    "direccion": "EVA PERON 1275",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2100378"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30088,
+    "cliente": "CVITANIC WARNER - SORAYA (RG)",
+    "nombre_comercio": "ALMACEN SORAYA",
+    "direccion": "J. INGENIEROS Y SAN LORENZO",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30101,
+    "cliente": "HAIM DENISA - LAPRIDA ( RG )",
+    "nombre_comercio": "KIOSCO LAPRIDA",
+    "direccion": "SUIPACHA 28",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2115283",
+      "2071438"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30132,
+    "cliente": "GREISSING HECTOR- EL GURI (RG)",
+    "nombre_comercio": "ALMACEN EL GURI",
+    "direccion": "ORKEKE 171",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2071452"
+    ],
+    "cafe_maquinas": [
+      "20173939037"
+    ]
+  },
+  {
+    "idcli": 30133,
+    "cliente": "PERIS MIGUEL - EL GALLEGO (RG)",
+    "nombre_comercio": "ALMACEN EL GALLEGO",
+    "direccion": "J.D. PERON 785",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2103160"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30148,
+    "cliente": "VASQUEZ JOSE - GREGORES (RG)",
+    "nombre_comercio": "ALMACEN GREGORES",
+    "direccion": "H. IRIGOYEN 1050",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2103170"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30155,
+    "cliente": "MANSILLA ULLOA - ESQUINA ( RG )",
+    "nombre_comercio": "ALMACEN LA ESQUINA",
+    "direccion": "HERALDO DEL SUR 1570",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2070370"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30158,
+    "cliente": "OPEN 24 S.A. EN FORM.- 24 HS (RG)",
+    "nombre_comercio": "KIOSCO OPEN 24 S.A. EN FORM.",
+    "direccion": "AV. KIRCHNER Y V. SARSFIELD",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2178147",
+      "2100214",
+      "2103125"
+    ],
+    "cafe_maquinas": [
+      "20232933948"
+    ]
+  },
+  {
+    "idcli": 30166,
+    "cliente": "HERNANDO DARIO- DON ALDO (RG)",
+    "nombre_comercio": "ALMACEN DON ALDO",
+    "direccion": "ALVEAR 1178",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2063275",
+      "2111636"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30168,
+    "cliente": "KUHN MATIAS - BAN RIV ( RG )",
+    "nombre_comercio": "KIOSCO BAN RIV",
+    "direccion": "BANCIELLA 1094",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30172,
+    "cliente": "MIGUELINA OYARZO-JORGELIN (RG)",
+    "nombre_comercio": "KIOSCO JORGELIN",
+    "direccion": "CORRIENTES 1160",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30175,
+    "cliente": "EL PIBE SAS - EL PIBE 1 ( RG )",
+    "nombre_comercio": "ALMACEN EL PIBE 1",
+    "direccion": "CONGRESO 852",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2066763",
+      "2182480"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30177,
+    "cliente": "GOMEZ ANIBAL - EL PINCHE ( RG )",
+    "nombre_comercio": "ALMACEN EL PINCHE",
+    "direccion": "CORRIENTES 110",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2111650"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30178,
+    "cliente": "ROJAS PEREZ JOSE- CRIS MEL (RG)",
+    "nombre_comercio": "ALMACEN CRIS MEL",
+    "direccion": "ALBERDI 219",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30193,
+    "cliente": "SEPULVEDA N. - SAMBEARI ( SC )",
+    "nombre_comercio": "ALMACEN SAMBEARI",
+    "direccion": "RIVADAVIA 360",
+    "ciudad": "PTO SANTA CRUZ",
+    "idvend": "708",
+    "freezers": [
+      "2102414",
+      "2102441"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30195,
+    "cliente": "OYARZO TRIVIÑO- TIO PETACO (RG)",
+    "nombre_comercio": "ALMACEN TIO PETACO",
+    "direccion": "GARAY Y BAT. PTO. ARGENTINO",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2100301"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30213,
+    "cliente": "BENITEZ M. H. - HORQUETAS ( CA )",
+    "nombre_comercio": "REST. LAS HORQUETAS",
+    "direccion": "PARAJE LAS HORQUETAS",
+    "ciudad": "EL CALAFATE",
+    "idvend": "707",
+    "freezers": [
+      "2171850"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30218,
+    "cliente": "GARDONIO ADRIAN- MIRAMAR 1 (SJ)",
+    "nombre_comercio": "ALMACEN MIRAMAR",
+    "direccion": "SAN MARTIN 146",
+    "ciudad": "PTO SAN JULIAN",
+    "idvend": "708",
+    "freezers": [
+      "2044584"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30228,
+    "cliente": "NADAL LILIANA - BOGUS ( SJ )",
+    "nombre_comercio": "KIOSCO BOGUS",
+    "direccion": "MITRE Y 25 DE MAYO",
+    "ciudad": "PTO SAN JULIAN",
+    "idvend": "708",
+    "freezers": [
+      "2102444"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30244,
+    "cliente": "VILLEGAS VICTOR - LA UNION ( SJ )",
+    "nombre_comercio": "ALMACEN LA UNION",
+    "direccion": "VIEYTES 1001",
+    "ciudad": "PTO SAN JULIAN",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30247,
+    "cliente": "ALARCON ARACELI - PABLITO ( PB )",
+    "nombre_comercio": "KIOSCO PABLITO",
+    "direccion": "SIMON BOLIVAR 208",
+    "ciudad": "PIEDRABUENA",
+    "idvend": "708",
+    "freezers": [
+      "2080413"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30248,
+    "cliente": "ORELLANO DANIEL - AUSTRAL ( RG )",
+    "nombre_comercio": "PANADERIA PANIF. AUSTRAL",
+    "direccion": "JOSE INGENIEROS 2196",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2111638"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30279,
+    "cliente": "ZARABOZO CAMILA- CAMILA 2 (RG)",
+    "nombre_comercio": "KIOSCO CAMILA 2",
+    "direccion": "JUAN DE GARAY 1548",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2111629"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30280,
+    "cliente": "VARGAS L. - LA ESQUINA ( RG )",
+    "nombre_comercio": "KIOSCO LA ESQUINA PARADELO",
+    "direccion": "PARADELO Y TAMEL AYKE",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2071998"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30281,
+    "cliente": "AYALA FELISA - LILI ( 28 )",
+    "nombre_comercio": "KIOSCO LILI",
+    "direccion": "SAN JUAN BOSCO 31 \" A \"",
+    "ciudad": "28 DE NOVIEMBRE",
+    "idvend": "707",
+    "freezers": [
+      "2054227",
+      "983546",
+      "2103157"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30283,
+    "cliente": "MILLAPEL FERNANDO- CERCA 5 (RG)",
+    "nombre_comercio": "ALMACEN CERCA 5",
+    "direccion": "ALFONSIN Y LOAIZA",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2065861"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30298,
+    "cliente": "DIAZ GUSTAVO - LO DE DANI (SC)",
+    "nombre_comercio": "ALMACEN LO DE DANI",
+    "direccion": "AVENIDA AVELLANEDA 1053",
+    "ciudad": "PTO SANTA CRUZ",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30299,
+    "cliente": "PAREDES RONALD - RONALD ( RG )",
+    "nombre_comercio": "ALMACEN RONALD",
+    "direccion": "LINIERS 1283",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2066324"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30302,
+    "cliente": "LACAMOIRE LAURA - CABAÑA (RG)",
+    "nombre_comercio": "ALMACEN LA CABAÑA",
+    "direccion": "SAN MARTIN 2280",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2071991"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30316,
+    "cliente": "BARRERA MARIA - JEMINA ( RG )",
+    "nombre_comercio": "KIOSCO JEMINA",
+    "direccion": "DEAN FUNES Y VILCAPUGIO",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2044347"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30347,
+    "cliente": "GONZALEZ F. - ROJO Y BLANCO (RG)",
+    "nombre_comercio": "KIOSCO ROJO Y BLANCO",
+    "direccion": "CORRIENTES 1280",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2071989"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30355,
+    "cliente": "U.N.P.A. - U.N.P.A.- U.A.R.G. ( RG )",
+    "nombre_comercio": "CONFITERIA UNPA UARG",
+    "direccion": "LISANDRO DE LA TORRE 860",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30374,
+    "cliente": "DIAZ CINTIA - CAÑAS ( RG )",
+    "nombre_comercio": "ALMACEN LOCUTORIO CAÑAS",
+    "direccion": "GREGORES Y LINIERS",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2176004"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30412,
+    "cliente": "DIAZ PAMELA - ABIGAIL ( RG )",
+    "nombre_comercio": "ALMACEN ABIGAIL",
+    "direccion": "LINIERS 483",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2063114"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30414,
+    "cliente": "MRÑA GENARO - EXTERNO ( RG )",
+    "nombre_comercio": "EXTERNO MRÑA GENARO",
+    "direccion": "RAWSON 354",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "SV",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30439,
+    "cliente": "OJEDA MARIA - 8 HERMANOS ( RG )",
+    "nombre_comercio": "ALMACEN LOS 8 HERMANOS",
+    "direccion": "LAPRIDA 148",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2066792"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30446,
+    "cliente": "EL COIRON S.R.L.- COIRON 1 (CA)",
+    "nombre_comercio": "KIOSCO EL COIRON",
+    "direccion": "LIBERTADOR 1472",
+    "ciudad": "EL CALAFATE",
+    "idvend": "707",
+    "freezers": [
+      "2071448",
+      "2080466",
+      "2111654"
+    ],
+    "cafe_maquinas": [
+      "20134140006"
+    ]
+  },
+  {
+    "idcli": 30451,
+    "cliente": "FLORINDA ROMERI - COLORADO (RT)",
+    "nombre_comercio": "ALMACEN EL COLORADO",
+    "direccion": "LOBO Y NEWBERY",
+    "ciudad": "RIO TURBIO",
+    "idvend": "707",
+    "freezers": [
+      "2081266"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30455,
+    "cliente": "GUTIERREZ A. - MARLENE ( 28 )",
+    "nombre_comercio": "ALMACEN MARLENE",
+    "direccion": "ANTARTIDA ARGENTINA 1239",
+    "ciudad": "28 DE NOVIEMBRE",
+    "idvend": "707",
+    "freezers": [
+      "2103163",
+      "2103167"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30456,
+    "cliente": "QUISPE FRANCISCO - IVAN ( 28 )",
+    "nombre_comercio": "ALMACEN IVAN",
+    "direccion": "BS.AS. Y SAN MARTIN",
+    "ciudad": "28 DE NOVIEMBRE",
+    "idvend": "707",
+    "freezers": [
+      "948478"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30457,
+    "cliente": "GUTIERREZ C. - S. FRANCISCO (28)",
+    "nombre_comercio": "ALMACEN SAN FRANCISCO",
+    "direccion": "LIBERTAD 492",
+    "ciudad": "28 DE NOVIEMBRE",
+    "idvend": "707",
+    "freezers": [
+      "2070510"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30484,
+    "cliente": "PERALTA J. - COMENTARIOS ( 28 )",
+    "nombre_comercio": "KIOSCO 5 COMENTARIOS",
+    "direccion": "YRIGOYEN 1017",
+    "ciudad": "28 DE NOVIEMBRE",
+    "idvend": "707",
+    "freezers": [
+      "2100215",
+      "2100163"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30623,
+    "cliente": "CLUB INDEPENDIENTE - CONF. (SJ)",
+    "nombre_comercio": "CONFITERIA CLUB INDEPENDIENTE",
+    "direccion": "CALLE SIN NOMBRE",
+    "ciudad": "PTO SAN JULIAN",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30702,
+    "cliente": "MONGE CARLOS - CURLY ( RG )",
+    "nombre_comercio": "ALMACEN CURLY",
+    "direccion": "ISLA SOLEDAD 2148",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2065849"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30705,
+    "cliente": "CARLOS VARGAS - NERON ( RG )",
+    "nombre_comercio": "ALMACEN NERON",
+    "direccion": "JUAN B JUSTO 708",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2070487"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30721,
+    "cliente": "NEIL SONIA - MARTY ( RG )",
+    "nombre_comercio": "ALMACEN MARTY",
+    "direccion": "B° 68 VIVIENDAS CASA N 47",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30723,
+    "cliente": "FINAL INTERIOR - INTERIOR (INT)",
+    "nombre_comercio": "OTRO FINAL INTERIOR",
+    "direccion": "RAMIREZ 672",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "SV",
+    "freezers": [
+      "2181868"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30725,
+    "cliente": "GARCIA JOSE - PERS. ( RG )",
+    "nombre_comercio": "PERSONAL - GARCIA",
+    "direccion": "RAWSON 354",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "SV",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30741,
+    "cliente": "EL PIBE SAS - EL PIBE 2 ( RG )",
+    "nombre_comercio": "ALMACEN EL PIBE 2",
+    "direccion": "ESTRADA 768",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2115249",
+      "2070491"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30744,
+    "cliente": "ALVAREZ MAURICIO - EXT. ( RG )",
+    "nombre_comercio": "EXTERNO ALVAREZ MAURICIO",
+    "direccion": "PJE LOS HORNOS 50",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "SV",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30745,
+    "cliente": "TRUJILLO SERGIO- EXTERNO (RG)",
+    "nombre_comercio": "EXTERNO TRUJILLO SERGIO",
+    "direccion": "LIBERTAD 1195",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "SV",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30750,
+    "cliente": "SANCHEZ G. - PIMPOLLOS ( RG )",
+    "nombre_comercio": "POLLERIA PIMPOLLOS",
+    "direccion": "URQUIZA 95",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2130391",
+      "2178428"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30771,
+    "cliente": "VERA JUANA- ESQ. CONGRESO (RG)",
+    "nombre_comercio": "ALMACEN ESQ. DE CONGRESO",
+    "direccion": "CONGRESO Y 19 DE DICIEMBRE",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "SV",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30782,
+    "cliente": "HORACIO DIAZ - PRIMAVERA ( RG )",
+    "nombre_comercio": "SANDWICHERIA PRIMAVERA",
+    "direccion": "MARCELINO ALVAREZ 246",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30814,
+    "cliente": "AUTOSERVICIO JORGE - JORGE (RG)",
+    "nombre_comercio": "ALMACEN JORGE",
+    "direccion": "FRANCISCO FERRADA 1373",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2102396"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30845,
+    "cliente": "CORTIZO MARCELO - CHUPIS ( RT )",
+    "nombre_comercio": "KIOSCO CHUPIS",
+    "direccion": "GOBERNADOR LISTA 398",
+    "ciudad": "RIO TURBIO",
+    "idvend": "707",
+    "freezers": [
+      "2181240/2111651",
+      "2115284",
+      "2103168"
+    ],
+    "cafe_maquinas": [
+      "20144241797",
+      "20144342245"
+    ]
+  },
+  {
+    "idcli": 30854,
+    "cliente": "CAMPOMENOSI ARIEL - VICIOS (28)",
+    "nombre_comercio": "KIOSCO VICIOS",
+    "direccion": "ANTARTIDA ARG. 1201",
+    "ciudad": "28 DE NOVIEMBRE",
+    "idvend": "707",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30859,
+    "cliente": "CANAL DE BEAGLE - YPF ( SC )",
+    "nombre_comercio": "EST. SERV. YPF SANTA CRUZ",
+    "direccion": "AV ROCA Y 6",
+    "ciudad": "PTO SANTA CRUZ",
+    "idvend": "708",
+    "freezers": [
+      "2070612"
+    ],
+    "cafe_maquinas": [
+      "20183043421"
+    ]
+  },
+  {
+    "idcli": 30872,
+    "cliente": "RUIZ SANDRA - ESPERANZA (RT)",
+    "nombre_comercio": "ALMACEN LA ESPERANZA",
+    "direccion": "B° H. CONTINENTALES 257",
+    "ciudad": "RIO TURBIO",
+    "idvend": "707",
+    "freezers": [
+      "2100227"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30876,
+    "cliente": "TRU - LA S.R.L. - TRU-LA 2 ( RG )",
+    "nombre_comercio": "KIOSCO TRU-LA 2",
+    "direccion": "AV. KIRCHNER 1486",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2179816"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30892,
+    "cliente": "LEON JAVIER - AVISUR (RG)",
+    "nombre_comercio": "CARNICERIA AVISUR",
+    "direccion": "AV JUJUY 379",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30940,
+    "cliente": "EL PIBE SAS - EL PIBE 4 ( RG )",
+    "nombre_comercio": "ALMACEN EL PIBE 4",
+    "direccion": "SAN JOSE OBRERO 923",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2081265"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30943,
+    "cliente": "NAVARRO - DON JOSE ( RG )",
+    "nombre_comercio": "ALMACEN DON JOSE",
+    "direccion": "CHACO 381",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2111649"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30952,
+    "cliente": "HERNANDEZ JULIO- JUNIOR ( CA )",
+    "nombre_comercio": "ALMACEN JUNIOR",
+    "direccion": "CAMPAÑA DEL DESIERTO 1694",
+    "ciudad": "EL CALAFATE",
+    "idvend": "707",
+    "freezers": [
+      "2080414"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30956,
+    "cliente": "CACERES PABLO - MAGYCO ( RG )",
+    "nombre_comercio": "KIOSCO MAGYCO",
+    "direccion": "ROQUE SAENZ PEÑA 231",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30961,
+    "cliente": "RODAS MENDOZA - KAROL ( RG )",
+    "nombre_comercio": "ALMACEN CRIS - KAROL",
+    "direccion": "AV. KIRCHNER 2989",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2114208"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30965,
+    "cliente": "CAMPORRO PABLO - JAMPLIN (RG)",
+    "nombre_comercio": "KIOSCO JAMPLIN",
+    "direccion": "VELEZ SARFIELD 104",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2071046"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30982,
+    "cliente": "LUNA QUIROGA - LUNAS ( PB )",
+    "nombre_comercio": "KIOSCO LUNAS TU KIOSCO",
+    "direccion": "MAYER 40",
+    "ciudad": "PIEDRABUENA",
+    "idvend": "708",
+    "freezers": [
+      "2115845"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 30985,
+    "cliente": "ARANDA DANIEL - LUCAS 1 ( RG )",
+    "nombre_comercio": "ALMACEN LUCAS 1",
+    "direccion": "DOCTOR FILLIPO 21",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31038,
+    "cliente": "DE DIOS AGUSTIN - MENINA ( RG )",
+    "nombre_comercio": "KIOSCO MENINA",
+    "direccion": "KIRCHNER Y MURATORE",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2071986"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31043,
+    "cliente": "MENARES CARLOS - MIRADOR (RG)",
+    "nombre_comercio": "KIOSCO EL MIRADOR",
+    "direccion": "DOCTOR FILIPPO 663",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2113730"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31044,
+    "cliente": "PIUCOL PAOLA - PERS. ( RG )",
+    "nombre_comercio": "PERSONAL - PIUCOL",
+    "direccion": "ALLEN GARDINER 858",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "SV",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31046,
+    "cliente": "PAREDES SERGIO - PERS. (RG)",
+    "nombre_comercio": "PERSONAL - PAREDES",
+    "direccion": "JOSE MATA 42",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "SV",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31048,
+    "cliente": "VALLEJOS DARIO - EXTERNO (RG)",
+    "nombre_comercio": "EXTERNO VALLEJOS DARIO",
+    "direccion": "JULIO CORTAZA B20viv C15",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "SV",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31051,
+    "cliente": "DELGADO EDUARDO - PERS. ( RG )",
+    "nombre_comercio": "PERSONAL - DELGADO",
+    "direccion": "B 108 V CASA 89",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "SV",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31055,
+    "cliente": "MARTINEZ DEBORAH - SITIO ( PB )",
+    "nombre_comercio": "KIOSCO EL SITIO",
+    "direccion": "BELGRANO 100",
+    "ciudad": "PIEDRABUENA",
+    "idvend": "708",
+    "freezers": [
+      "2115641"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31064,
+    "cliente": "BOREA LIDIA - SARMIENTO ( SC )",
+    "nombre_comercio": "KIOSCO LIB. SARMIENTO",
+    "direccion": "SAN MARTIN 153",
+    "ciudad": "PTO SANTA CRUZ",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31070,
+    "cliente": "MIGUEL FUENTES -SAGITARIO ( SJ )",
+    "nombre_comercio": "ALMACEN SAGITARIO",
+    "direccion": "SAN MARTIN 1257",
+    "ciudad": "PTO SAN JULIAN",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31081,
+    "cliente": "EL COIRON S.R.L.- COIRON 2 (CA)",
+    "nombre_comercio": "KIOSCO EL COIRON 2",
+    "direccion": "LIBERTADOR AL 300",
+    "ciudad": "EL CALAFATE",
+    "idvend": "707",
+    "freezers": [
+      "2115616",
+      "2071132",
+      "2054192"
+    ],
+    "cafe_maquinas": [
+      "1215090900172",
+      "20232933881"
+    ]
+  },
+  {
+    "idcli": 31095,
+    "cliente": "QUINTANA ALFONZO - KAMI ( GG )",
+    "nombre_comercio": "KIOSCO KAMI",
+    "direccion": "SAN MARTIN 480",
+    "ciudad": "GOB. GREGORES",
+    "idvend": "708",
+    "freezers": [
+      "2102390",
+      "2065847",
+      "2044534"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31096,
+    "cliente": "GRACIELA LOPEZ - LO FA LU (GG)",
+    "nombre_comercio": "KIOSCO LO. FA. LU.",
+    "direccion": "BELGRANO 975",
+    "ciudad": "GOB. GREGORES",
+    "idvend": "708",
+    "freezers": [
+      "2120824"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31100,
+    "cliente": "FERNANDEZ MARIA - LAUTARO (GG)",
+    "nombre_comercio": "KIOSCO MULTIRUBRO LAUTARO",
+    "direccion": "CAÑADON LEON 486",
+    "ciudad": "GOB. GREGORES",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31101,
+    "cliente": "HERRERA TAMARA - EL ALAMO (GG)",
+    "nombre_comercio": "EST. SERV. EL ALAMO GREGORES",
+    "direccion": "ANTARTIDA ARGENTINA 100",
+    "ciudad": "GOB. GREGORES",
+    "idvend": "708",
+    "freezers": [
+      "2102518"
+    ],
+    "cafe_maquinas": [
+      "20232933884"
+    ]
+  },
+  {
+    "idcli": 31108,
+    "cliente": "BUSTAMANTE PATRICIO- PERS. (RG)",
+    "nombre_comercio": "PERSONAL - BUSTAMANTE",
+    "direccion": "TOMAS BRENEY 30",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "SV",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31136,
+    "cliente": "ROMERO EDUARDO - UNION (GG)",
+    "nombre_comercio": "ALMACEN LA UNION",
+    "direccion": "BELGRANO 869",
+    "ciudad": "GOB. GREGORES",
+    "idvend": "708",
+    "freezers": [
+      "2115205"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31141,
+    "cliente": "ALMADA MATIAS - PERS. ( RG )",
+    "nombre_comercio": "PERSONAL - ALMADA",
+    "direccion": "B 108 V CASA 89",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "SV",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31154,
+    "cliente": "GUILLIN DIEGO - PERS. ( RG )",
+    "nombre_comercio": "PERSONAL - GUILLIN",
+    "direccion": "S/N",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "SV",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31157,
+    "cliente": "FINAL GALLEGOS - GALLEGOS (RG)",
+    "nombre_comercio": "OTRO FINAL GALLEGOS",
+    "direccion": "RAMIREZ 672",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "SV",
+    "freezers": [
+      "2111658"
+    ],
+    "cafe_maquinas": [
+      "20181621469",
+      "20191316171"
+    ]
+  },
+  {
+    "idcli": 31168,
+    "cliente": "NEIL JULIA - JULIA ( RG )",
+    "nombre_comercio": "ALMACEN JULIA",
+    "direccion": "2 DE ABRIL 286",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2171898",
+      "2183044"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31183,
+    "cliente": "NATIVO DE LA PATAGONIA (CA)",
+    "nombre_comercio": "REST. NATIVO DE LA PATAGONIA",
+    "direccion": "ING. HECTOR M.GUATTI 1350",
+    "ciudad": "EL CALAFATE",
+    "idvend": "707",
+    "freezers": [],
+    "cafe_maquinas": [
+      "20232933880"
+    ]
+  },
+  {
+    "idcli": 31199,
+    "cliente": "MONCADA SERGIO - MASTIL ( PB )",
+    "nombre_comercio": "KIOSCO EL MASTIL",
+    "direccion": "IBAÑEZ 141",
+    "ciudad": "PIEDRABUENA",
+    "idvend": "708",
+    "freezers": [
+      "2102426"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31201,
+    "cliente": "CARLOS ACUÑA - CHARLES ( RG )",
+    "nombre_comercio": "ALMACEN CHARLES",
+    "direccion": "ALBERTI Y ALBERDI",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2102524"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31206,
+    "cliente": "LADA FERNANDO - PIE GRANDE (GG)",
+    "nombre_comercio": "KIOSCO PIE GRANDE",
+    "direccion": "SAN MARTIN 729",
+    "ciudad": "GOB. GREGORES",
+    "idvend": "708",
+    "freezers": [
+      "2102387",
+      "2063567"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31236,
+    "cliente": "ORELLANO DANIEL - AUSTRAL 2 (RG)",
+    "nombre_comercio": "PANADERIA PANIF. AUSTRAL 2",
+    "direccion": "M. ALVAREZ Y MATA",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2114212"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31248,
+    "cliente": "AMIGACHO - SAN BENITO ( RG )",
+    "nombre_comercio": "ALMACEN AMIGACHO",
+    "direccion": "CALLE 9 Y 38 - SAN BENITO",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2111645"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31250,
+    "cliente": "AMANECER S.R.L. ( RT )",
+    "nombre_comercio": "ALMACEN AMANECER",
+    "direccion": "AV. DE LOS MINEROS",
+    "ciudad": "RIO TURBIO",
+    "idvend": "707",
+    "freezers": [
+      "2111647"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31260,
+    "cliente": "NAVARRO F. - PATAGONIA (RG)",
+    "nombre_comercio": "ALMACEN PATAGONIA",
+    "direccion": "FELIX RIQUEZ 556",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2070233"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31267,
+    "cliente": "VEGA OJEDA - JOSELIN ( GG )",
+    "nombre_comercio": "PANADERIA JOSELIN",
+    "direccion": "PERITO MORENO 995",
+    "ciudad": "GOB. GREGORES",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31269,
+    "cliente": "DEL GOBBO G. - MR. PIZZA ( RG )",
+    "nombre_comercio": "ROTISERIA MR. PIZZA",
+    "direccion": "BELGRANO 457",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31271,
+    "cliente": "MIRANDA DANIEL H. - DANIEL (SJ)",
+    "nombre_comercio": "ALMACEN DANIEL",
+    "direccion": "BERUTTI 796",
+    "ciudad": "PTO SAN JULIAN",
+    "idvend": "708",
+    "freezers": [
+      "2111106"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31283,
+    "cliente": "BARRIA ROMINA - SIMPSONS ( RG )",
+    "nombre_comercio": "KIOSCO SIMPSON",
+    "direccion": "M. AYKMOND 25",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2111615"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31285,
+    "cliente": "LEVILL DIEGO - DON DIEGO ( RG )",
+    "nombre_comercio": "CARNICERIA DON DIEGO",
+    "direccion": "DR. FILIPPO 363",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2071874"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31294,
+    "cliente": "LUIS NUÑEZ - SERV. GAST. ( RG )",
+    "nombre_comercio": "REST. SERV. GASTRONOMICOS",
+    "direccion": "LOS POZOS 6",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "SV",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31295,
+    "cliente": "DUARTE NOELIA - EXPRESS ( RG )",
+    "nombre_comercio": "KIOSCO EXPRESS",
+    "direccion": "PERON 739",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2081258"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31312,
+    "cliente": "DELSOUC A. - SANTACRUCEÑO (RG)",
+    "nombre_comercio": "ALMACEN SANTACRUCEÑO",
+    "direccion": "H. YRIGOYEN 717",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2114189"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31320,
+    "cliente": "EL PIBE SAS - EL PIBE 5 ( RG )",
+    "nombre_comercio": "ALMACEN EL PIBE 5",
+    "direccion": "PABLO NERUDA",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2066204",
+      "2115639"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31353,
+    "cliente": "LLANQUIN A. - OPEN 25 II (RG)",
+    "nombre_comercio": "ALMACEN MI VILLANO",
+    "direccion": "ZAPIOLA Y PERITO MORENO",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2063580"
+    ],
+    "cafe_maquinas": [
+      "20144442978"
+    ]
+  },
+  {
+    "idcli": 31355,
+    "cliente": "VILLAGRÁN LUCIA- ALFREDITO (RG)",
+    "nombre_comercio": "KIOSCO ALFREDITO",
+    "direccion": "LA PAZ 265",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2114224"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31357,
+    "cliente": "AMPUERO SEPULVEDA- MARIA (GG)",
+    "nombre_comercio": "KIOSCO MARIA",
+    "direccion": "JUAN DGO. PERÓN 645",
+    "ciudad": "GOB. GREGORES",
+    "idvend": "708",
+    "freezers": [
+      "2064762"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31369,
+    "cliente": "PEÑA LUIS - DAMODE ( RT )",
+    "nombre_comercio": "ALMACEN DAMODE",
+    "direccion": "PELLEGRINI 97",
+    "ciudad": "RIO TURBIO",
+    "idvend": "707",
+    "freezers": [
+      "2066199"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31373,
+    "cliente": "TOLEDO ERIC- DE LA ABUELA (RG)",
+    "nombre_comercio": "REST. DELICIAS DE LA ABUELA",
+    "direccion": "ERRAZURIZ 26",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "SIN NUMERO"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31374,
+    "cliente": "VEINTISEIS S.A.S. - CERCA 1 (RG)",
+    "nombre_comercio": "AUTOSERVICIO CERCA 1",
+    "direccion": "DOCTOR LORENZO 1351",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2115265"
+    ],
+    "cafe_maquinas": [
+      "Asig Trelew",
+      "20114937467"
+    ]
+  },
+  {
+    "idcli": 31377,
+    "cliente": "CASIMIRO SABINA - MAILEN 1 (28)",
+    "nombre_comercio": "KIOSCO MAILEN 1",
+    "direccion": "BÂª 100 VIV. CASA 1",
+    "ciudad": "28 DE NOVIEMBRE",
+    "idvend": "707",
+    "freezers": [
+      "2120408"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31378,
+    "cliente": "TACACHO BASILIO- PATAGONIA (28)",
+    "nombre_comercio": "ALMACEN LOC. PATAGONIA",
+    "direccion": "SAN LUIS 585",
+    "ciudad": "28 DE NOVIEMBRE",
+    "idvend": "707",
+    "freezers": [
+      "2182982",
+      "2102450"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31389,
+    "cliente": "SANTOS RICARDO - RULY ( RG )",
+    "nombre_comercio": "ALMACEN RULY",
+    "direccion": "LAVALLE Y ALFONSIN",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2115568"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31397,
+    "cliente": "MARTINEZ ARIAS - ANGOL ( GG )",
+    "nombre_comercio": "ALMACEN ANGOL",
+    "direccion": "COLON",
+    "ciudad": "GOB. GREGORES",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31401,
+    "cliente": "DIAZ CLAUDIA - EL CANI ( RG )",
+    "nombre_comercio": "CARNICERIA EL CANI",
+    "direccion": "CALLE 13 - 3719",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31419,
+    "cliente": "SOUTO PABLO - PATORUZITO (RG)",
+    "nombre_comercio": "KIOSCO PATORUZITO",
+    "direccion": "MARIANO MORENO 402",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2071994"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31429,
+    "cliente": "VIRGINIA FLORES - FLORES (GG)",
+    "nombre_comercio": "ALMACEN LAS FLORES",
+    "direccion": "9 DE JULIO 182",
+    "ciudad": "GOB. GREGORES",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31430,
+    "cliente": "CENTURION MARCELA- ROCIO (PB)",
+    "nombre_comercio": "ALMACEN ROCIO",
+    "direccion": "SAENZ PEÑA 737",
+    "ciudad": "PIEDRABUENA",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31443,
+    "cliente": "ANDRADE PABLO - BAIÑA ( SJ )",
+    "nombre_comercio": "ALMACEN BAIÑA",
+    "direccion": "AV. PIEDRA BUENA 572",
+    "ciudad": "PTO SAN JULIAN",
+    "idvend": "708",
+    "freezers": [
+      "2070508"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31455,
+    "cliente": "TIANI KARINA- PROMO FIESTA (RG)",
+    "nombre_comercio": "OTRO CATERING PROMO FIESTA",
+    "direccion": "CORRIENTES 313",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31461,
+    "cliente": "EL PIBE SAS - EL PIBE 6 ( RG )",
+    "nombre_comercio": "ALMACEN EL PIBE 6",
+    "direccion": "JUAN DE GARAY Y VILCAPUGIO",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2103169"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31469,
+    "cliente": "JIMENEZ DIEGO - J.M. ( PB )",
+    "nombre_comercio": "KIOSCO J.M.",
+    "direccion": "IBAÑEZ 88",
+    "ciudad": "PIEDRABUENA",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31474,
+    "cliente": "CASAS CESAR - PEPE EXP. (RG)",
+    "nombre_comercio": "ALMACEN PEPE EXPRESS",
+    "direccion": "SAMUEL MORSE 2487",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2181157"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31502,
+    "cliente": "DA SILVA ROMINA - B & B ( RG )",
+    "nombre_comercio": "ALMACEN B & B",
+    "direccion": "CORRIENTES Y TORRES",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2120435"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31503,
+    "cliente": "MARTINEZ VANINA - CARA PAPA (RG)",
+    "nombre_comercio": "ALMACEN CARA DE PAPA",
+    "direccion": "URQUIZA 846",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31504,
+    "cliente": "VARGAS LUIS - MI VIEJO ( RG )",
+    "nombre_comercio": "PANADERIA MI VIEJO",
+    "direccion": "BORGES Y PEREZ GALDOS",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2114216"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31526,
+    "cliente": "BOGADO CARLOS - BONGYA 2 ( RG )",
+    "nombre_comercio": "PANADERIA BONGYA 2",
+    "direccion": "LOS POZOS 736",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": [
+      "20183043255"
+    ]
+  },
+  {
+    "idcli": 31532,
+    "cliente": "VILLEGAS J. - ESTUDIANTE (SJ)",
+    "nombre_comercio": "KIOSCO EL ESTUDIANTE",
+    "direccion": "SAN MARTIN 317",
+    "ciudad": "PTO SAN JULIAN",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31545,
+    "cliente": "QUIROZ SOLIS - EL SALTO ( CH )",
+    "nombre_comercio": "KIOSCO EL SALTO",
+    "direccion": "SAN MARTIN 219",
+    "ciudad": "EL CHALTEN",
+    "idvend": "707",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31549,
+    "cliente": "TORRES VERONICA - JESSY ( GG )",
+    "nombre_comercio": "ALMACEN JESSY",
+    "direccion": "PERON 356",
+    "ciudad": "GOB. GREGORES",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31550,
+    "cliente": "ROJAS EDUARDO - SELECTA (SC)",
+    "nombre_comercio": "PANADERIA LA SELECTA",
+    "direccion": "ROCA 870",
+    "ciudad": "PTO SANTA CRUZ",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31551,
+    "cliente": "SOTO ADRIANA - PAMPERITO ( PB )",
+    "nombre_comercio": "ALMACEN PAMPERITO",
+    "direccion": "ESPINOSA Y SAENZ PEÑA",
+    "ciudad": "PIEDRABUENA",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31565,
+    "cliente": "VERA DIAZ - RAYITO DE SOL ( RG )",
+    "nombre_comercio": "KIOSCO RAYITO DE SOL",
+    "direccion": "M. ALVAREZ 266",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31570,
+    "cliente": "SOTOMAYOR SANTIAGO- BAJO CERO 1 (RG)",
+    "nombre_comercio": "KIOSCO BAJO CERO 1",
+    "direccion": "PERITO MORENO 395",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2103171"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31617,
+    "cliente": "AMAYA FEDERICO - ELENA ( 28 )",
+    "nombre_comercio": "ALMACEN ELENA",
+    "direccion": "TUCUMAN 54",
+    "ciudad": "28 DE NOVIEMBRE",
+    "idvend": "707",
+    "freezers": [
+      "2179910",
+      "2180926",
+      "2080469"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31621,
+    "cliente": "ROMERO NANCY - ROSITA ( RG )",
+    "nombre_comercio": "ALMACEN ROSITA",
+    "direccion": "LA PAZ 77",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2100004"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31624,
+    "cliente": "MARCELO GIANINNI - CM ( PB )",
+    "nombre_comercio": "ROTISERIA CM MINUTAS",
+    "direccion": "ALEM Y ESPAÑA",
+    "ciudad": "PIEDRABUENA",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31634,
+    "cliente": "GONZALEZ F. - CHIMBOTES (RG)",
+    "nombre_comercio": "KIOSCO LOS CHIMBOTES",
+    "direccion": "EVA PERON 1190-1120",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31650,
+    "cliente": "KURTZ KARINA R. - VALÚ ( RG )",
+    "nombre_comercio": "ALMACEN VALÚ",
+    "direccion": "MURATORE 286",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31652,
+    "cliente": "HUMANA SILVINA - FRATELLO (28)",
+    "nombre_comercio": "KIOSCO FRATELLO",
+    "direccion": "H. YRIGOYEN 635",
+    "ciudad": "28 DE NOVIEMBRE",
+    "idvend": "707",
+    "freezers": [
+      "2180944"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31686,
+    "cliente": "MOGRO IVANA - GABITO ( RG )",
+    "nombre_comercio": "KIOSCO GABITO",
+    "direccion": "DEAN FUNES 1625",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2120790"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31688,
+    "cliente": "ULLOA MARIA - SAMBEARI ( PB )",
+    "nombre_comercio": "ALMACEN SAMBEARI",
+    "direccion": "BOLIVIA 115",
+    "ciudad": "PIEDRABUENA",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31697,
+    "cliente": "AMPUERO MAXIMILIANO- PERS. (RG)",
+    "nombre_comercio": "PERSONAL - AMPUERO",
+    "direccion": "RIO GALLEGOS",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "SV",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31703,
+    "cliente": "LAVIE VICTOR - CHICHE ( 28 )",
+    "nombre_comercio": "KIOSCO RANCHO É CHICHE",
+    "direccion": "YRIGOYEN 1625",
+    "ciudad": "28 DE NOVIEMBRE",
+    "idvend": "707",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31706,
+    "cliente": "MENARES CARLOS - MIRADOR (RG)",
+    "nombre_comercio": "CARNICERIA EL MIRADOR",
+    "direccion": "SAN JUAN Y S. DEL ESTERO",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2100717"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31711,
+    "cliente": "CABALLERO SARAVIA - TAHIEL (RG)",
+    "nombre_comercio": "KIOSCO TAHIEL",
+    "direccion": "LAPRIDA 243",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2111662"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31719,
+    "cliente": "MANUEL ALEJANDRO - NANO ( PB )",
+    "nombre_comercio": "CONFITERIA NANO PUB",
+    "direccion": "IBAÑEZ 120",
+    "ciudad": "PIEDRABUENA",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31724,
+    "cliente": "ROJAS MARTIN - EL ABUELO ( CA )",
+    "nombre_comercio": "KIOSCO EL ABUELO",
+    "direccion": "AV. LIBERTADOR 459",
+    "ciudad": "EL CALAFATE",
+    "idvend": "707",
+    "freezers": [
+      "2064650"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31727,
+    "cliente": "RODRIGUEZ F. - MATE ( RG )",
+    "nombre_comercio": "KIOSCO MATE",
+    "direccion": "ZAPIOLA 1216",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2103080"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31742,
+    "cliente": "CAZON MABEL - ALEX ( RG )",
+    "nombre_comercio": "ALMACEN ALEX",
+    "direccion": "S. JOSE OBRERO 1075",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2113657"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31749,
+    "cliente": "MEJIA MALCIER - LOS BICHIS (RG)",
+    "nombre_comercio": "KIOSCO LOS BICHIS",
+    "direccion": "FELIX RIQUEZ 828",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2114228"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31781,
+    "cliente": "AVELLANEDA P. - KOKITO (RG)",
+    "nombre_comercio": "ALMACEN KOKITO",
+    "direccion": "CALLE 13 Y 16 BIS",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2179866"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31796,
+    "cliente": "GUERRERO G. - FULL TIME (RG)",
+    "nombre_comercio": "KIOSCO FULL TIME",
+    "direccion": "AV. KIRCHNER 398",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2115561"
+    ],
+    "cafe_maquinas": [
+      "20144342215"
+    ]
+  },
+  {
+    "idcli": 31806,
+    "cliente": "OBLINOVICH HECTOR - TIA IRMA (SJ)",
+    "nombre_comercio": "KIOSCO TIA IRMA",
+    "direccion": "VELEZ SARSFIELD 1075",
+    "ciudad": "PTO SAN JULIAN",
+    "idvend": "708",
+    "freezers": [
+      "2100789"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31822,
+    "cliente": "GARCIA ARGENTINA - VALENTIN (CA)",
+    "nombre_comercio": "KIOSCO VALENTIN",
+    "direccion": "CORONEL ROSALES 335",
+    "ciudad": "EL CALAFATE",
+    "idvend": "707",
+    "freezers": [
+      "2180932"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31830,
+    "cliente": "VEINTISEIS S.A.S. - CERCA 2 (RG)",
+    "nombre_comercio": "ALMACEN CERCA 2",
+    "direccion": "ZAPIOLA 2282",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2115258"
+    ],
+    "cafe_maquinas": [
+      "20183043401"
+    ]
+  },
+  {
+    "idcli": 31831,
+    "cliente": "MARIN MARCIAL - LAS PIEDRAS (RG)",
+    "nombre_comercio": "KIOSCO LAS PIEDRAS",
+    "direccion": "LAS PIEDRAS 101",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2081877"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31833,
+    "cliente": "MUÑOZ BRUNETTI- LONGANIZA (RG)",
+    "nombre_comercio": "FIAMBRERIA MAESTRO LONGANIZA",
+    "direccion": "ENTRE RIOS y M.MORENO",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2179873"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31837,
+    "cliente": "CHIGUAY NATALIA - TAVOS ( RG )",
+    "nombre_comercio": "KIOSCO TAVOS",
+    "direccion": "RIVERO Y 3 LAGOS",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2115264"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31840,
+    "cliente": "GARCIA VERONICA - LA ALDEA ( RG )",
+    "nombre_comercio": "KIOSCO LA ALDEA",
+    "direccion": "RICHIERI 584",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2111637"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31842,
+    "cliente": "ROJAS RODRIGO- S. SANDWICH (RG)",
+    "nombre_comercio": "SANDWICHERIA SOLO SANDWICH",
+    "direccion": "KIRCHNER 1502",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31843,
+    "cliente": "MIÑO ANALIA BEATRIZ - ITUS ( SJ )",
+    "nombre_comercio": "KIOSCO ITUS",
+    "direccion": "PERIODICO EL SONIDO 1965",
+    "ciudad": "PTO SAN JULIAN",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31845,
+    "cliente": "BENITEZ SILVIA - PLAN B ( SJ )",
+    "nombre_comercio": "KIOSCO PLAN B",
+    "direccion": "CONSTANTINO MICHUDIS 1608",
+    "ciudad": "PTO SAN JULIAN",
+    "idvend": "708",
+    "freezers": [
+      "2114213"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31851,
+    "cliente": "BERRENECHEA N. - CAYETANO (GG)",
+    "nombre_comercio": "PANADERIA SAN CAYETANO",
+    "direccion": "ANTARTIDA ARGENTINA 25",
+    "ciudad": "GOB. GREGORES",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31853,
+    "cliente": "SILVESTRE CASTRO - GAIMA ( PB )",
+    "nombre_comercio": "VERDULERIA GAIMA",
+    "direccion": "21 DE NOVIEMBRE 230",
+    "ciudad": "PIEDRABUENA",
+    "idvend": "708",
+    "freezers": [
+      "2171860"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31855,
+    "cliente": "QUINTAS JOSE - DEL BOCHA (SC)",
+    "nombre_comercio": "CARNICERIA LO DEL BOCHA",
+    "direccion": "BELGRANO 60",
+    "ciudad": "PTO SANTA CRUZ",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31856,
+    "cliente": "BOGLIACINO GUSTAVO- LA RIA ( RG )",
+    "nombre_comercio": "ALMACEN LA RIA",
+    "direccion": "ALCORTA 642",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "982514"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31860,
+    "cliente": "SANCHEZ M. - DON POLLO (RG)",
+    "nombre_comercio": "POLLERIA DON POLLO",
+    "direccion": "CEPEDA 302",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31861,
+    "cliente": "HAMAT S.A.S - HAMAT ( RG )",
+    "nombre_comercio": "KIOSCO HAMAT",
+    "direccion": "CALLE 13 Y 28 - SAN BENITO",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2115505"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31874,
+    "cliente": "MEDINA ESTEBAN - LANTOÑA (PB)",
+    "nombre_comercio": "FIAMBRERIA LANTOÑA",
+    "direccion": "SAENZ PEÑA 755",
+    "ciudad": "PIEDRABUENA",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31876,
+    "cliente": "AIZPURUA DAMIAN - MAJO ( CA )",
+    "nombre_comercio": "KIOSCO MAJO",
+    "direccion": "LUIS BAHAMONDE 159",
+    "ciudad": "EL CALAFATE",
+    "idvend": "707",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31880,
+    "cliente": "VARGAS GUEICHA - SOFIA ( RG )",
+    "nombre_comercio": "ALMACEN SOFIA",
+    "direccion": "ARISTIZABAL 2145",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2111427"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31881,
+    "cliente": "CABAÑA JAVIER - KIOSKITO ( RG )",
+    "nombre_comercio": "KIOSCO KIOSKITO",
+    "direccion": "CHILE 1085",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2171897"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31887,
+    "cliente": "MARPATAG S.R.L. - CALAFATE ( CA )",
+    "nombre_comercio": "CONFITERIA MARPATAG S.R.L.",
+    "direccion": "AV. DEL LIBERTADOR 1319",
+    "ciudad": "EL CALAFATE",
+    "idvend": "707",
+    "freezers": [],
+    "cafe_maquinas": [
+      "20232933882",
+      "1215092200062"
+    ]
+  },
+  {
+    "idcli": 31896,
+    "cliente": "FRETES HECTOR - MINI MART (CA)",
+    "nombre_comercio": "KIOSCO MINI E MART",
+    "direccion": "LIBERTADOR 1873",
+    "ciudad": "EL CALAFATE",
+    "idvend": "707",
+    "freezers": [
+      "2102509"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31906,
+    "cliente": "MANSILLA LILIANA - PERICO ( RG )",
+    "nombre_comercio": "KIOSCO PERICO",
+    "direccion": "HORACIO PIRULO ALVAREZ 371",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31907,
+    "cliente": "ROMERO AGUSTINA - ESQUINA (SC)",
+    "nombre_comercio": "KIOSCO LA ESQUINA",
+    "direccion": "CORDOBA 198",
+    "ciudad": "PTO SANTA CRUZ",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31910,
+    "cliente": "PEREZ MARIA - MARIA ( PB )",
+    "nombre_comercio": "KIOSCO EXTOA",
+    "direccion": "BELGRANO 380",
+    "ciudad": "PIEDRABUENA",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31918,
+    "cliente": "QUISPE CARLOS- V. DEL SUR ( SJ )",
+    "nombre_comercio": "ALMACEN VIENTOS DEL SUR",
+    "direccion": "EL SONIDO Y CENT",
+    "ciudad": "PTO SAN JULIAN",
+    "idvend": "708",
+    "freezers": [
+      "2063567"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31919,
+    "cliente": "MAS BARNEY - BARNEY 1 (RG)",
+    "nombre_comercio": "KIOSCO BARNEY 1",
+    "direccion": "NEWBERY MZA 30 CASA 10",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2081897"
+    ],
+    "cafe_maquinas": [
+      "1217052300184"
+    ]
+  },
+  {
+    "idcli": 31920,
+    "cliente": "MAS BARNEY - BARNEY 2 (RG)",
+    "nombre_comercio": "KIOSCO BARNEY II",
+    "direccion": "SAN MARTIN Y CAJAL",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2114190",
+      "2114191"
+    ],
+    "cafe_maquinas": [
+      "20144442973"
+    ]
+  },
+  {
+    "idcli": 31931,
+    "cliente": "ROCHA ELMER - ELUNEY ( CA )",
+    "nombre_comercio": "KIOSCO ELUNEY",
+    "direccion": "ALICIA MENDEZ 112",
+    "ciudad": "EL CALAFATE",
+    "idvend": "707",
+    "freezers": [
+      "2181829"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31935,
+    "cliente": "LUQUES E HIJOS S.A.S. ( SJ )",
+    "nombre_comercio": "AUTOSERVICIO LUQUES E HIJOS",
+    "direccion": "SAN MARTIN Y 25 DE MAYO",
+    "ciudad": "PTO SAN JULIAN",
+    "idvend": "708",
+    "freezers": [
+      "2100081",
+      "2111630",
+      "2111648"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31936,
+    "cliente": "CARDOZO ROMINA - TAPIA ( 28 )",
+    "nombre_comercio": "KIOSCO EL TAPIA",
+    "direccion": "EDIFICIO 22 DEPTO \" A \"",
+    "ciudad": "28 DE NOVIEMBRE",
+    "idvend": "707",
+    "freezers": [
+      "2115584"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31941,
+    "cliente": "MOMA S.A.S. - MOMA ( RG )",
+    "nombre_comercio": "MOMA",
+    "direccion": "ALBERDI Y ESPAÑA",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31943,
+    "cliente": "MUÑOZ JORGE - N. CACERITO (RG)",
+    "nombre_comercio": "PANADERIA NUEVO CACERITO",
+    "direccion": "JOAQUIN SAN MIGUEL 690",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31948,
+    "cliente": "BLOISE MARTIN- BLOISE M. ( RG )",
+    "nombre_comercio": "OTRO BLOISE MARTIN",
+    "direccion": "RIO PELQUE 2263",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "SV",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31950,
+    "cliente": "DURAN RAUL - VALENTINA ( RG )",
+    "nombre_comercio": "ALMACEN VALENTINA",
+    "direccion": "JUAN ESTEBAN 508",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2115193"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31951,
+    "cliente": "RODRIGUEZ ZAHN GUSTAVO- 2 (RG)",
+    "nombre_comercio": "ALMACEN RODRIGUEZ 2",
+    "direccion": "BARRIO SAN BENITO",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2132916",
+      "2179863"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31952,
+    "cliente": "SOTOMAYOR SANTIAGO- BAJO CERO 2 (RG)",
+    "nombre_comercio": "KIOSCO BAJO CERO 2",
+    "direccion": "HERNAN CORTES Y CEPEDA",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2171895",
+      "2171807"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31954,
+    "cliente": "BERNALES CONTRERA- FRANJE (RG)",
+    "nombre_comercio": "ALMACEN FRAN - JE",
+    "direccion": "JOSE CREMA Y LADVOCAT",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2045828"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31955,
+    "cliente": "PALACIOS SOFIA - EMPERADOR (RG)",
+    "nombre_comercio": "ALMACEN EL EMPERADOR",
+    "direccion": "FELIZ RIQUEZ 820",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31964,
+    "cliente": "GUSTAVO GORDILLO - PAULA ( 28 )",
+    "nombre_comercio": "KIOSCO PAULA",
+    "direccion": "SAN MARTIN 1047",
+    "ciudad": "28 DE NOVIEMBRE",
+    "idvend": "707",
+    "freezers": [
+      "2063039"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31970,
+    "cliente": "ALVARADO ETELVINA- ELUNEY (SJ)",
+    "nombre_comercio": "KIOSCO ELUNEY 2",
+    "direccion": "FLORIDA BLANCA Y BERUTTI",
+    "ciudad": "PTO SAN JULIAN",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31971,
+    "cliente": "ROMERO MABEL - ROSPY ( RT )",
+    "nombre_comercio": "KIOSCO ROSPY",
+    "direccion": "PARADELO 445",
+    "ciudad": "RIO TURBIO",
+    "idvend": "707",
+    "freezers": [
+      "S/N",
+      "2179860"
+    ],
+    "cafe_maquinas": [
+      "20144342243"
+    ]
+  },
+  {
+    "idcli": 31987,
+    "cliente": "CABAÑA JAVIER - LOS CHINOS (RG)",
+    "nombre_comercio": "ALMACEN LOS CHINOS",
+    "direccion": "JOSE INGENIEROS 954",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31990,
+    "cliente": "GLADIS PAREDES - B. COMPRA (RT)",
+    "nombre_comercio": "ALMACEN BUENA COMPRA",
+    "direccion": "CASIMIRO BIGUA 178",
+    "ciudad": "RIO TURBIO",
+    "idvend": "707",
+    "freezers": [
+      "2180941"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 31996,
+    "cliente": "CHOQUE ELIZABETH - VALLE ( SJ )",
+    "nombre_comercio": "VERDULERIA DEL VALLE",
+    "direccion": "SAN MARTIN 1101",
+    "ciudad": "PTO SAN JULIAN",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32002,
+    "cliente": "AGUILAR VANESA - PEQUES ( RG )",
+    "nombre_comercio": "ALMACEN LOS PEQUES",
+    "direccion": "CALLE 22 ENTRE 33 Y 37",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32007,
+    "cliente": "RAPISUR SA - EST. AXION ( RG )",
+    "nombre_comercio": "EST. SERV. AXION GALLEGOS",
+    "direccion": "MARIANO MORENO 921",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [],
+    "cafe_maquinas": [
+      "1217052300154"
+    ]
+  },
+  {
+    "idcli": 32009,
+    "cliente": "A.O.M.A. SEC. SANTA CRUZ ( SJ )",
+    "nombre_comercio": "OTRO A.O.M.A. STA. CRUZ",
+    "direccion": "GUEMES 959",
+    "ciudad": "PTO SAN JULIAN",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32014,
+    "cliente": "SILVA MAURICIO - TOMATITO (RG)",
+    "nombre_comercio": "ALMACEN TOMATITO",
+    "direccion": "E. LOPEZ 1252",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32015,
+    "cliente": "LAZARTE NOIME - LA 22 ( RG )",
+    "nombre_comercio": "ALMACEN LA 22",
+    "direccion": "AYRES ARG. CALLE 22 MZA 140",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2071984"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32017,
+    "cliente": "DIAZ PAOLA - LA GORDA ( RG )",
+    "nombre_comercio": "KIOSCO LA GORDA",
+    "direccion": "ZAPIOLA 797 DEPTO 3",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2181844"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32019,
+    "cliente": "TORRES ERQUINIO- DESPENSA (RG)",
+    "nombre_comercio": "ALMACEN LA DESPENSA",
+    "direccion": "RIQUELME 2209",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2172065"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32020,
+    "cliente": "NORIEGA F. - E. NORTE ( RG )",
+    "nombre_comercio": "ALMACEN ESTILO DEL NORTE",
+    "direccion": "ROMUALDO DE ANDREA 954",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32021,
+    "cliente": "ACEVEDO ORTIZ - BELEN ( RG )",
+    "nombre_comercio": "ALMACEN BELEN",
+    "direccion": "AV. PARADELO 97",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2181816"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32022,
+    "cliente": "SOLO PATAGONIA S.A. - (CA)",
+    "nombre_comercio": "OTRO SOLO PATAGONIA S.A.",
+    "direccion": "AV DEL LIBERTADOR 867",
+    "ciudad": "EL CALAFATE",
+    "idvend": "707",
+    "freezers": [],
+    "cafe_maquinas": [
+      "20142122041",
+      "20232933878"
+    ]
+  },
+  {
+    "idcli": 32023,
+    "cliente": "DIAZ C. A. - PORVENIR SANTAFESINO ( RG )",
+    "nombre_comercio": "PANADERIA PORV. SANTAFESINO",
+    "direccion": "PASTEUR Y ONELLI",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32025,
+    "cliente": "MINIMARKET S.A.- MINIMARKET (RG)",
+    "nombre_comercio": "ALMACEN MINIMARKET",
+    "direccion": "MOYANO 157",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32027,
+    "cliente": "SEIGNOUX A. - A. COMPRAR ( RG )",
+    "nombre_comercio": "ALMACEN AIKE COMPRAR",
+    "direccion": "MANCHURIA 280",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2111263"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32035,
+    "cliente": "MARECO DANIEL - 24 HS FENIX (RG)",
+    "nombre_comercio": "KIOSCO 24 HS FENIX",
+    "direccion": "MOYANO 561",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32036,
+    "cliente": "ORTIZ SANTUSA - P. LISANDRO (RG)",
+    "nombre_comercio": "VERDULERIA PRIMAS LISANDRO",
+    "direccion": "RAMON Y CAJAL Y MISIONES",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2080415"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32038,
+    "cliente": "BOTELLA PABLO - COCO 2 ( RG )",
+    "nombre_comercio": "ALMACEN COCO 2",
+    "direccion": "BELGRANO 1058",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2179874"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32039,
+    "cliente": "GUTIERREZ RENE - GUTYS ( 28 )",
+    "nombre_comercio": "KIOSCO EL GUTY",
+    "direccion": "AV. IRIGOYEN 769",
+    "ciudad": "28 DE NOVIEMBRE",
+    "idvend": "707",
+    "freezers": [
+      "2121155",
+      "2081271"
+    ],
+    "cafe_maquinas": [
+      "20183043258"
+    ]
+  },
+  {
+    "idcli": 32040,
+    "cliente": "PALAGUERRA MABEL - DESY ( RG )",
+    "nombre_comercio": "KIOSCO DOÑA DESY",
+    "direccion": "CHILE 205",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2179902"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32041,
+    "cliente": "REYES SUSANA - C. RICA ( RG )",
+    "nombre_comercio": "KIOSCO COSTA RICA STORE",
+    "direccion": "COSTA RICA 1935",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32043,
+    "cliente": "EL CUYO S.A.S.- S. M. 24 HS.1 (RG)",
+    "nombre_comercio": "KIOSCO SAN MARTIN 24 HS. 1",
+    "direccion": "SAN MARTIN 2284",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2182229"
+    ],
+    "cafe_maquinas": [
+      "20183043259"
+    ]
+  },
+  {
+    "idcli": 32047,
+    "cliente": "S.A. POLLOS AMIGOS- LEONES (RG)",
+    "nombre_comercio": "POLLERIA LOS LEONES",
+    "direccion": "19 DE DIC. Y P. INDUSTRIAL",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2100383"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32048,
+    "cliente": "MACHUCA GARAY - LIA ( RG )",
+    "nombre_comercio": "ALMACEN LIA",
+    "direccion": "HERNAN CORTEZ 2127",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2179908"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32050,
+    "cliente": "PUNTA NORTE SRL- HOSPITAL (CA)",
+    "nombre_comercio": "CONFITERIA HOSPITAL CALAFATE",
+    "direccion": "HOSPITAL SAMIC CALAFATE",
+    "ciudad": "EL CALAFATE",
+    "idvend": "707",
+    "freezers": [],
+    "cafe_maquinas": [
+      "20232933950",
+      "20232933943",
+      "20134341884"
+    ]
+  },
+  {
+    "idcli": 32053,
+    "cliente": "BUFFALO SAS - CARREFOUR ( RG )",
+    "nombre_comercio": "REST. BUFFALOS CARREFOUR",
+    "direccion": "PASEO DE LOS ARRIEROS 1098",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": [
+      "20183043405"
+    ]
+  },
+  {
+    "idcli": 32059,
+    "cliente": "HERRERA JESICA - GAUCHITO (RG)",
+    "nombre_comercio": "ALMACEN EL GAUCHITO",
+    "direccion": "SAN LORENZO 1150",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32060,
+    "cliente": "SILVA ERNESTO - A Y F ( RT )",
+    "nombre_comercio": "KIOSCO A Y F",
+    "direccion": "HERNANDEZ 202",
+    "ciudad": "RIO TURBIO",
+    "idvend": "707",
+    "freezers": [
+      "2132902",
+      "2045054"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32064,
+    "cliente": "INOSTROZA CARLOS - HNOS. (CA)",
+    "nombre_comercio": "ALMACEN LOS HERMANOS",
+    "direccion": "EVA PERON 1905",
+    "ciudad": "EL CALAFATE",
+    "idvend": "707",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32068,
+    "cliente": "CORTEZ HUGO - EL FACHA ( PB )",
+    "nombre_comercio": "KIOSCO EL FACHA",
+    "direccion": "JULIA DUFOUR 650",
+    "ciudad": "PIEDRABUENA",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32070,
+    "cliente": "RODRIGUEZ C. - MEJORCITA 5 (RG)",
+    "nombre_comercio": "VERDULERIA LA MEJORCITA 5",
+    "direccion": "JUAN DE GARAY 1755",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2181305"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32075,
+    "cliente": "RODRIGUEZ J. - MEJORCITA 3 (RG)",
+    "nombre_comercio": "ALMACEN LA MEJORCITA 3",
+    "direccion": "S. JOSE OBRERO 655",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2181806"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32084,
+    "cliente": "FLORES MAXIMA - CRISTIAN ( GG )",
+    "nombre_comercio": "KIOSCO CRISTIAN",
+    "direccion": "JUAN PERON 344",
+    "ciudad": "GOB. GREGORES",
+    "idvend": "708",
+    "freezers": [
+      "2111626"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32090,
+    "cliente": "TRU - LA S.R.L. - LA NAVE ( RG )",
+    "nombre_comercio": "KIOSCO LA NAVE",
+    "direccion": "AV. KIRCHNER 1074",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2171900"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32091,
+    "cliente": "NESTOR MULLER - PACHI ( RG )",
+    "nombre_comercio": "KIOSCO PACHI STORE",
+    "direccion": "J. INGENIEROS 1835",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2114192"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32095,
+    "cliente": "GONZALEZ FLORES - 2 MARIAS ( RG )",
+    "nombre_comercio": "ALMACEN DOS MARIAS",
+    "direccion": "JUAN J. PASO 1385",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2070496"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32096,
+    "cliente": "CORONEL C. - LUIS CELESTINO (RG)",
+    "nombre_comercio": "KIOSCO DON LUIS Y CELESTINO",
+    "direccion": "LOS GORRIONES LOS ALAMOS",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2179900"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32098,
+    "cliente": "GARDONIO ADRIAN- MIRAMAR 2 (SJ)",
+    "nombre_comercio": "ALMACEN MIRAMAR 2",
+    "direccion": "ALBERDI 1411",
+    "ciudad": "PTO SAN JULIAN",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32101,
+    "cliente": "LA PANETTERIA - ARTESANO (RG)",
+    "nombre_comercio": "PANADERIA EL ARTESANO",
+    "direccion": "ZAPIOLA 122",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "SV",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32110,
+    "cliente": "SAN MARTIN C. - EXTREMO ( RG )",
+    "nombre_comercio": "ALMACEN EL EXTREMO",
+    "direccion": "CONGRESO 169",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2100380"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32116,
+    "cliente": "TRU - LA S.R.L. - LINA ( RG )",
+    "nombre_comercio": "KIOSCO LINA",
+    "direccion": "AV. KIRCHNER 780 GALERIA",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": [
+      "1215020500171"
+    ]
+  },
+  {
+    "idcli": 32117,
+    "cliente": "TRU - LA S.R.L. - TRU-LA 1 ( RG )",
+    "nombre_comercio": "KIOSCO TRU-LA 1",
+    "direccion": "AV KIRCHNER 1250",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2171887"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32119,
+    "cliente": "MEZA CLAUDIO - MARCELITA ( RG )",
+    "nombre_comercio": "KIOSCO MARCELITA",
+    "direccion": "MAGALLANES 112",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2173428"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32122,
+    "cliente": "GUTIERREZ ELDA - AM/PM ( RG )",
+    "nombre_comercio": "KIOSKO AM/PM",
+    "direccion": "SAN MARTIN 502",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2102471"
+    ],
+    "cafe_maquinas": [
+      "20183043430"
+    ]
+  },
+  {
+    "idcli": 32127,
+    "cliente": "HERNANDEZ LUIS- LA AVENIDA (RG)",
+    "nombre_comercio": "ALMACEN LA AVENIDA",
+    "direccion": "SANTA MARIA DE ORO 85",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2180993"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32128,
+    "cliente": "MEDINA ELIANA - BALBIN ( RG )",
+    "nombre_comercio": "ALMACEN BALBIN",
+    "direccion": "BORGES Y BALBIN",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2180935",
+      "2132900"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32131,
+    "cliente": "IRIARTE JOSE- PRIMAS LAVALLE (RG)",
+    "nombre_comercio": "ALMACEN PRIMAS LAVALLE",
+    "direccion": "LAVALLE Y 20 DE JUNIO",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2180367"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32132,
+    "cliente": "ROLDAN CARLOS - D. CARLOS (RG)",
+    "nombre_comercio": "ALMACEN DON CARLOS",
+    "direccion": "MARCELINO ALVAREZ 705",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32135,
+    "cliente": "VEINTISEIS S.A.S. - CERCA 3 (RG)",
+    "nombre_comercio": "ALMACEN CERCA 3",
+    "direccion": "BARRIO PROCREAR",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2180999",
+      "2080705",
+      "2180934"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32143,
+    "cliente": "CAMPOS GLADIS - AVENIDA ( RT )",
+    "nombre_comercio": "ALMACEN AVENIDA",
+    "direccion": "J. NEWBERY 238",
+    "ciudad": "RIO TURBIO",
+    "idvend": "707",
+    "freezers": [
+      "2180905"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32148,
+    "cliente": "CORONEL LAURA - AVENIDA ( 28 )",
+    "nombre_comercio": "KIOSCO AVENIDA",
+    "direccion": "A. ARGENTINA 1036",
+    "ciudad": "28 DE NOVIEMBRE",
+    "idvend": "707",
+    "freezers": [
+      "SIN NUMERO",
+      "2180905"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32152,
+    "cliente": "EL CUYO S.A.S.- S. M. 24 HS.2 (RG)",
+    "nombre_comercio": "KIOSCO SAN MARTIN 24 HS. 2",
+    "direccion": "ONELLI Y 19 DE DICIEMBRE",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2122564"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32157,
+    "cliente": "ESCOBAR CARMEN - AARON (SC)",
+    "nombre_comercio": "KIOSCO AARON",
+    "direccion": "AV ROCA 598",
+    "ciudad": "PTO SANTA CRUZ",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32158,
+    "cliente": "POCILLOS S.A.S. - CAFE 1885 (RG)",
+    "nombre_comercio": "CONFITERIA CAFE 1885",
+    "direccion": "SAN MARTIN Y KIRCHNER",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32159,
+    "cliente": "PACHECO ALFONSO- DIEGO LUIS (RG)",
+    "nombre_comercio": "ALMACEN DIEGO Y LUIS",
+    "direccion": "LA PAZ 586",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2071430"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32160,
+    "cliente": "JARAMILLO ERICA - GABRIEL (RG)",
+    "nombre_comercio": "ALMACEN GABRIEL",
+    "direccion": "SERV. P. FEDERAL 835",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32161,
+    "cliente": "ROMERO LARA - GERALD (RG)",
+    "nombre_comercio": "ALMACEN GERALD",
+    "direccion": "OBISPO ANGELELLI 2103",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2100389"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32164,
+    "cliente": "GODOY NEREA - PERS. ( RG )",
+    "nombre_comercio": "PERSONAL - GODOY",
+    "direccion": "MAIPU 335",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "SV",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32168,
+    "cliente": "DUARTE NOELIA -SOL MINIM. (RG)",
+    "nombre_comercio": "ALMACEN SOL MINIMERCADO",
+    "direccion": "SANTA FE 795",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2114196",
+      "2071995"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 32170,
+    "cliente": "ROMERO EDGARDO - DAMIRA (28)",
+    "nombre_comercio": "KIOSCO DAMIRA",
+    "direccion": "CIRC 25 DE MAYO MZA 258 LOTE 15",
+    "ciudad": "28 DE NOVIEMBRE",
+    "idvend": "707",
+    "freezers": [
+      "2115278"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33335,
+    "cliente": "TORRE CLAUDIA - VICTORIA (RG)",
+    "nombre_comercio": "CARNICERIA VICTORIA",
+    "direccion": "VICAPUGIO 995",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33338,
+    "cliente": "SANCHEZ GUSTAVO- PADRINO (RT)",
+    "nombre_comercio": "KIOSCO EL PADRINO",
+    "direccion": "GRAN MALVINA CASA 74",
+    "ciudad": "RIO TURBIO",
+    "idvend": "707",
+    "freezers": [
+      "2100243"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33339,
+    "cliente": "BRENDA FABIANA - P. METRO (28)",
+    "nombre_comercio": "ALMACEN PIZZA METRO",
+    "direccion": "SAN MARTIN 509",
+    "ciudad": "28 DE NOVIEMBRE",
+    "idvend": "707",
+    "freezers": [
+      "2179871",
+      "2080465",
+      "2181792"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33342,
+    "cliente": "OLIVA MARIA - CUENCA DEL SOL (RG)",
+    "nombre_comercio": "PANADERIA CUENCA DEL SOL",
+    "direccion": "CURUPAYTI Y FERRADA",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33343,
+    "cliente": "SOC.POR ACC. SIMP - CERRO (CA)",
+    "nombre_comercio": "ALMACEN DEL CERRO",
+    "direccion": "CALLE 357 N° 1152",
+    "ciudad": "EL CALAFATE",
+    "idvend": "707",
+    "freezers": [
+      "2115279"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33360,
+    "cliente": "REINOSO MORETA A. - CIA ( RG )",
+    "nombre_comercio": "ALMACEN CIA",
+    "direccion": "MIGUEL CERVANTES SAAVEDRA 2696",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2178474"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33361,
+    "cliente": "YAPURA ANDREA - AZABACHE (RG)",
+    "nombre_comercio": "ALMACEN AZABACHE",
+    "direccion": "IRIGOYEN Y ENTRE RIOS",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2179881"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33362,
+    "cliente": "DIMSUR SRL - AXION RUTA 3 ( RG )",
+    "nombre_comercio": "EST. SERV. DIMSUR AXION RUTA 3",
+    "direccion": "BANCIELA 1225",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [],
+    "cafe_maquinas": [
+      "20232933951"
+    ]
+  },
+  {
+    "idcli": 33363,
+    "cliente": "ORTIZ ESPERANZA - PRIMAS SB (RG)",
+    "nombre_comercio": "VERDULERIA LAS PRIMAS SB",
+    "direccion": "CALLE 13 Y 6 SAN BENITO",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2063581"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33364,
+    "cliente": "GUTIERREZ E. - CATIAN (RG)",
+    "nombre_comercio": "ALMACEN CATIAN",
+    "direccion": "CALLE 13 Y 6",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2170089"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33365,
+    "cliente": "CORTINA GARCIA - VICTORIA (RG)",
+    "nombre_comercio": "ALMACEN VICTORIA",
+    "direccion": "LOS SAUCES CALLE 1 Y 50",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33368,
+    "cliente": "HERNANDEZ LUIS- AVENIDA 2 (RG)",
+    "nombre_comercio": "ALMACEN AVENIDA 2",
+    "direccion": "AV. PERON 1010",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2115637"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33372,
+    "cliente": "QUIROGA JORGE - PERS. ( RG )",
+    "nombre_comercio": "PERSONAL - QUIROGA",
+    "direccion": "CALAFATE 32",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "SV",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33373,
+    "cliente": "ALCANTARA ROJAS - LAMERCE (RG)",
+    "nombre_comercio": "ALMACEN LAMERCE",
+    "direccion": "CALLE 5 Y 12 SAN BENITO",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2171894"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33375,
+    "cliente": "SORIA CHOQUE - ANGELES (RG)",
+    "nombre_comercio": "POLLERIA LOS ANGELES",
+    "direccion": "38 ENTRE 5 Y7 SAN BENITO",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2183044",
+      "2072135"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33380,
+    "cliente": "MACIAS ROJAS R. - LEONEL ( RG )",
+    "nombre_comercio": "ALMACEN LEONEL",
+    "direccion": "45 ENTRE 30 Y 28 AYRES ARG",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2180311"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33383,
+    "cliente": "VARGAS ROMINA - COPITA ( RG )",
+    "nombre_comercio": "ALMACEN COPITA",
+    "direccion": "PREFECTURA NAVAL ARGENTINA 785",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2179870"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33384,
+    "cliente": "TORRES ARMANDO - CINTIA ( RG )",
+    "nombre_comercio": "VERDULERIA CINTIA",
+    "direccion": "CALLE 38 Y 21 SAN BENITO",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2178362"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33386,
+    "cliente": "VELAZQUES MARIA - CANTERA (RG)",
+    "nombre_comercio": "ALMACEN LA CANTERA",
+    "direccion": "ZAPIOLA 3491",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2178480"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33388,
+    "cliente": "OJEDA HECTOR - TOMATITO 2 (RG)",
+    "nombre_comercio": "ALMACEN TOMATITO 2",
+    "direccion": "CONGRESO 120",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33389,
+    "cliente": "MUTUAL 12 DE SEPTIEMBRE (RG)",
+    "nombre_comercio": "AUTOSERVICIO 12 DE SEPTIEMBRE",
+    "direccion": "BARRIO SAN BENITO",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33393,
+    "cliente": "EL CUYO S.A.S.- S. M. 24 HS.3 (RG)",
+    "nombre_comercio": "KIOSCO SAN MARTIN 24 HS. 3",
+    "direccion": "PASEO DE LOS ARRIEGOS 1330",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2102494"
+    ],
+    "cafe_maquinas": [
+      "20232933885"
+    ]
+  },
+  {
+    "idcli": 33397,
+    "cliente": "SILVA PERLA S. - YENU (RG)",
+    "nombre_comercio": "ALMACEN YENU",
+    "direccion": "J. INGENIEROS 2350",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "982155"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33404,
+    "cliente": "FERNANDEZ G. - CORRENTINA (28)",
+    "nombre_comercio": "KIOSCO LA CORRENTINA",
+    "direccion": "GOB. GREORES 142",
+    "ciudad": "28 DE NOVIEMBRE",
+    "idvend": "707",
+    "freezers": [
+      "2180938"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33406,
+    "cliente": "ALVARADO F. - COHIUES (RT)",
+    "nombre_comercio": "PANADERIA LOS COHIUES",
+    "direccion": "AV DE LOS MINEROS YCF",
+    "ciudad": "RIO TURBIO",
+    "idvend": "707",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33409,
+    "cliente": "BENITEZ SILVIA - BAJO CERO (SJ)",
+    "nombre_comercio": "KIOSCO BAJO CERO",
+    "direccion": "ALFONSIN 2193",
+    "ciudad": "PTO SAN JULIAN",
+    "idvend": "708",
+    "freezers": [
+      "2103104"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33410,
+    "cliente": "ORTIZ PARY - PRIMAS P. NAVAL (RG)",
+    "nombre_comercio": "VERDULERIA PRIMAS P. NAVAL",
+    "direccion": "PERFECTURA NAVAL 834",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2180320"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33411,
+    "cliente": "CONDORI ISABELO - PRIMAS 2 (RG)",
+    "nombre_comercio": "ALMACEN LAS PRIMAS II",
+    "direccion": "HERNAN CORTEZ Y FRONDIZI",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2100336"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33413,
+    "cliente": "FRETES HECTOR - EXTRA 2 (CA)",
+    "nombre_comercio": "KIOSCO EXTRA 2",
+    "direccion": "DE LOS ALAMOS 2850",
+    "ciudad": "EL CALAFATE",
+    "idvend": "707",
+    "freezers": [
+      "2102509",
+      "2063129"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33415,
+    "cliente": "TORRES ELIZABETH - JAZMIN (RG)",
+    "nombre_comercio": "ALMACEN JAZMIN",
+    "direccion": "RIQUELME 2436",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2114086"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33416,
+    "cliente": "TECNOLOGIA EN CONST.- TEC (RG)",
+    "nombre_comercio": "OTRO TEC SA",
+    "direccion": "ESPAÑA 16 PISO 2",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [],
+    "cafe_maquinas": [
+      "20183043429"
+    ]
+  },
+  {
+    "idcli": 33418,
+    "cliente": "CHICKEN CHILL - MINI MARKET S.A. (RG)",
+    "nombre_comercio": "CONFITERIA CHICKEN CHILL",
+    "direccion": "KIRCHNER 862",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33419,
+    "cliente": "VITIAN OLGA - LA PREVIA (RT)",
+    "nombre_comercio": "KIOSCO LA PREVIA",
+    "direccion": "SAN MARTIN 529",
+    "ciudad": "RIO TURBIO",
+    "idvend": "707",
+    "freezers": [
+      "2132000"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33421,
+    "cliente": "VIDAL CAROLINA - TITA ( RG )",
+    "nombre_comercio": "KIOSKO TITA",
+    "direccion": "ALVEAR Y 13 DE JULIO",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2115716"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33424,
+    "cliente": "MILLAPEL FERNANDO- CERCA 4 (RG)",
+    "nombre_comercio": "ALMACEN CERCA 4",
+    "direccion": "CALLE 13 Y 12",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2103115"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33427,
+    "cliente": "MAICA CESAR - MAIKITA ( PB )",
+    "nombre_comercio": "ALMACEN MAIKITA",
+    "direccion": "BOLIVAR Y MOYANO",
+    "ciudad": "PIEDRABUENA",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33431,
+    "cliente": "LUQUES GRACIELA - LUQUES (PB)",
+    "nombre_comercio": "ALMACEN LUQUES",
+    "direccion": "ESPAÑA 140",
+    "ciudad": "PIEDRABUENA",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33432,
+    "cliente": "MIRANDA ARIAN - DAZ ( SJ )",
+    "nombre_comercio": "KIOSCO MULTIRUBRO DAZ",
+    "direccion": "CAMERON 1604",
+    "ciudad": "PTO SAN JULIAN",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33434,
+    "cliente": "BARRIENTOS L. - CITY MARKET (RG)",
+    "nombre_comercio": "ALMACEN CITY MARKET",
+    "direccion": "TUCUMAN 726",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33435,
+    "cliente": "TEPPA JORGE - TIROLESA ( RG )",
+    "nombre_comercio": "OTRO COLONIA TIROLESA",
+    "direccion": "TONIETTI ESQ PEÑALOZA",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2132880"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33436,
+    "cliente": "MIRANDA ALEXIS - PITU ( 28 )",
+    "nombre_comercio": "KIOSCO PITU",
+    "direccion": "CORDOBA 1591",
+    "ciudad": "28 DE NOVIEMBRE",
+    "idvend": "707",
+    "freezers": [
+      "2180940"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33437,
+    "cliente": "MIRANDA CRISTIAN - NENAS ( SJ )",
+    "nombre_comercio": "KIOSCO LAS NENAS",
+    "direccion": "PELLEGRINI 624",
+    "ciudad": "PTO SAN JULIAN",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33438,
+    "cliente": "RODRIGUEZ C. - POLLO EXP. (RG)",
+    "nombre_comercio": "SANDWICHERIA POLLO EXPRESS",
+    "direccion": "AV KIRSHNER 419",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33443,
+    "cliente": "VIDAURRE JUAN - PAPIROS ( SJ )",
+    "nombre_comercio": "KIOSCO PAPIROS",
+    "direccion": "VIEYTES 574",
+    "ciudad": "PTO SAN JULIAN",
+    "idvend": "708",
+    "freezers": [
+      "2102423"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33445,
+    "cliente": "ADORNO CINTIA - KOA (SJ)",
+    "nombre_comercio": "KIOSCO KOA",
+    "direccion": "RODOLFO MARTINEZ 1720",
+    "ciudad": "PTO SAN JULIAN",
+    "idvend": "708",
+    "freezers": [
+      "2081540"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33446,
+    "cliente": "PRIMO S. CAP - NALGA (RG)",
+    "nombre_comercio": "SANDWICHERIA NALGA",
+    "direccion": "ESTRADA 170",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33450,
+    "cliente": "AVILA GUSTAVO - COLIBRI ( PB )",
+    "nombre_comercio": "PANADERIA COLIBRI",
+    "direccion": "MAYER 365",
+    "ciudad": "PIEDRABUENA",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33452,
+    "cliente": "MANSILLA ARBILLA - BENIC (GG)",
+    "nombre_comercio": "KIOSCO BENIC",
+    "direccion": "SAN MARTIN 189",
+    "ciudad": "GOB. GREGORES",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33454,
+    "cliente": "EL SITIO S.A - EL SITIO ( SJ )",
+    "nombre_comercio": "KIOSCO EL SITIO",
+    "direccion": "SAN MARTIN 375",
+    "ciudad": "PTO SAN JULIAN",
+    "idvend": "708",
+    "freezers": [
+      "2103092"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33456,
+    "cliente": "NAHUELANCA M. - R. DE JULIA (28)",
+    "nombre_comercio": "ALMACEN RINCON DE JULIA",
+    "direccion": "MISIONES 33",
+    "ciudad": "28 DE NOVIEMBRE",
+    "idvend": "707",
+    "freezers": [
+      "2131886"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33457,
+    "cliente": "ZARABOZO CAMILA- CAMILA (RG)",
+    "nombre_comercio": "KIOSCO CAMILA",
+    "direccion": "KIRCHNER 495",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2180333"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33458,
+    "cliente": "BECERRA ADRIAN - V & A (RG)",
+    "nombre_comercio": "KIOSCO V & A",
+    "direccion": "JULIO ROCHA 1297",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2180301"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33462,
+    "cliente": "GUERRA OMAR- ESTRELLITA 1 (RG)",
+    "nombre_comercio": "ALMACEN ESTRELLITA 1",
+    "direccion": "JUAN DE GARAY 1831",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2100438"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33463,
+    "cliente": "LLAULI ROMEROS - NEYRA (RG)",
+    "nombre_comercio": "ALMACEN NEYRA",
+    "direccion": "JOSE INGENIEROS 468",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33467,
+    "cliente": "MIRANDA MARCELA - APU ( RG )",
+    "nombre_comercio": "ALMACEN APU",
+    "direccion": "AMEGHINO Y AUTOVIA 1708",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2063587"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33469,
+    "cliente": "OYARZUN DAVID - COCO 1 (RG)",
+    "nombre_comercio": "ALMACEN COCO 1",
+    "direccion": "ZAPIOLA 682",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "s/n",
+      "2179887"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33470,
+    "cliente": "GONZALEZ FIAMA- FAUSTINO (RG)",
+    "nombre_comercio": "KIOSCO FAUSTINO 1",
+    "direccion": "KIRCHNER 702",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33471,
+    "cliente": "LJK EDITORIAL S.A. TIEMPO (RG)",
+    "nombre_comercio": "OTRO MULTIMEDIO TIEMPO",
+    "direccion": "ZAPIOLA 451",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [],
+    "cafe_maquinas": [
+      "20183043261"
+    ]
+  },
+  {
+    "idcli": 33474,
+    "cliente": "PARSONS MARIO - LIKE ( RG)",
+    "nombre_comercio": "KIOSCO LIKE",
+    "direccion": "CALLE 13 Y 4 B SAN BENITO",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2130370",
+      "2100052"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33476,
+    "cliente": "PAILEMAN GUSTAVO-MALVINAS 1 (RG)",
+    "nombre_comercio": "ALMACEN MALVINAS 1",
+    "direccion": "AV. JUAN PERON 563",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33477,
+    "cliente": "CHEUQUEMAN MANUEL - ELSA (RG)",
+    "nombre_comercio": "ALMACEN ELSA",
+    "direccion": "AV JUJUY 607",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2178550",
+      "2081261"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33478,
+    "cliente": "MOLINA PUMA EMILIANA - EMI (RG)",
+    "nombre_comercio": "VERDULERIA Y FRUTERIA EMI",
+    "direccion": "MARCELINO ALVAREZ 360",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2181830"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33479,
+    "cliente": "RAMIREZ LEIVA- ESTRELLITA 2 (RG)",
+    "nombre_comercio": "ALMACEN ESTRELLITA 2",
+    "direccion": "JUAN DE GARAY 1845",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2178524"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33482,
+    "cliente": "MUÑOZ ARMANDO- POCHOCLIN (RG)",
+    "nombre_comercio": "ALMACEN POCHOCLIN",
+    "direccion": "LOS POZOS 591",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2181661"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33484,
+    "cliente": "DAIANA ORECCHIA - BACHICHAS (RG)",
+    "nombre_comercio": "ALMACEN BACHICHAS",
+    "direccion": "SANTIAGO DEL ESTERO E IMIGRANTES",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "983546"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33487,
+    "cliente": "SEGUI JUAN - WIND BURGER (RG)",
+    "nombre_comercio": "CONFITERIA BAR WIND BURGER",
+    "direccion": "AV. NESTOR KIRCHNER 1002",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33491,
+    "cliente": "TOLEDO F. - BELG. STORE (RG)",
+    "nombre_comercio": "KIOSCO BELGRANO STORE",
+    "direccion": "ALVEAR 1386",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2178422"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33498,
+    "cliente": "VARGAS CARLOS - NERON II (RG)",
+    "nombre_comercio": "CARNICERIA NERON II",
+    "direccion": "ALFONSI 1057",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2182451"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33499,
+    "cliente": "PARY CHAVARRIA - RUTH ( RG )",
+    "nombre_comercio": "VERDULERIA RUTH LISANDRO",
+    "direccion": "LISANDRO DE LA TORRE 53",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2179877"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33501,
+    "cliente": "GARCIA WILTON- L. DE CUENCA (RT)",
+    "nombre_comercio": "ALMACEN LEON DE LA CUENCA",
+    "direccion": "AVELLANEDA 77",
+    "ciudad": "RIO TURBIO",
+    "idvend": "707",
+    "freezers": [
+      "2080421",
+      "2102458"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33504,
+    "cliente": "AYZA ORTIZ E. - FRESH (RG)",
+    "nombre_comercio": "VERDULERIA FRESH",
+    "direccion": "Calle 13 y 22 san benito",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2180392"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33505,
+    "cliente": "HERNANDEZ VIVAR - CHANGO (RG)",
+    "nombre_comercio": "KIOSCO EL CHANGO",
+    "direccion": "BELGRANO 448",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2113642"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33507,
+    "cliente": "S.S. SERVICIOS S.A.S. ( RG )",
+    "nombre_comercio": "OTRO S.S. SERVICIOS S.A.S.",
+    "direccion": "BELGRANO 532",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [],
+    "cafe_maquinas": [
+      "20183043424"
+    ]
+  },
+  {
+    "idcli": 33508,
+    "cliente": "ANGULO RIVERA - ALONSO (RG)",
+    "nombre_comercio": "HOTEL ALONSO",
+    "direccion": "CORRIENTES 33",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33514,
+    "cliente": "CORDERO ENZO - ESQUINA SB (RG)",
+    "nombre_comercio": "ALMACEN LA ESQUINA S.B.",
+    "direccion": "CALLE 13 Y 40 BICENTENARIO",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2179888"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33519,
+    "cliente": "CLAUDIA PARADA - PATU P. (RG)",
+    "nombre_comercio": "PANCHERIA PATU PANCHO",
+    "direccion": "SAN MARTIN 1223",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33520,
+    "cliente": "PALOMINO T. - RESPLANDOR (RG)",
+    "nombre_comercio": "ALMACEN EL RESPLANDOR",
+    "direccion": "CASEROS 592",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2071983"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33524,
+    "cliente": "VILLEGAS MONTES- JUANCITO (RG)",
+    "nombre_comercio": "ALMACEN JUANCITO",
+    "direccion": "ARISTIZABAL 2343",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33525,
+    "cliente": "CAMPOS PABLO - PREFERIDO (28)",
+    "nombre_comercio": "ALMACEN HIELO PREFERIDO",
+    "direccion": "CALLE 19 MZA 223",
+    "ciudad": "28 DE NOVIEMBRE",
+    "idvend": "707",
+    "freezers": [
+      "2179766"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33528,
+    "cliente": "GONZALES C. - GREGORES (RG)",
+    "nombre_comercio": "KIOSCO GREGORES 24 HS",
+    "direccion": "VIDAL Y LADVOCAT 1020",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2180929"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33530,
+    "cliente": "GAMBOA MARIELA - J & G (RG)",
+    "nombre_comercio": "ALMACEN J & G",
+    "direccion": "SOTOMAYOR QUILCA 1021",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33531,
+    "cliente": "RODRIGUEZ S. - DISFRUTA 2 (RG)",
+    "nombre_comercio": "VERDULERIA DISFRUTA 2",
+    "direccion": "CALLE 22 ENTRE 17 Y 19",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33532,
+    "cliente": "ROSAS PACHECO P. - TURCA (RG)",
+    "nombre_comercio": "ALMACEN LA TURCA",
+    "direccion": "PASAJE TORRES N544",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33533,
+    "cliente": "SANGA CHACO- MINI MARKET (RG)",
+    "nombre_comercio": "ALMACEN MINI MARKET",
+    "direccion": "BTA PTO ARGENTINO 334",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2172318"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33534,
+    "cliente": "GONZALEZ YANINA - LUNITA (RG)",
+    "nombre_comercio": "ALMACEN LUNITA",
+    "direccion": "PEDRO RENA 785",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33535,
+    "cliente": "SALDAÑA R. - MEJORCITA 1 (RG)",
+    "nombre_comercio": "VERDULERIA LA MEJORCITA 1",
+    "direccion": "FELIX RIQUEZ 834",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2182474"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33536,
+    "cliente": "CHAMBI CARRIZO- MEJORCITA 6 (RG)",
+    "nombre_comercio": "VERDULERIA LA MEJORCITA 6",
+    "direccion": "SANTA FE 568",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2172113"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33537,
+    "cliente": "EQUISE SUSANA - GLORIA (RG)",
+    "nombre_comercio": "KIOSCO GLORIA",
+    "direccion": "ALVEAR Y MISIONES",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2130390"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33538,
+    "cliente": "CHAMBI SERRANO - DISFRUTA (RG)",
+    "nombre_comercio": "ALMACEN DISFRUTA",
+    "direccion": "CALLE 13 y 34 SAN BENITO",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2182469",
+      "2181635"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33539,
+    "cliente": "GUITIAN NORA - ALAMITOS (RG)",
+    "nombre_comercio": "ALMACEN ALAMITOS",
+    "direccion": "CALLE 25 y 44 - BICENTENARIO",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33541,
+    "cliente": "DOMINGUEZ LOPEZ - VICENTA 2 (RG)",
+    "nombre_comercio": "FIAMBRERIA DOÑA VICENTA 2",
+    "direccion": "MARCELINO ALVAREZ 234",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2111646"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33543,
+    "cliente": "MABRA SUITES SAS- CASIMIRO (CA)",
+    "nombre_comercio": "REST. CASIMIRO BIGUA",
+    "direccion": "25 de Mayo 51",
+    "ciudad": "EL CALAFATE",
+    "idvend": "707",
+    "freezers": [],
+    "cafe_maquinas": [
+      "20232933887"
+    ]
+  },
+  {
+    "idcli": 33545,
+    "cliente": "RIO LA LEONA S.A. - ESTELA (CA)",
+    "nombre_comercio": "OTRO ESTANCIA LA ESTELA",
+    "direccion": "RN40",
+    "ciudad": "EL CALAFATE",
+    "idvend": "707",
+    "freezers": [],
+    "cafe_maquinas": [
+      "20144241802",
+      "20144241801",
+      "20232933945"
+    ]
+  },
+  {
+    "idcli": 33547,
+    "cliente": "MACHUCA GARAY R. - BE Y CA (RG)",
+    "nombre_comercio": "ALMACEN BE Y CA",
+    "direccion": "RAMON Y CAJAL 1345",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2102393"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33549,
+    "cliente": "QUISPE ANALIA- MULTISHOP (SJ)",
+    "nombre_comercio": "KIOSCO MULTISHOP",
+    "direccion": "PERIÓDICO EL SONIDO 1864",
+    "ciudad": "PTO SAN JULIAN",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33550,
+    "cliente": "LIMA CARDOZO JUAN - LIMA 1 (PB)",
+    "nombre_comercio": "KIOSCO LIMA 1",
+    "direccion": "WILLIAM CLARK 318",
+    "ciudad": "PIEDRABUENA",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33551,
+    "cliente": "SANCHEZ C. - JONATHAN (PB)",
+    "nombre_comercio": "ALMACEN JONATHAN",
+    "direccion": "LAVALLE 105",
+    "ciudad": "PIEDRABUENA",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33552,
+    "cliente": "QUISPE ALDANA - ASADOR 2 (SJ)",
+    "nombre_comercio": "ALMACEN EL ASADOR 2",
+    "direccion": "FAGNANO 532",
+    "ciudad": "PTO SAN JULIAN",
+    "idvend": "708",
+    "freezers": [
+      "2063567",
+      "2111635"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33553,
+    "cliente": "FLORES ANAGUA A. - FLORES ( SC )",
+    "nombre_comercio": "ALMACEN FLORES",
+    "direccion": "AVELLANEDA Y BALLESTRA",
+    "ciudad": "PTO SANTA CRUZ",
+    "idvend": "708",
+    "freezers": [
+      "2181858"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33554,
+    "cliente": "MARTINEZ MICAELA - ROSARIO (SC)",
+    "nombre_comercio": "KIOSCO ROSARIO",
+    "direccion": "SARMIENTO 482",
+    "ciudad": "PTO SANTA CRUZ",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33556,
+    "cliente": "PATRICIO FRANCO - SHULY (RG)",
+    "nombre_comercio": "VERDULERIA SHULY",
+    "direccion": "MARIANO MORENO 932",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33557,
+    "cliente": "EL CUYO S.A.S.- S. M. 24 HS.4 (RG)",
+    "nombre_comercio": "KIOSCO SAN MARTIN 24 HS. 4",
+    "direccion": "INGENIEROS Y PREFECTURA",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2181835"
+    ],
+    "cafe_maquinas": [
+      "1215020300062"
+    ]
+  },
+  {
+    "idcli": 33560,
+    "cliente": "SANGA CHACO - FRUTISHOP (RG)",
+    "nombre_comercio": "VERDULERIA FRUTISHOP",
+    "direccion": "CORRIENTES 602",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33563,
+    "cliente": "FERREYRA T. - PRO FITNESS (RG)",
+    "nombre_comercio": "OTRO PRO FITNESS",
+    "direccion": "DON BOSCO 475",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [],
+    "cafe_maquinas": [
+      "20144241822"
+    ]
+  },
+  {
+    "idcli": 33564,
+    "cliente": "QUIROZ NOELIA -TIO MOU (RG)",
+    "nombre_comercio": "ALMACEN TIO MOU",
+    "direccion": "EVA PERON Y SANTA FE",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2179911"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33565,
+    "cliente": "MILLAPEL FERNANDO- CERCA 6 (RG)",
+    "nombre_comercio": "ALMACEN CERCA 6",
+    "direccion": "BATALLA PTO ARGENTINO 846",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2071993"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33567,
+    "cliente": "GALLEGOS ROMINA - NOVA 1 (RG)",
+    "nombre_comercio": "KIOSCO DRUGSTORE NOVA",
+    "direccion": "URQUIZA Y ENTRE RIOS",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [],
+    "cafe_maquinas": [
+      "20124742600"
+    ]
+  },
+  {
+    "idcli": 33570,
+    "cliente": "AGUILERA NAHUEL - YIYI ( 28 )",
+    "nombre_comercio": "KIOSCO YIYI",
+    "direccion": "GODOR. GREGORES 250",
+    "ciudad": "28 DE NOVIEMBRE",
+    "idvend": "707",
+    "freezers": [
+      "2178579"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33571,
+    "cliente": "LEON NOELIA M. - PAMPA 1 (RG)",
+    "nombre_comercio": "CARNICERIA C. DE LA PAMPA 1",
+    "direccion": "T. DEL FOURNIER 2615",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33574,
+    "cliente": "CANTERO JEREMIAS - DOGS (RT)",
+    "nombre_comercio": "PANCHERIA DOGS",
+    "direccion": "PELLEGRINI 78",
+    "ciudad": "RIO TURBIO",
+    "idvend": "707",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33575,
+    "cliente": "PELOZO NATALIA - REYNA (CA)",
+    "nombre_comercio": "KIOSCO MULTIRUBRO REYNA",
+    "direccion": "SONIA SIMUNOVIC 105",
+    "ciudad": "EL CALAFATE",
+    "idvend": "707",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33577,
+    "cliente": "TEPPA JORGE - TIROLESA ( RG )",
+    "nombre_comercio": "FIAMBRERIA TIROLESA",
+    "direccion": "JUAN JOSE PASO 1416",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33581,
+    "cliente": "DURAN LAURA - NUEVO XD (RG)",
+    "nombre_comercio": "KIOSCO NUEVO XD",
+    "direccion": "KIRCHNER 953",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33582,
+    "cliente": "GONZALEZ Y. - FAUSTINO 2 (RG)",
+    "nombre_comercio": "KIOSCO FAUSTINO 2",
+    "direccion": "SANTIAGO DEL ESTERO 306",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2179898"
+    ],
+    "cafe_maquinas": [
+      "20144241798"
+    ]
+  },
+  {
+    "idcli": 33584,
+    "cliente": "BURGOA SANCHEZ - CHANY (CA)",
+    "nombre_comercio": "ALMACEN CHANY",
+    "direccion": "PEDRO OJEDA 3654",
+    "ciudad": "EL CALAFATE",
+    "idvend": "707",
+    "freezers": [
+      "2081272"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33588,
+    "cliente": "CANOBRA MIGUEL - PIONERO (SJ)",
+    "nombre_comercio": "KIOSCO EL PIONERO",
+    "direccion": "FAGNANO 1554",
+    "ciudad": "PTO SAN JULIAN",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33589,
+    "cliente": "VAZQUEZ N. - ESQ MAGICA (SJ)",
+    "nombre_comercio": "KIOSCO LA ESQUINA MAGICA",
+    "direccion": "FAGNANO Y JULIAN FERNANDEZ",
+    "ciudad": "PTO SAN JULIAN",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33591,
+    "cliente": "AREVALO HERNANDEZ- CHICHO (RG)",
+    "nombre_comercio": "KIOSCO POLIRUBRO CHICHO",
+    "direccion": "KIRCHNER 2552",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2111643"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33593,
+    "cliente": "ERAZO ABEL - EL FLACO (PB)",
+    "nombre_comercio": "KIOSCO EL FLACO",
+    "direccion": "WILLIAMS CLARK 750",
+    "ciudad": "PIEDRABUENA",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33594,
+    "cliente": "RIVERO A. - LIBERTADOR (CA)",
+    "nombre_comercio": "KIOSCO LIBERTADOR",
+    "direccion": "AMILCAR AMAYA 241",
+    "ciudad": "EL CALAFATE",
+    "idvend": "707",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33595,
+    "cliente": "TRUJILLO WALTER - ALICIA (28)",
+    "nombre_comercio": "ALMACEN ALICIA",
+    "direccion": "PASAJE ISLAS MALVINAS 1244",
+    "ciudad": "28 DE NOVIEMBRE",
+    "idvend": "707",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33598,
+    "cliente": "CRUZ CARDOZO - CRUZ (RG)",
+    "nombre_comercio": "ALMACEN CRUZ",
+    "direccion": "JUNCAL 796",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33599,
+    "cliente": "ZAMUDIO SOTO JOSE - DINA (RG)",
+    "nombre_comercio": "VERDULERIA DINA",
+    "direccion": "PERITO MORENO 166",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33600,
+    "cliente": "LI XUEBING - AUTO LI (RG)",
+    "nombre_comercio": "AUTOSERVICIO LI",
+    "direccion": "MARIANO MORENO 1545",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33610,
+    "cliente": "MARTINS ALEXIS - PERS. ( RG )",
+    "nombre_comercio": "PERSONAL - MARTINS",
+    "direccion": "RIO GALLEGOS",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "SV",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33612,
+    "cliente": "DENIS PALLENTE - SANTA (RG)",
+    "nombre_comercio": "CONFITERIA BAR SANTA",
+    "direccion": "ZAPIOLA 166",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33613,
+    "cliente": "JARA MONICA E. - E & S (SJ)",
+    "nombre_comercio": "KIOSCO E & S",
+    "direccion": "DANIEL CAMERON 980",
+    "ciudad": "PTO SAN JULIAN",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33614,
+    "cliente": "ROMERO ARIEL - MI TATA (RG)",
+    "nombre_comercio": "CARNICERIA MI TATA",
+    "direccion": "CRUCERO BELGRANO 1600",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33615,
+    "cliente": "SILVA FLORES - TERMINAL (RG)",
+    "nombre_comercio": "KIOSCO LA TERMINAL",
+    "direccion": "P. DE LOS ARRIEROS 1134",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [],
+    "cafe_maquinas": [
+      "20183043260"
+    ]
+  },
+  {
+    "idcli": 33616,
+    "cliente": "S.A. LOS POLLOS AMIGOS ( RG )",
+    "nombre_comercio": "ROTISERIA LOS POLLOS AMIGOS",
+    "direccion": "TIERRA DEL FUEGO 22",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33617,
+    "cliente": "LLANQUIN A. - OPEN 25 (RG)",
+    "nombre_comercio": "KIOSCO OPEN 25",
+    "direccion": "AV KIRCHNER 2186",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33620,
+    "cliente": "CASTILLO ROMERO V. - LUCIA (SJ)",
+    "nombre_comercio": "ALMACEN LUCIA",
+    "direccion": "JUAN DOMINGO PERON 1990",
+    "ciudad": "PTO SAN JULIAN",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33621,
+    "cliente": "BONIFACIO CARLOS - AMIGO (RG)",
+    "nombre_comercio": "ALMACEN EL AMIGO",
+    "direccion": "CALLE 40 BIS ENTRE 33 Y 37",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33623,
+    "cliente": "ARFARO S. A. S. - CORNER (28)",
+    "nombre_comercio": "HELADERIA CORNER",
+    "direccion": "SAN MARTIN 475",
+    "ciudad": "28 DE NOVIEMBRE",
+    "idvend": "707",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33628,
+    "cliente": "GOMEZ AMELIA - CAMPEONES (RG)",
+    "nombre_comercio": "KIOSCO CAMPEONES",
+    "direccion": "CALLE GOTTI 263",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33629,
+    "cliente": "ZABALA V. - TODO PROMO (RG)",
+    "nombre_comercio": "KIOSCO TODO PROMO",
+    "direccion": "CRUCERO GRAL BELGRANO 2472",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33630,
+    "cliente": "BALSAMO MAURO- MALVINAS 2 (RG)",
+    "nombre_comercio": "KIOSCO MALVINAS",
+    "direccion": "ALVEAR 929",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33634,
+    "cliente": "BORQUEZ G. - NUEVA COCINA (RG)",
+    "nombre_comercio": "ROTISERIA LA NUEVA COCINA",
+    "direccion": "JUAN DOMINGO PERON 785",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33635,
+    "cliente": "BOGADO CARLOS- BONGYA SB (RG)",
+    "nombre_comercio": "PANADERIA BONGYA S.B.",
+    "direccion": "CALLE 22 ENTRE 13 Y 9",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33636,
+    "cliente": "CHOQUE AYZA N. - JHOSE (RG)",
+    "nombre_comercio": "VERDULERIA JHOSE",
+    "direccion": "LAGO VIEDMA Y ANGELLELI",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33638,
+    "cliente": "ROSALES ARMANDO - DIST. (28)",
+    "nombre_comercio": "OTRO DISTRIBUIDORA ROSALES",
+    "direccion": "SAN MARTIN Y SAN LUIS",
+    "ciudad": "28 DE NOVIEMBRE",
+    "idvend": "707",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33639,
+    "cliente": "MENDEZ VERONICA - PAPRIKA (PB)",
+    "nombre_comercio": "ALMACEN PAPRIKA",
+    "direccion": "AVENIDA IBAÑES 407",
+    "ciudad": "PIEDRABUENA",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33640,
+    "cliente": "TELERA MEZA - AMANECER (SC)",
+    "nombre_comercio": "KIOSCO EL AMANECER",
+    "direccion": "SAN MARTIN 656",
+    "ciudad": "PTO SANTA CRUZ",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33641,
+    "cliente": "IGNAO YOLANDA - YOLANDA (PB)",
+    "nombre_comercio": "ALMACEN YOLANDA",
+    "direccion": "BARRIO 88 CASA 50",
+    "ciudad": "PIEDRABUENA",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33642,
+    "cliente": "GALLEGOS ROMINA - NOVA 2 (RG)",
+    "nombre_comercio": "KIOSCO DRUGSTORE NOVA 2",
+    "direccion": "BECCAR 209",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2113731"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33643,
+    "cliente": "CHOQUE AIZA PIO - MICKY 3 (RG)",
+    "nombre_comercio": "KIOSCO MICKY 3",
+    "direccion": "P. NAVAL Y J. INGENIEROS",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33644,
+    "cliente": "EL CUYO S.A.S.-24 HS.CALAFATE (CA)",
+    "nombre_comercio": "KIOSCO 24 HS. CALAFATE",
+    "direccion": "AV 17 DE OCTUBRE 24",
+    "ciudad": "EL CALAFATE",
+    "idvend": "707",
+    "freezers": [],
+    "cafe_maquinas": [
+      "20122725216"
+    ]
+  },
+  {
+    "idcli": 33646,
+    "cliente": "PURAN RUIZ V. - DATYAH (RG)",
+    "nombre_comercio": "KIOSCO DATYAH",
+    "direccion": "9 DE JULIO 102",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2173899"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33647,
+    "cliente": "CHOSCO R. - MENDOCINA 1 (RG)",
+    "nombre_comercio": "VERDULERIA MENDOCINA 1",
+    "direccion": "CARLOS BECCAR 223",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2115261"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33648,
+    "cliente": "GALLEGOS ROMINA - NOVA 3 (RG)",
+    "nombre_comercio": "KIOSCO DRUGSTORE NOVA 3",
+    "direccion": "BELGRANO 1019",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2181817"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33649,
+    "cliente": "JOPESH POIEN SRL - CIABATTA (RG)",
+    "nombre_comercio": "PANADERIA CIABATTA",
+    "direccion": "ZAPIOLA 2201",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [],
+    "cafe_maquinas": [
+      "20183043269"
+    ]
+  },
+  {
+    "idcli": 33651,
+    "cliente": "LI GONZALO. - FU WANG DA ( RG )",
+    "nombre_comercio": "AUTOSERVICIO FU WANG DA",
+    "direccion": "MARIANO MORENO 875",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33653,
+    "cliente": "CRUZ SILVESTRE - F. FRUT (RG)",
+    "nombre_comercio": "VERDULERIA FRUTY FRUT",
+    "direccion": "CALLE 13 ENTRE 30 Y 32",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33654,
+    "cliente": "CASIMIRO SABINA - MAILEN 2 (28)",
+    "nombre_comercio": "KIOSCO MAILEN 2",
+    "direccion": "BARRIO 700",
+    "ciudad": "28 DE NOVIEMBRE",
+    "idvend": "707",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33658,
+    "cliente": "FIERRO JAVIER - GOAT (RG)",
+    "nombre_comercio": "KIOSCO GOAT STORE",
+    "direccion": "COSTA RICA 1985",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33659,
+    "cliente": "SALVATIERRA JOSE - NEO (RG)",
+    "nombre_comercio": "KIOSCO NEO CIBER",
+    "direccion": "FAGNANO 119",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2180387"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33660,
+    "cliente": "SANCHEZ C. - SARA Y LIA (RG)",
+    "nombre_comercio": "VERDULERIA SARA Y LIA",
+    "direccion": "JUAN RIQUEZ 818",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33661,
+    "cliente": "MANSILLA SILVA - D. BERON (RG)",
+    "nombre_comercio": "CARNICERIA DON BERON",
+    "direccion": "JOSE INGENIEROS 1825",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33662,
+    "cliente": "ROMERO MARIA - 25 HORAS (RT)",
+    "nombre_comercio": "KIOSCO DRUGSTORE 25 HORAS",
+    "direccion": "AV DE LOS MINEROS 188",
+    "ciudad": "RIO TURBIO",
+    "idvend": "707",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33663,
+    "cliente": "FREY AGUILAR F. - EL PELA (RG)",
+    "nombre_comercio": "KIOSCO EL PELA",
+    "direccion": "COSTA RICA 3138",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33664,
+    "cliente": "MACHUCA GARAY - PORTALES (RG)",
+    "nombre_comercio": "KIOSCO LOS PORTALES",
+    "direccion": "B. PTO ARGENTINO 682",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "710",
+    "freezers": [
+      "2065136"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33665,
+    "cliente": "RODRIGUEZ A. - LOTSO (RG)",
+    "nombre_comercio": "KIOSKO LOTSO",
+    "direccion": "BALBIN 1251",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33666,
+    "cliente": "FERCHER ROJAS - MINUTO 45 (RG)",
+    "nombre_comercio": "KIOSCO MINUTO 45",
+    "direccion": "JUAN JOSE PASO 1486",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33667,
+    "cliente": "SOLANO VICTOR - EL TREBOL (RG)",
+    "nombre_comercio": "KIOSCO EL TREBOL",
+    "direccion": "URQUIZA 1068",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33668,
+    "cliente": "SANTA CRUZ P.- M. QUE RICO (28)",
+    "nombre_comercio": "ROTISERIA MAS QUE RICO",
+    "direccion": "28 DE NOVIEMBRE",
+    "ciudad": "28 DE NOVIEMBRE",
+    "idvend": "707",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33669,
+    "cliente": "JINDRA WALTER - LA MORENA (RG)",
+    "nombre_comercio": "KIOSCO LA MORENA",
+    "direccion": "ALCORTA Y RIVADAVIA",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [
+      "2181164"
+    ],
+    "cafe_maquinas": [
+      "20183043343"
+    ]
+  },
+  {
+    "idcli": 33671,
+    "cliente": "ORQUERA NICOLAS- 24-7 MINI. (RG)",
+    "nombre_comercio": "KIOSCO 24-7 MINIMARKET",
+    "direccion": "JUAN JOSE PASO 1604",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33672,
+    "cliente": "ALMONACID VIVIANA - EMILIO (RG)",
+    "nombre_comercio": "ALMACEN DON EMILIO",
+    "direccion": "PAPA FRANCISCO 710",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33673,
+    "cliente": "FIGUEROA SHARON - LOLA (PB)",
+    "nombre_comercio": "PANADERIA LOLA",
+    "direccion": "RIVADAVIA 245",
+    "ciudad": "PIEDRABUENA",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": [
+      "20144442843"
+    ]
+  },
+  {
+    "idcli": 33674,
+    "cliente": "CORDERO ENZO - ESQ. SB 2 (RG)",
+    "nombre_comercio": "ALMACEN LA ESQUINA S.B. 2",
+    "direccion": "CALLE 13 Y 56",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33675,
+    "cliente": "MULTIMARC S.A.S.- MARCOS (RG)",
+    "nombre_comercio": "OTRO MULTIMARC S. A. S.",
+    "direccion": "KIRCHNER 1142",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2179882"
+    ],
+    "cafe_maquinas": [
+      "20232933877"
+    ]
+  },
+  {
+    "idcli": 33676,
+    "cliente": "ROMERO ARIEL - A&M 24 (RG)",
+    "nombre_comercio": "KIOSCO A&M 24",
+    "direccion": "KIRCHNER 1416",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [
+      "2179880"
+    ],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33677,
+    "cliente": "MILLAPEL FERNANDO- CERCA 7 (RG)",
+    "nombre_comercio": "ALMACEN CERCA 7",
+    "direccion": "PICARD Y PERU",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33678,
+    "cliente": "RODRIGUEZ M.-ABRACADABRA (RG)",
+    "nombre_comercio": "KIOSCO ABRACADABRA",
+    "direccion": "GOTTI LUIS 86",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33679,
+    "cliente": "GANESHA S. A. S. - MOMA (RG)",
+    "nombre_comercio": "OTRO GANESHA S. A. S.",
+    "direccion": "ESPAÑA 85",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33681,
+    "cliente": "DOPAZO MYRIAN - LA MADRINA (RG)",
+    "nombre_comercio": "OTRO LA MADRINA CUBANITOS",
+    "direccion": "AV. ALTE. BROWN 600",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [],
+    "cafe_maquinas": [
+      "20122725227"
+    ]
+  },
+  {
+    "idcli": 33682,
+    "cliente": "ARIAS ALVARES - 30 OCTUBRE (RG)",
+    "nombre_comercio": "ALMACEN 30 DE OCTUBRE",
+    "direccion": "CALLE 13 y 58",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33684,
+    "cliente": "CILARDI CARLOS - LA PLAZA (RG)",
+    "nombre_comercio": "PANCHERIA LA PLAZA",
+    "direccion": "PASTORA BAUMAN 449",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33685,
+    "cliente": "MENCHACA GARCIA A.- CABA (RG)",
+    "nombre_comercio": "VERDULERIA CABA",
+    "direccion": "DON BOSCO 1678",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33686,
+    "cliente": "HERRERA LUCIANO- 3°TIEMPO (CA)",
+    "nombre_comercio": "KIOSCO TERCER TIEMPO",
+    "direccion": "MONS. FAGNANO 1494",
+    "ciudad": "EL CALAFATE",
+    "idvend": "707",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33687,
+    "cliente": "WERLE LILIANA - GLACIAR (CA)",
+    "nombre_comercio": "KIOSCO ESCAPE GLACIAR",
+    "direccion": "LOS TEHUELCHES 1198",
+    "ciudad": "EL CALAFATE",
+    "idvend": "707",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33688,
+    "cliente": "SALAS MARIA - KIOSCO 444 ( CA )",
+    "nombre_comercio": "KIOSCO 444",
+    "direccion": "CALLES AMAYA Y LARA",
+    "ciudad": "EL CALAFATE",
+    "idvend": "707",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33689,
+    "cliente": "CRUZ MARTINEZ N. - SANTI (RG)",
+    "nombre_comercio": "VERDULERIA SANTI",
+    "direccion": "PASTEUR 756",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33690,
+    "cliente": "FIGUEROA JOHANA - AMORE (RG)",
+    "nombre_comercio": "KIOSCO AMORE",
+    "direccion": "LERO RIVERO 1126",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33692,
+    "cliente": "PUNTA NORTE SRL - AYRES (CA)",
+    "nombre_comercio": "HOTEL AYRES DE CALAFATE",
+    "direccion": "FREILE 2197",
+    "ciudad": "EL CALAFATE",
+    "idvend": "707",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33693,
+    "cliente": "GARCIA JUAN CRUZ - CHIC (PB)",
+    "nombre_comercio": "OTRO MULTIESPACIO CHIC",
+    "direccion": "MITRE ESTE 49",
+    "ciudad": "PIEDRABUENA",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33694,
+    "cliente": "SILVA ELIZABETH - MATEO (RG)",
+    "nombre_comercio": "PANADERIA MATEO",
+    "direccion": "13 DE JULIO 436",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33695,
+    "cliente": "VALLEJOS SOFIA - DALTON (CA)",
+    "nombre_comercio": "KIOSCO DALTON",
+    "direccion": "SONIA SIMUNOVIC",
+    "ciudad": "EL CALAFATE",
+    "idvend": "707",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33696,
+    "cliente": "GIL GONZALEZ FRANCO- PANA (CA)",
+    "nombre_comercio": "KIOSCO LO DEL PANA",
+    "direccion": "9 DE JULIO 49",
+    "ciudad": "EL CALAFATE",
+    "idvend": "707",
+    "freezers": [],
+    "cafe_maquinas": [
+      "20183043257"
+    ]
+  },
+  {
+    "idcli": 33697,
+    "cliente": "MUÑOZ BRUNETTI - PIETROS ( RG )",
+    "nombre_comercio": "ROTISERIA PIETROS",
+    "direccion": "MITRE 197",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33698,
+    "cliente": "MARTINEZ MARIBEL - LUZMA ( RG )",
+    "nombre_comercio": "VERDULERIA LUZMA",
+    "direccion": "PILOTO RIVERA 1750",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33699,
+    "cliente": "EL CUYO S.A.S.- S. M. 24 HS.5 (RG)",
+    "nombre_comercio": "KIOSCO SAN MARTIN 24 HS. 5",
+    "direccion": "SAN MARTIN Y ZAPIOLA",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [],
+    "cafe_maquinas": [
+      "20183043256"
+    ]
+  },
+  {
+    "idcli": 33700,
+    "cliente": "LIMA CARDOZO D. - LIMA 2 (PB)",
+    "nombre_comercio": "ALMACEN LIMA 2",
+    "direccion": "PJE. ALBARRACIN 374",
+    "ciudad": "PIEDRABUENA",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33701,
+    "cliente": "XIAO JANHUANG - ORIENTE (SJ)",
+    "nombre_comercio": "AUTOSERVICIO ORIENTE",
+    "direccion": "COLECTORA SUR 2625",
+    "ciudad": "PTO SAN JULIAN",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33702,
+    "cliente": "LEVICOY MARIA - ESTRELLA (RG)",
+    "nombre_comercio": "ALMACEN LA ESTRELLA",
+    "direccion": "JUAN MANUEL DE ROSAS 891",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33703,
+    "cliente": "DAI YAN HONG - DAI ( RG )",
+    "nombre_comercio": "AUTOSERVICIO DAI",
+    "direccion": "ZAPIOLA 1006",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33704,
+    "cliente": "QUELIN LUCIANA - ALMASUR (RG)",
+    "nombre_comercio": "ALMACEN ALMASUR",
+    "direccion": "PROSPERO PALAZZO 820",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "706",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33705,
+    "cliente": "RAMOS LUTO- LA CATAMARCA (SC)",
+    "nombre_comercio": "ALMACEN LA CATAMARCA",
+    "direccion": "CATAMARCA 153",
+    "ciudad": "PTO SANTA CRUZ",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33706,
+    "cliente": "ANAQUIN DANIELA - EL PICAR (RG)",
+    "nombre_comercio": "FIAMBRERIA EL PICAR",
+    "direccion": "SILVIA ESTEVEZ 697",
+    "ciudad": "RIO GALLEGOS",
+    "idvend": "712",
+    "freezers": [],
+    "cafe_maquinas": []
+  },
+  {
+    "idcli": 33707,
+    "cliente": "MIRANDA ARIAN - DAZ II ( SJ )",
+    "nombre_comercio": "KIOSCO MULTIRUBRO DAZ II",
+    "direccion": "ROTONDA DE ENTRADA",
+    "ciudad": "PTO SAN JULIAN",
+    "idvend": "708",
+    "freezers": [],
+    "cafe_maquinas": []
+  }
+]
