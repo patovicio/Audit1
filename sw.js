@@ -1,5 +1,5 @@
 // Service Worker - Auditoría Friosur PWA
-const CACHE_NAME = 'friosur-audit-v4'; // ← v4: maestro vía Apps Script con token + JSONP (evita CORS)
+const CACHE_NAME = 'friosur-audit-v5'; // ← v5: index.html network-first (evita servir HTML viejo tras deploy)
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -55,6 +55,21 @@ self.addEventListener('fetch', event => {
 
   // For POST requests (Google Sheets): let them pass through
   if (event.request.method === 'POST') {
+    return;
+  }
+
+  // index.html y navegación: network-first para que siempre baje la última
+  // versión publicada (tras cada deploy), con fallback a cache si no hay red.
+  if (event.request.mode === 'navigate' || url.pathname.endsWith('/index.html') || url.pathname.endsWith('/')) {
+    event.respondWith(
+      fetch(event.request)
+        .then(response => {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+          return response;
+        })
+        .catch(() => caches.match(event.request).then(c => c || caches.match('./index.html')))
+    );
     return;
   }
 
