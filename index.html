@@ -217,6 +217,32 @@
           <span id="frmVend"
             class="text-[10px] bg-secondary-container px-2 py-0.5 rounded font-bold text-on-secondary-container uppercase"></span>
         </div>
+
+        <!-- Info de ventas del cliente (solo lectura, viene del maestro) -->
+        <div id="frmVentas" class="mt-3 pt-3 border-t border-outline-variant hidden">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="material-symbols-outlined text-[16px] text-primary">insights</span>
+            <span class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider">Ventas del cliente</span>
+          </div>
+          <div class="grid grid-cols-3 gap-2">
+            <div class="bg-surface-container-high rounded-lg p-2 text-center">
+              <p class="text-[9px] text-outline uppercase font-semibold">Última compra</p>
+              <p id="ventaUltima" class="text-[12px] font-bold text-on-surface mt-0.5">—</p>
+            </div>
+            <div class="bg-surface-container-high rounded-lg p-2 text-center">
+              <p class="text-[9px] text-outline uppercase font-semibold">Mes actual</p>
+              <p id="ventaMes" class="text-[12px] font-bold text-on-surface mt-0.5">—</p>
+            </div>
+            <div class="bg-surface-container-high rounded-lg p-2 text-center">
+              <p class="text-[9px] text-outline uppercase font-semibold">Últimos 3m</p>
+              <p id="venta3m" class="text-[12px] font-bold text-on-surface mt-0.5">—</p>
+            </div>
+          </div>
+          <div id="ventaTopWrap" class="mt-2 hidden">
+            <p class="text-[9px] text-outline uppercase font-semibold mb-1">Más comprados (90 días)</p>
+            <ul id="ventaTop" class="space-y-1"></ul>
+          </div>
+        </div>
       </section>
 
       <!-- Timestamp -->
@@ -420,11 +446,16 @@
     // CONFIGURACIÓN - Modificar estas URLs después del deploy
     // ===================================================================
     const CONFIG = {
-      // URL del JSON de clientes en GitHub Pages
-      CLIENTES_URL: "https://patovicio.github.io/Audit1/clientes_maestro.json",
       // URL del Google Apps Script web app
       SHEETS_API_URL: "https://script.google.com/macros/s/AKfycbwdFTYU9OPm6AI3CjIeWRa71wpaR1EcqyPxXQZQATwVsW6fholi08LC_aFKzMmJvvUL/exec",
+      // Token para descargar el maestro de clientes (opción B).
+      // DEBE coincidir con la propiedad CLIENTES_TOKEN configurada en Apps Script.
+      CLIENTES_TOKEN: "friosur-a7f3d9c2e1b4-2026",
     };
+
+    // El maestro de clientes (con datos de ventas) NO se sirve desde el repo público.
+    // Se descarga del Apps Script, protegido por token.
+    CONFIG.CLIENTES_URL = `${CONFIG.SHEETS_API_URL}?action=clientes&token=${encodeURIComponent(CONFIG.CLIENTES_TOKEN)}`;
 
     // ===================================================================
     // ESTADO GLOBAL
@@ -486,7 +517,13 @@
       try {
         const resp = await fetch(CONFIG.CLIENTES_URL);
         if (!resp.ok) throw new Error('HTTP ' + resp.status);
-        clientes = await resp.json();
+        const data = await resp.json();
+        // El Apps Script devuelve {status:"error"} (HTTP 200) si el token es
+        // inválido o falta configuración. Solo un array es una respuesta válida.
+        if (!Array.isArray(data)) {
+          throw new Error(data && data.message ? data.message : 'Respuesta inesperada del servidor');
+        }
+        clientes = data;
         localStorage.setItem('clientes_cache', JSON.stringify(clientes));
         console.log(`Clientes cargados desde servidor: ${clientes.length}`);
       } catch (e) {
@@ -613,8 +650,55 @@
       document.getElementById("frmTimestamp").textContent = new Date().toLocaleString('es-AR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
       // Mostrar sección café solo si el cliente tiene máquinas
       document.getElementById('seccionCafe').classList.toggle('hidden', !(cliente.cafe_maquinas?.length > 0));
+      renderizarVentasCliente(cliente);
       resetFormulario();
       renderizarActivos(cliente);
+    }
+
+    // Formatea pesos de forma compacta para pantalla chica ($1,2M / $340K / $0)
+    function fmtPesos(n) {
+      const v = Number(n) || 0;
+      if (v === 0) return '$0';
+      const abs = Math.abs(v);
+      if (abs >= 1e6) return '$' + (v / 1e6).toFixed(1).replace('.', ',') + 'M';
+      if (abs >= 1e3) return '$' + Math.round(v / 1e3) + 'K';
+      return '$' + Math.round(v);
+    }
+
+    // Rellena el panel de ventas del cliente (datos que vienen del maestro).
+    function renderizarVentasCliente(cliente) {
+      const panel = document.getElementById('frmVentas');
+      const ventas = cliente.ventas;
+      if (!ventas) { panel.classList.add('hidden'); return; }
+      panel.classList.remove('hidden');
+
+      // Última compra en formato dd/mm/aa
+      let ultimaStr = '—';
+      if (ventas.ultima_compra) {
+        const d = new Date(ventas.ultima_compra + 'T00:00:00');
+        ultimaStr = d.toLocaleDateString('es-AR', { day: '2-digit', month: '2-digit', year: '2-digit' });
+      }
+      document.getElementById('ventaUltima').textContent = ultimaStr;
+      document.getElementById('ventaMes').textContent = fmtPesos(ventas.venta_mes);
+      document.getElementById('venta3m').textContent = fmtPesos(ventas.venta_3m);
+
+      // Top productos
+      const wrap = document.getElementById('ventaTopWrap');
+      const ul = document.getElementById('ventaTop');
+      ul.innerHTML = '';
+      const top = ventas.top_productos || [];
+      if (top.length === 0) {
+        wrap.classList.add('hidden');
+      } else {
+        wrap.classList.remove('hidden');
+        top.forEach(p => {
+          const li = document.createElement('li');
+          li.className = 'flex justify-between items-center gap-2 text-[11px]';
+          li.innerHTML = `<span class="text-on-surface-variant truncate flex-1">${p.producto}</span>` +
+                         `<span class="font-bold text-on-surface flex-shrink-0">${fmtPesos(p.neto)}</span>`;
+          ul.appendChild(li);
+        });
+      }
     }
 
     function mostrarListaClientes() {
@@ -846,9 +930,102 @@
     function generarTextoWhatsApp() {
       const d = construirDatosReporte();
 
-      // Helpers de formato
       // Title case respetando artículos menores en español
       const MINORS = new Set(['de','del','la','las','los','el','en','y','a','e','o','al','con','por','para','sin']);
+      const tc = str => (str || '').toLowerCase()
+        .split(' ')
+        .map((w, i) => (i === 0 || !MINORS.has(w)) ? w.charAt(0).toUpperCase() + w.slice(1) : w)
+        .join(' ');
+
+      // Hora en formato 24h limpio
+      const now = new Date();
+      const DIAS  = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+      const MESES = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+      const horaFmt = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+      const fechaFmt = `${DIAS[now.getDay()]} ${String(now.getDate()).padStart(2,'0')} ${MESES[now.getMonth()]} · ${horaFmt} hs`;
+
+      let t = '';
+      t += `🔵 *AUDITORÍA FRIOSUR* · ${fechaFmt}\n`;
+      t += `🏪 *${tc(d.comercio || d.cliente)}*\n`;
+      t += `👤 ${tc(d.cliente)} · #${d.clienteId} · V${d.vendedor}\n`;
+      t += `📍 ${tc(d.direccion)}, ${tc(d.ciudad)}\n`;
+
+      // Activos
+      t += `\n🛡️ *Activos*\n`;
+      let hayActivos = false;
+      for (let uid in d.activos) {
+        const a = d.activos[uid];
+        hayActivos = true;
+        if (a.estado === 'ok') {
+          t += `✅ ${a.tipo}${a.serieOriginal ? ' SN ' + a.serieOriginal : ''}\n`;
+        } else if (a.estado === 'disc') {
+          if (!a.serieOriginal) {
+            t += `⚠️ EXTRA · ${a.tipo} · SN ${a.serieReal || 'sin registrar'}\n`;
+          } else {
+            t += `❌ ${a.tipo} ${a.serieOriginal} → *${a.serieReal || 'no localizado'}*\n`;
+          }
+        } else {
+          t += `⏳ ${a.tipo}${a.serieOriginal ? ' SN ' + a.serieOriginal : ''}\n`;
+        }
+        if (a.obs) t += `   _↳ ${a.obs}_\n`;
+      }
+      if (!hayActivos) t += `— Sin activos\n`;
+
+      // Cobertura
+      t += `\n📦 *Cobertura*\n`;
+      for (let m in d.cobertura) {
+        const label = m === 'marfrig' ? 'Marfrig' : 'Froneri';
+        if (d.cobertura[m] === 'NC') {
+          t += `🔴 ${label}: No encontrado\n`;
+        } else {
+          const items = d.cobertura[m];
+          t += `🟢 ${label}: ${items.length ? items.join(', ') : 'Sin detalle'}\n`;
+        }
+      }
+
+      // Precios (solo si hay datos)
+      const preciosKeys = Object.keys(d.precios);
+      if (preciosKeys.length > 0) {
+        t += `\n💲 *Precios competencia*\n`;
+        for (let k in d.precios) {
+          const p = d.precios[k];
+          const mStr = p.marca ? ` (${p.marca})` : '';
+          t += `• ${k}${mStr}: *$${p.precio.toLocaleString('es-AR')}*\n`;
+        }
+      }
+
+      // Activos competencia (solo si hay datos)
+      const compKeys = Object.keys(d.competencia);
+      if (compKeys.length > 0) {
+        t += `\n⚔️ *Activos competencia*\n`;
+        for (let k in d.competencia) {
+          t += `• ${k}: ${d.competencia[k]}\n`;
+        }
+      }
+
+      // Servicio café (solo si hay algo marcado)
+      const sc = d.serviciosCafe;
+      if (sc && (sc.contadores || sc.mantenimiento || sc.reparacion)) {
+        t += `\n☕ *Servicio máquina de café*\n`;
+        if (sc.contadores)    t += `✅ Auditoría de contadores\n`;
+        if (sc.mantenimiento) t += `✅ Mantenimiento preventivo\n`;
+        if (sc.reparacion) {
+          t += `✅ Reparación de equipo\n`;
+          if (sc.reparacionDetalle?.trim()) t += `   _↳ ${sc.reparacionDetalle.trim()}_\n`;
+        }
+      }
+
+      // Ofertas (solo si hay)
+      if (d.ofertas && d.ofertas.length > 0) {
+        t += `\n🏷️ *Ofertas*\n`;
+        d.ofertas.forEach(o => { t += `• ${o.texto}\n`; });
+      }
+
+      // Notas
+      if (d.notas) t += `\n📝 ${d.notas}\n`;
+
+      return t;
+    }
       const tc = str => (str || '').toLowerCase()
         .split(' ')
         .map((w, i) => (i === 0 || !MINORS.has(w)) ? w.charAt(0).toUpperCase() + w.slice(1) : w)

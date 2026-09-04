@@ -16,3 +16,7 @@ Thumbs.db
 
 # Excel fuente (no necesario en deploy)
 *.xlsx
+
+# Maestro de clientes: contiene datos comerciales sensibles (ventas por cliente).
+# NO se publica en el repo publico. Se sirve por backend con token (opcion B).
+clientes_maestro.json

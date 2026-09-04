@@ -1,10 +1,11 @@
 // Service Worker - Auditoría Friosur PWA
-const CACHE_NAME = 'friosur-audit-v2'; // ← Versión incrementada
+const CACHE_NAME = 'friosur-audit-v3'; // ← Versión incrementada (maestro ahora vía Apps Script con token)
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './manifest.json',
-  './clientes_maestro.json', // ← AGREGADO para funcionamiento offline desde primera carga
+  // El maestro de clientes ya NO se precachea acá: se sirve desde el Apps Script
+  // con token (network-first + cache dinámico en el fetch handler).
   './icons/icon-192.png',
   './icons/icon-512.png',
   'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap',
@@ -36,8 +37,10 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
 
-  // For the clientes JSON: network first, fallback to cache
-  if (url.pathname.endsWith('clientes_maestro.json') || url.href.includes('github.io')) {
+  // Maestro de clientes: ahora llega del Apps Script (?action=clientes&token=...).
+  // Network-first con fallback a cache para que siga funcionando offline.
+  if (url.searchParams.get('action') === 'clientes' ||
+      url.pathname.endsWith('clientes_maestro.json')) {
     event.respondWith(
       fetch(event.request)
         .then(response => {

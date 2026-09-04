@@ -17,6 +17,17 @@
 const SPREADSHEET_ID = "1Za8ZKGGn1jbQ-4QamXcv1PRKhTu_UYKK0pkJhCoZVwo"; // <-- Cambiar por el ID de tu Sheet
 const SHEET_NAME = "Auditorías";
 
+// --- Maestro de clientes protegido (opción B) ---
+// El archivo clientes_maestro.json vive en Google Drive (NO en el repo público).
+// Configurar estos dos valores en el editor de Apps Script:
+//   Proyecto → Configuración → Propiedades del script:
+//     CLIENTES_FILE_ID  = ID del archivo clientes_maestro.json en Drive
+//     CLIENTES_TOKEN    = una clave secreta larga (ej: friosur-9f3a...-2026)
+// La app envía ?action=clientes&token=CLIENTES_TOKEN para descargarlo.
+function _prop(nombre) {
+  return PropertiesService.getScriptProperties().getProperty(nombre);
+}
+
 // ============ ENDPOINT POST: Recibir auditoría ============
 function doPost(e) {
   try {
@@ -85,6 +96,14 @@ function doPost(e) {
 
 // ============ ENDPOINT GET: Verificar que funciona + recibir auditorías ============
 function doGet(e) {
+  // --- action=clientes: servir el maestro de clientes protegido por token ---
+  // El maestro (clientes_maestro.json) NO se publica en el repo publico porque
+  // contiene datos comerciales (ventas por cliente). Se guarda en Google Drive
+  // y se sirve solo si el token coincide.
+  if (e && e.parameter && e.parameter.action === "clientes") {
+    return servirClientes(e);
+  }
+
   // Si viene con action=guardar, procesar datos
   if (e && e.parameter && e.parameter.action === "guardar" && e.parameter.data) {
     try {
@@ -175,4 +194,39 @@ function construirResumenCobertura(cobertura) {
     }
   }
   return partes.join(" | ");
+}
+
+// ============ MAESTRO DE CLIENTES (opción B: servir con token) ============
+function servirClientes(e) {
+  const tokenEsperado = _prop("CLIENTES_TOKEN");
+  const fileId = _prop("CLIENTES_FILE_ID");
+
+  // Si falta configuración, avisar (sin exponer nada)
+  if (!tokenEsperado || !fileId) {
+    return ContentService.createTextOutput(JSON.stringify({
+      status: "error",
+      message: "Backend sin configurar (CLIENTES_TOKEN / CLIENTES_FILE_ID)"
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+
+  // Validar token
+  const tokenRecibido = e.parameter.token || "";
+  if (tokenRecibido !== tokenEsperado) {
+    return ContentService.createTextOutput(JSON.stringify({
+      status: "error",
+      message: "No autorizado"
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+
+  // Leer el JSON desde Drive y devolverlo tal cual
+  try {
+    const contenido = DriveApp.getFileById(fileId).getBlob().getDataAsString("UTF-8");
+    return ContentService.createTextOutput(contenido)
+      .setMimeType(ContentService.MimeType.JSON);
+  } catch (error) {
+    return ContentService.createTextOutput(JSON.stringify({
+      status: "error",
+      message: "No se pudo leer el maestro: " + error.toString()
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
 }

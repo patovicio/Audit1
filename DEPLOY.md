@@ -17,26 +17,31 @@ AppAuditoria/
 
 ---
 
+> **IMPORTANTE (seguridad de datos):** el `clientes_maestro.json` contiene datos
+> comerciales (ventas por cliente) y **NO se publica** en el repo público. La app
+> lo descarga desde el Google Apps Script protegido por token, y el archivo vive en
+> Google Drive. Está excluido en `.gitignore`.
+
 ## PASO 1: Crear repositorio en GitHub (hosting gratuito)
 
 1. Ir a https://github.com/new
 2. Nombre del repo: `friosur-audit` (o el que quieras)
-3. Dejarlo **público**
+3. Dejarlo **público** (solo contiene la app, sin datos sensibles)
 4. Crear el repositorio
 
-### Subir los archivos:
+### Subir los archivos (SIN el maestro de clientes):
 
 Opción A - Desde la web de GitHub:
 - Click "uploading an existing file"
-- Arrastrar: `index.html`, `manifest.json`, `sw.js`, `clientes_maestro.json`, y la carpeta `icons/`
+- Arrastrar: `index.html`, `manifest.json`, `sw.js`, y la carpeta `icons/`
+- **NO subir `clientes_maestro.json`** (contiene datos de ventas)
 - Commit
 
 Opción B - Con git desde la terminal:
 ```bash
-cd "G:\Mi unidad\AppAuditoria"
-git init
-git add index.html manifest.json sw.js clientes_maestro.json icons/
-git commit -m "App de auditoría Friosur"
+cd "AppAuditoria"
+git add index.html manifest.json sw.js icons/ .gitignore
+git commit -m "App de auditoría Friosur (sin maestro sensible)"
 git remote add origin https://github.com/TU-USUARIO/friosur-audit.git
 git push -u origin main
 ```
@@ -54,18 +59,45 @@ git push -u origin main
 
 ---
 
-## PASO 3: Actualizar la URL en index.html
+## PASO 3: Publicar el maestro de clientes en Drive + token (opción B)
 
-Abrir `index.html` y cambiar en la sección CONFIG:
+El maestro NO va al repo. Se sirve desde el Apps Script leyéndolo de Google Drive.
+
+### 3.1 Subir el JSON a Google Drive
+
+1. Generar el archivo con:  `python generar_maestro_desde_duckdb.py`
+   (o correr `extraer_datos_sql.bat`, que ya lo regenera).
+2. Subir `clientes_maestro.json` a una carpeta de tu Google Drive.
+3. Abrir el archivo en Drive → copiar el **ID** de la URL:
+   `https://drive.google.com/file/d/ESTE_ES_EL_ID/view`
+
+### 3.2 Configurar las propiedades del Apps Script
+
+En el editor de Apps Script (script.google.com, mismo proyecto del backend):
+1. Ir a **Configuración del proyecto** (ícono de engranaje) → **Propiedades del script**.
+2. Agregar dos propiedades:
+   - `CLIENTES_FILE_ID` = el ID del archivo de Drive del paso 3.1
+   - `CLIENTES_TOKEN`   = una clave secreta larga (ej: `friosur-8f2ac91d3e-2026`)
+3. Guardar y **volver a implementar** la Web App (Implementar → Administrar implementaciones → editar → nueva versión).
+
+### 3.3 Poner el mismo token en la app
+
+Abrir `index.html`, sección CONFIG, y reemplazar:
 
 ```javascript
 const CONFIG = {
-  CLIENTES_URL: "https://TU-USUARIO.github.io/friosur-audit/clientes_maestro.json",
-  ...
+  SHEETS_API_URL: "https://script.google.com/macros/s/TU-SCRIPT-ID/exec",
+  CLIENTES_TOKEN: "friosur-8f2ac91d3e-2026",  // ← el MISMO valor que CLIENTES_TOKEN en Apps Script
 };
 ```
 
-Reemplazar `TU-USUARIO` por tu usuario de GitHub.
+> La app arma sola la URL: `SHEETS_API_URL?action=clientes&token=CLIENTES_TOKEN`.
+
+### 3.4 Actualizar clientes más adelante
+
+1. Correr `extraer_datos_sql.bat` (regenera `clientes_maestro.json` con datos frescos).
+2. Reemplazar el archivo en Drive (mismo archivo, así el FILE_ID no cambia).
+3. La app trae la versión nueva en la próxima apertura online.
 
 ---
 
@@ -104,10 +136,13 @@ Reemplazar `TU-USUARIO` por tu usuario de GitHub.
 
 ```javascript
 const CONFIG = {
-  CLIENTES_URL: "https://TU-USUARIO.github.io/friosur-audit/clientes_maestro.json",
   SHEETS_API_URL: "https://script.google.com/macros/s/TU-SCRIPT-ID/exec",
+  CLIENTES_TOKEN: "friosur-8f2ac91d3e-2026",  // el mismo token del PASO 3
 };
 ```
+
+> El mismo Apps Script sirve dos cosas: guarda auditorías (`action=guardar`) y
+> entrega el maestro de clientes (`action=clientes&token=...`).
 
 ---
 
@@ -137,11 +172,12 @@ const CONFIG = {
 
 ## Actualizar datos de clientes
 
-Cuando cambien los clientes:
-1. Actualizar `clientes_maestro.json`
-2. Hacer commit + push a GitHub
-3. GitHub Pages se actualiza en ~1 minuto
-4. La app cargará los datos nuevos en la próxima apertura
+Cuando cambien los clientes o las ventas:
+1. Correr `extraer_datos_sql.bat` (regenera `clientes_maestro.json` desde DuckDB).
+2. Reemplazar el archivo en Google Drive (mismo archivo → mismo FILE_ID).
+3. La app cargará los datos nuevos en la próxima apertura online.
+
+> El JSON NO se sube a GitHub (está en `.gitignore`). Se distribuye por Drive + token.
 
 ---
 
