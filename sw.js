@@ -1,5 +1,5 @@
 // Service Worker - Auditoría Friosur PWA
-const CACHE_NAME = 'friosur-audit-v3'; // ← Versión incrementada (maestro ahora vía Apps Script con token)
+const CACHE_NAME = 'friosur-audit-v4'; // ← v4: maestro vía Apps Script con token + JSONP (evita CORS)
 const ASSETS_TO_CACHE = [
   './',
   './index.html',

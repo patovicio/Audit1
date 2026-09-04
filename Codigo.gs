@@ -197,36 +197,43 @@ function construirResumenCobertura(cobertura) {
 }
 
 // ============ MAESTRO DE CLIENTES (opción B: servir con token) ============
+// Soporta JSONP: si se pasa &callback=nombre, envuelve la respuesta en esa
+// función. La app usa JSONP porque el fetch() clásico contra Apps Script falla
+// por CORS (Google responde con un redirect a otro dominio que el navegador bloquea).
 function servirClientes(e) {
+  const callback = e.parameter.callback || "";
+
+  const responder = function (texto, esJson) {
+    if (callback) {
+      // Respuesta JSONP: callback(<contenido>)
+      const cuerpo = esJson ? texto : JSON.stringify(texto);
+      return ContentService.createTextOutput(callback + "(" + cuerpo + ")")
+        .setMimeType(ContentService.MimeType.JAVASCRIPT);
+    }
+    // Respuesta JSON normal
+    return ContentService.createTextOutput(esJson ? texto : JSON.stringify(texto))
+      .setMimeType(ContentService.MimeType.JSON);
+  };
+
   const tokenEsperado = _prop("CLIENTES_TOKEN");
   const fileId = _prop("CLIENTES_FILE_ID");
 
   // Si falta configuración, avisar (sin exponer nada)
   if (!tokenEsperado || !fileId) {
-    return ContentService.createTextOutput(JSON.stringify({
-      status: "error",
-      message: "Backend sin configurar (CLIENTES_TOKEN / CLIENTES_FILE_ID)"
-    })).setMimeType(ContentService.MimeType.JSON);
+    return responder({ status: "error", message: "Backend sin configurar (CLIENTES_TOKEN / CLIENTES_FILE_ID)" }, false);
   }
 
   // Validar token
   const tokenRecibido = e.parameter.token || "";
   if (tokenRecibido !== tokenEsperado) {
-    return ContentService.createTextOutput(JSON.stringify({
-      status: "error",
-      message: "No autorizado"
-    })).setMimeType(ContentService.MimeType.JSON);
+    return responder({ status: "error", message: "No autorizado" }, false);
   }
 
   // Leer el JSON desde Drive y devolverlo tal cual
   try {
     const contenido = DriveApp.getFileById(fileId).getBlob().getDataAsString("UTF-8");
-    return ContentService.createTextOutput(contenido)
-      .setMimeType(ContentService.MimeType.JSON);
+    return responder(contenido, true);
   } catch (error) {
-    return ContentService.createTextOutput(JSON.stringify({
-      status: "error",
-      message: "No se pudo leer el maestro: " + error.toString()
-    })).setMimeType(ContentService.MimeType.JSON);
+    return responder({ status: "error", message: "No se pudo leer el maestro: " + error.toString() }, false);
   }
 }
