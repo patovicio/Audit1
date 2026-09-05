@@ -959,6 +959,7 @@
         direccion: c.direccion,
         ciudad: c.ciudad,
         vendedor: c.idvend,
+        ventas: c.ventas || null,
         activos: auditoriaActivos,
         cobertura: coberturaDetalle,
         precios: precios,
@@ -1016,6 +1017,17 @@
       if (d.comercio && tc(d.comercio) !== tc(d.cliente)) t += `Razón social: ${tc(d.cliente)}\n`;
       t += `Domicilio: ${tc(d.direccion)}, ${tc(d.ciudad)}\n`;
       t += `Cliente N° ${d.clienteId}  ·  Vendedor ${d.vendedor}\n`;
+      // Ventas del cliente (vienen del maestro generado desde DuckDB)
+      if (d.ventas) {
+        const ventaMesFmt = `$${Math.round(d.ventas.venta_mes || 0).toLocaleString('es-AR')}`;
+        let ultimaFmt = '—';
+        if (d.ventas.ultima_compra) {
+          const fu = new Date(d.ventas.ultima_compra + 'T00:00:00');
+          ultimaFmt = fu.toLocaleDateString('es-AR', { day: '2-digit', month: '2-digit', year: '2-digit' });
+        }
+        t += `Venta del mes: ${ventaMesFmt}\n`;
+        t += `Último pedido: ${ultimaFmt}\n`;
+      }
       t += `${SEP}\n`;
 
       // ── Resumen ejecutivo ─────────────────────────────────────
