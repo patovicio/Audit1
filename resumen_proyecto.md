@@ -9,14 +9,21 @@
 **Auditoría Friosur** es una app web progresiva (PWA) que usan los vendedores/auditores de Friosur para registrar visitas comerciales a sus clientes (almacenes, supermercados, kioscos) en toda la Patagonia. 
 
 En cada visita el auditor puede:
+- Ver de un vistazo el **contexto comercial del cliente**: venta del mes en curso,
+  fecha del último pedido y top de productos (datos reales del ERP vía DuckDB)
 - Verificar **activos** (freezers y máquinas de café) que Friosur tiene colocados en el local
-- Relevrar **cobertura de productos** (marcas Marfrig y Froneri)
+- Relevar **cobertura de productos** (marcas Marfrig y Froneri)
 - Anotar **precios de la competencia** (Swift, La Casona, Panchin, etc.)
 - Registrar **activos de la competencia** (freezers Arcor, Grido, Ice Cream, etc.)
+- Registrar **servicio de máquina de café** (contadores, mantenimiento, reparación)
 - Cargar **ofertas y precios especiales** encontrados en el punto de venta
 - Sacar hasta **4 fotos** de la visita
 - Dejar **notas libres** (acuerdos, reclamos, comentarios)
-- Enviar un **reporte por WhatsApp** en tiempo real
+- Enviar un **reporte por WhatsApp** en tiempo real (formato sobrio que leen
+  directivos y gerentes a diario)
+
+> **Documento de continuidad técnico:** ver `ESTADO_PROYECTO.md` (configuración
+> viva: IDs, tokens, cómo actualizar el maestro, bitácora de sesiones).
 
 ---
 
@@ -26,7 +33,8 @@ En cada visita el auditor puede:
 |------|-----------|---------|
 | **Frontend** | HTML + Vanilla JS + TailwindCSS CDN | Un solo archivo, sin build step, sin bundler |
 | **Diseño** | Material Design 3 (colores, tokens) | Sistema de diseño coherente, adaptable a dark mode |
-| **Fuente de datos (clientes)** | JSON estático en GitHub Pages | Gratuito, versionado con git, actualizable sin deploy |
+| **Fuente de datos (clientes)** | JSON en Google Drive, servido por Apps Script con token (JSONP) | El maestro incluye ventas por cliente (dato sensible): NO va al repo público |
+| **Origen del maestro** | DuckDB (`friosur_analytics.duckdb`) → `generar_maestro_desde_duckdb.py` | Datos reales del ERP: vendedor, freezers, café, venta mes/3m, último pedido, top productos |
 | **Backend (guardar auditorías)** | Google Apps Script (Web App) | Sin servidor, sin costo, escribe directo a Google Sheets |
 | **Offline / PWA** | Service Worker + localStorage | Funciona sin internet, sincroniza cuando vuelve la conexión |
 
@@ -40,7 +48,7 @@ En cada visita el auditor puede:
 │                                             │
 │  ┌──────────────────────────────────────┐   │
 │  │         App PWA (index.html)         │   │
-│  │  - Lista de 473 clientes             │   │
+│  │  - Lista de ~466 clientes activos    │   │
 │  │  - Formulario de auditoría          │   │
 │  │  - Historial local (localStorage)   │   │
 │  │  - Cola offline (pendientes)        │   │
@@ -56,19 +64,19 @@ En cada visita el auditor puede:
          │                        │
          ▼                        ▼
 ┌─────────────────┐    ┌──────────────────────┐
-│  GitHub Pages   │    │  Google Apps Script  │
-│                 │    │   (Codigo.gs)        │
+│  Google Drive   │    │  Google Apps Script  │
+│                 │◄───│   (Codigo.gs)        │
 │ clientes_       │    │                      │
-│ maestro.json    │    │  doGet()  → health   │
-│ (473 clientes)  │    │  doGet()  → guardar  │
-│                 │    │  doPost() → guardar  │
+│ maestro.json    │    │ ?action=clientes     │
+│ (~466, c/ventas)│    │   → JSONP + token    │
+│  privado, token │    │ ?action=guardar      │
 └─────────────────┘    └──────────────────────┘
                                   │
                                   ▼
                        ┌──────────────────────┐
                        │    Google Sheets     │
                        │  "Auditorías"        │
-                       │  (15 columnas)       │
+                       │  (16 columnas)       │
                        │  - Timestamp         │
                        │  - Cliente/Comercio  │
                        │  - Activos (JSON)    │
@@ -142,18 +150,21 @@ guardarYWhatsApp()
 
 ```
 AppAuditoria/
-├── index.html              ← Toda la app (UI + JS, ~895 líneas)
-├── manifest.json           ← Config PWA (nombre, íconos, orientación)
-├── sw.js                   ← Service Worker (caché offline)
-├── clientes_maestro.json   ← Base de datos de clientes (473 registros)
-├── Codigo.gs               ← Backend Google Apps Script
+├── index.html                       ← Toda la app (UI + JS + estilos inline)
+├── manifest.json                    ← Config PWA (nombre, íconos, orientación)
+├── sw.js                            ← Service Worker (caché offline, v5 network-first)
+├── clientes_maestro.json            ← Maestro de clientes (~466, en .gitignore, va a Drive)
+├── Codigo.gs                        ← Backend Google Apps Script (sirve maestro + guarda)
+├── generar_maestro_desde_duckdb.py  ← Genera el maestro desde DuckDB
+├── GENERAR_MAESTRO.bat              ← Doble clic: regenera el maestro con el .venv
+├── ESTADO_PROYECTO.md               ← Documento de continuidad (config viva + bitácora)
 ├── icons/
-│   ├── icon-192.png        ← Ícono para Android
-│   └── icon-512.png        ← Ícono splash screen
-├── DEPLOY.md               ← Guía paso a paso para publicar
-├── exportar_a_excel.py     ← Herramienta para exportar clientes
-├── generar_app.py          ← Script auxiliar de generación
-└── generar_iconos.py       ← Genera los íconos PNG
+│   ├── icon-192.png                 ← Ícono para Android
+│   └── icon-512.png                 ← Ícono splash screen
+├── DEPLOY.md                        ← Guía paso a paso para publicar
+├── exportar_a_excel.py              ← Herramienta para exportar clientes
+├── generar_app.py                   ← Script auxiliar de generación
+└── generar_iconos.py                ← Genera los íconos PNG
 ```
 
 ---
@@ -164,16 +175,26 @@ Cada cliente tiene esta forma:
 
 ```json
 {
-  "idcli": "10045",
-  "cliente": "GARCIA JUAN CARLOS",
-  "nombre_comercio": "Almacén El Progreso",
-  "direccion": "Av. Kirchner 1234",
+  "idcli": 30003,
+  "cliente": "CHAMORRO MARIA - CRISTINA (RG)",
+  "nombre_comercio": "ALMACEN CRISTINA",
+  "direccion": "10 E/ 21Y20 LOS ALAMOS",
   "ciudad": "RIO GALLEGOS",
-  "idvend": "V03",
-  "freezers": ["SN-001234", "SN-005678"],
-  "cafe_maquinas": ["CM-00091"]
+  "idvend": "712",
+  "freezers": ["2132889"],
+  "cafe_maquinas": [],
+  "ventas": {
+    "ultima_compra": "2026-07-10",
+    "venta_mes": 0.0,
+    "venta_3m": 126573.05,
+    "top_productos": [{ "producto": "LUXOR BOMBON FRIGOR 24 x 53g", "neto": 39708.6 }]
+  }
 }
 ```
+
+> El vendedor sale de `customer.Collector` y las ventas se calculan como el neto
+> facturado del ERP (`SUM(SubTotal) WHERE DocType IN (0,1)`). Detalle de reglas en
+> `ESTADO_PROYECTO.md`.
 
 Ciudades cubiertas: Río Gallegos, El Calafate, Río Turbio, 28 de Noviembre, Puerto San Julián, Piedrabuena, Gobernador Gregores, Puerto Santa Cruz, El Chaltén.
 
@@ -185,27 +206,26 @@ Ciudades cubiertas: Río Gallegos, El Calafate, Río Turbio, 28 de Noviembre, Pu
 
 ### Resumen en 4 pasos:
 
-**1. GitHub (hosting gratuito)**
+**1. GitHub (hosting del app-shell, SIN el maestro)**
 ```bash
-git init && git add index.html manifest.json sw.js clientes_maestro.json icons/
+git add index.html manifest.json sw.js icons/
 git commit -m "App de auditoría Friosur"
-git remote add origin https://github.com/TU-USUARIO/friosur-audit.git
-git push -u origin main
+git push
 ```
+> `clientes_maestro.json` NO se sube al repo (está en `.gitignore`) porque incluye
+> ventas por cliente. Vive en Google Drive y lo sirve el Apps Script con token.
 
-**2. GitHub Pages**
-- Repo → Settings → Pages → Branch: main / root → Save
-- URL resultante: `https://TU-USUARIO.github.io/friosur-audit/`
+**2. GitHub Pages** — Repo → Settings → Pages → Branch → Save.
 
 **3. Google Apps Script (backend)**
-- Crear Google Sheet → agregar hoja "Auditorías"
-- Ir a script.google.com → pegar `Codigo.gs` → cambiar `SPREADSHEET_ID`
-- Implementar como Web App (acceso: cualquier persona)
-- Copiar URL del script
+- Google Sheet con hoja "Auditorías" → pegar `Codigo.gs` → setear `SPREADSHEET_ID`.
+- Propiedades del script: `CLIENTES_FILE_ID` (ID del JSON en Drive) y `CLIENTES_TOKEN`.
+- Implementar como Web App (acceso: cualquier persona) → copiar URL.
 
-**4. Conectar la app**
-- En `index.html` cambiar `CONFIG.CLIENTES_URL` y `CONFIG.SHEETS_API_URL`
-- Push a GitHub → automáticamente actualizado en ~1 minuto
+**4. Conectar la app** — En `index.html`, `CONFIG.SHEETS_API_URL` y
+`CONFIG.CLIENTES_TOKEN` (debe coincidir con el del Apps Script). Push a GitHub.
+
+> Valores vivos (URLs, IDs, token) documentados en `ESTADO_PROYECTO.md`.
 
 ---
 
@@ -242,14 +262,19 @@ Cada auditoría genera una fila con **16 columnas** (enviadas vía `doGet` con q
 
 ---
 
-## Cómo actualizar la lista de clientes
+## Cómo actualizar la lista de clientes (y sus ventas)
 
 ```
-1. Modificar clientes_maestro.json
-2. git add clientes_maestro.json && git commit && git push
-3. GitHub Pages actualiza en ~1 minuto
-4. La app descarga el nuevo JSON en la próxima apertura
+1. (Opcional) Correr la ETL del proyecto padre: actualizar_datos.bat
+2. Doble clic en GENERAR_MAESTRO.bat  → regenera clientes_maestro.json desde DuckDB
+3. En Google Drive, sobre el archivo que YA existe:
+   clic derecho → Gestionar versiones → Subir nueva versión → elegir el JSON local
+4. La app descarga el maestro (network-first) en la próxima apertura con conexión
 ```
+
+> ⚠️ En Drive usar SIEMPRE "Subir nueva versión". Subirlo como archivo nuevo genera
+> un File ID distinto y rompe la conexión (habría que actualizar `CLIENTES_FILE_ID`
+> en el Apps Script). Ver `ESTADO_PROYECTO.md`.
 
 ---
 
