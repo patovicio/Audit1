@@ -1051,15 +1051,15 @@
         const a = d.activos[uid];
         hayActivos = true;
         if (a.estado === 'ok') {
-          t += `✅ ${a.tipo}${a.serieOriginal ? ' — S/N ' + a.serieOriginal : ''}\n`;
+          t += `[OK] ${a.tipo}${a.serieOriginal ? ' — S/N ' + a.serieOriginal : ''}\n`;
         } else if (a.estado === 'disc') {
           if (!a.serieOriginal) {
-            t += `🔶 No registrado — ${a.tipo} — S/N ${a.serieReal || 'sin dato'}\n`;
+            t += `[EXTRA] No registrado — ${a.tipo} — S/N ${a.serieReal || 'sin dato'}\n`;
           } else {
-            t += `🔴 Discrepancia — ${a.tipo}\n   Registrado: ${a.serieOriginal}  →  Hallado: *${a.serieReal || 'no localizado'}*\n`;
+            t += `[!] Discrepancia — ${a.tipo}\n   Registrado: ${a.serieOriginal}  →  Hallado: *${a.serieReal || 'no localizado'}*\n`;
           }
         } else {
-          t += `⏳ Pendiente — ${a.tipo}${a.serieOriginal ? ' — S/N ' + a.serieOriginal : ''}\n`;
+          t += `[PEND.] ${a.tipo}${a.serieOriginal ? ' — S/N ' + a.serieOriginal : ''}\n`;
         }
         if (a.obs) t += `   _Obs.: ${a.obs}_\n`;
       }
@@ -1070,10 +1070,10 @@
       for (let m in d.cobertura) {
         const label = m === 'marfrig' ? 'Marfrig' : 'Froneri';
         if (d.cobertura[m] === 'NC') {
-          t += `🔴 ${label}: sin cobertura\n`;
+          t += `[!] ${label}: sin cobertura\n`;
         } else {
           const items = d.cobertura[m];
-          t += `🟢 ${label}: ${items.length ? items.join(', ') : 'presente (sin detalle)'}\n`;
+          t += `[OK] ${label}: ${items.length ? items.join(', ') : 'presente (sin detalle)'}\n`;
         }
       }
 
@@ -1105,10 +1105,10 @@
       const sc = d.serviciosCafe;
       if (sc && (sc.contadores || sc.mantenimiento || sc.reparacion)) {
         t += `\n*5 · SERVICIO MÁQUINA DE CAFÉ*\n`;
-        if (sc.contadores)    t += `✅ Auditoría de contadores\n`;
-        if (sc.mantenimiento) t += `✅ Mantenimiento preventivo\n`;
+        if (sc.contadores)    t += `[OK] Auditoría de contadores\n`;
+        if (sc.mantenimiento) t += `[OK] Mantenimiento preventivo\n`;
         if (sc.reparacion) {
-          t += `✅ Reparación de equipo\n`;
+          t += `[OK] Reparación de equipo\n`;
           if (sc.reparacionDetalle?.trim()) t += `   _Detalle: ${sc.reparacionDetalle.trim()}_\n`;
         }
       }
