@@ -175,9 +175,13 @@ Función `generarTextoWhatsApp()` en `index.html`. Estructura:
 5. `OFERTAS / PRECIOS ESPECIALES` y `OBSERVACIONES` (si hay).
 6. Pie: `_Generado desde App Auditoría Friosur_`.
 
-Emojis solo semánticos de estado: ✅ 🔴 🟢 🔶 ⏳. Venta del mes redondeada sin
-decimales; último pedido en dd/mm/aa. Los campos de venta salen de
-`clienteSeleccionado.ventas` (via `construirDatosReporte()`).
+**Emojis:** definidos en el objeto `EMO` al inicio de `generarTextoWhatsApp()`,
+por **escape Unicode** (`'\uD83D\uDCCB'`...) para que no se corrompan según la
+codificación del archivo. Cada sección lleva su emoji (📋 título, 📅 fecha,
+🏪 comercio, 📍 dirección, 💰 venta, 🚩 resumen, 🧊 activos, 💲 precios,
+⚔️ competencia, ☕ café, 🏷️ ofertas, 📝 notas) y los estados usan ✅ 🔴 🟢 🔶 ⏳.
+Venta del mes redondeada sin decimales; último pedido en dd/mm/aa. Los campos de
+venta salen de `clienteSeleccionado.ventas` (via `construirDatosReporte()`).
 
 ---
 
@@ -194,10 +198,16 @@ Para `sw.js`: `node --check sw.js`.
 ## 11. Bitácora de sesiones
 
 ### 2026-09-04 (cont.)
-- **Emojis del informe rompían en algunos teléfonos** (`✅ 🔴 🟢 🔶 ⏳` → `�`).
-  Reemplazados por marcadores de texto universales: `[OK]`, `[!]` (discrepancia /
-  sin cobertura), `[EXTRA]` (no registrado), `[PEND.]`. Se ven igual en todos los
-  dispositivos. (commit `718324b`)
+- **Emojis SÍ van en el informe.** El problema no era WhatsApp (los soporta) sino
+  que al guardar el archivo con codificación no-UTF-8 los emojis literales se
+  corrompían en el fuente (`✅ 🔴 🟢` → `�`). **Solución definitiva:** objeto `EMO`
+  en `generarTextoWhatsApp()` con todos los emojis definidos por **escape Unicode**
+  (`'\uD83D\uDCCB'`, etc.) en vez de pegar el carácter. Así nunca se corrompen sin
+  importar la codificación del editor. (commit `30abc5d`)
+  - ⚠️ **NO volver a quitar los emojis ni pasarlos a `[OK]`/`[!]`.** El usuario los
+    quiere. Si alguno se ve mal, revisar el escape Unicode en `EMO`, no eliminarlo.
+  - Intento previo con marcadores de texto (`[OK]`, `[!]`, `[EXTRA]`, `[PEND.]`)
+    fue revertido a pedido del usuario. (commit descartado `718324b`)
 - Nota: la 2ª línea del encabezado del informe quedó como `Patricio Bustamante-SUP.`
   (edición manual del usuario, respetada). Antes era `FRIOSUR S.R.L.`. Está en
   `generarTextoWhatsApp()` como texto fijo — cambiar ahí si se quiere otro rótulo.
