@@ -193,6 +193,15 @@ Para `sw.js`: `node --check sw.js`.
 
 ## 11. Bitácora de sesiones
 
+### 2026-09-04 (cont.)
+- **Emojis del informe rompían en algunos teléfonos** (`✅ 🔴 🟢 🔶 ⏳` → `�`).
+  Reemplazados por marcadores de texto universales: `[OK]`, `[!]` (discrepancia /
+  sin cobertura), `[EXTRA]` (no registrado), `[PEND.]`. Se ven igual en todos los
+  dispositivos. (commit `718324b`)
+- Nota: la 2ª línea del encabezado del informe quedó como `Patricio Bustamante-SUP.`
+  (edición manual del usuario, respetada). Antes era `FRIOSUR S.R.L.`. Está en
+  `generarTextoWhatsApp()` como texto fijo — cambiar ahí si se quiere otro rótulo.
+
 ### 2026-09-04
 - **Informe WhatsApp → formato ejecutivo**: encabezado institucional, resumen
   ejecutivo de hallazgos, secciones numeradas 1-5, pie de firma. Reducidos los
