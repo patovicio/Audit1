@@ -161,27 +161,33 @@ Reglas de negocio aplicadas (respetan la directiva FrioSur):
 
 ---
 
-## 9. Informe de WhatsApp — formato ejecutivo actual
+## 9. Informe de WhatsApp — formato SOBRIO (definitivo)
+
+> ⚠️ El usuario definió este formato como el bueno: **lo ven directivos y gerentes
+> todos los días.** Es sobrio, con un dato por línea en el encabezado y separadores
+> `─────` entre secciones. **NO** volver al formato "ejecutivo numerado"
+> (`1 ·`, `2 ·`, resumen ejecutivo, `INFORME DE AUDITORÍA COMERCIAL`) — se probó y
+> se descartó.
 
 Función `generarTextoWhatsApp()` en `index.html`. Estructura:
 
-1. Encabezado institucional (`INFORME DE AUDITORÍA COMERCIAL` / `FRIOSUR S.R.L.` / fecha larga).
-2. Bloque de identificación del cliente: comercio, razón social (si difiere),
-   domicilio, `Cliente N° · Vendedor`, **Venta del mes**, **Último pedido**.
-3. **Resumen ejecutivo** (▸ hallazgos: discrepancias, activos no registrados,
-   cobertura faltante, activos de competencia; o "Sin novedades").
-4. Secciones numeradas: `1 · ACTIVOS FRIOSUR`, `2 · COBERTURA`, `3 · PRECIOS
-   COMPETENCIA`, `4 · ACTIVOS COMPETENCIA`, `5 · SERVICIO MÁQUINA CAFÉ`.
-5. `OFERTAS / PRECIOS ESPECIALES` y `OBSERVACIONES` (si hay).
-6. Pie: `_Generado desde App Auditoría Friosur_`.
+1. Encabezado (una línea por dato):
+   `🔵 *AUDITORÍA FRIOSUR*` / `📅 fecha corta (Vie 04 sep · 16:51 hs)` /
+   `🏪 comercio` / `👤 razón social` / `📍 dirección · ciudad` /
+   `🔢 Cliente #ID · Vendedor` / `💰 Venta del mes` / `📅 Último pedido`.
+2. Secciones separadas por `─────` con emoji + título (sin numeración):
+   `🛡️ ACTIVOS FRIOSUR`, `📦 COBERTURA DE PRODUCTOS`, `💲 PRECIOS COMPETENCIA`,
+   `⚔️ ACTIVOS COMPETENCIA`, `☕ SERVICIO MÁQUINA DE CAFÉ` (si aplica),
+   `🏷️ OFERTAS / PRECIOS ESPECIALES` (si hay), `📝 NOTAS` (si hay).
+3. Estados de activos: ✅ OK · 🔴 discrepancia · 🔶 no registrado · ⏳ pendiente.
+   Cobertura: 🟢 presente · 🔴 no encontrado. Bullets `•` en precios/competencia/ofertas.
+4. Sin pie de firma (se sacó para dejarlo más limpio).
 
 **Emojis:** definidos en el objeto `EMO` al inicio de `generarTextoWhatsApp()`,
-por **escape Unicode** (`'\uD83D\uDCCB'`...) para que no se corrompan según la
-codificación del archivo. Cada sección lleva su emoji (📋 título, 📅 fecha,
-🏪 comercio, 📍 dirección, 💰 venta, 🚩 resumen, 🧊 activos, 💲 precios,
-⚔️ competencia, ☕ café, 🏷️ ofertas, 📝 notas) y los estados usan ✅ 🔴 🟢 🔶 ⏳.
-Venta del mes redondeada sin decimales; último pedido en dd/mm/aa. Los campos de
-venta salen de `clienteSeleccionado.ventas` (via `construirDatosReporte()`).
+por **escape Unicode** (`'\uD83D\uDD35'`...) para que no se corrompan según la
+codificación del archivo. Venta del mes redondeada sin decimales; último pedido en
+dd/mm/aa. Los campos de venta salen de `clienteSeleccionado.ventas` (via
+`construirDatosReporte()`).
 
 ---
 
@@ -196,6 +202,15 @@ Para `sw.js`: `node --check sw.js`.
 ---
 
 ## 11. Bitácora de sesiones
+
+### 2026-09-05
+- **Formato del informe: DEFINITIVO = sobrio.** Se descartó el formato ejecutivo
+  numerado (`1 ·`, `2 ·`, resumen ejecutivo, título institucional). El usuario
+  aclaró que **lo leen directivos y gerentes a diario** y quiere el formato sobrio:
+  encabezado con un dato por línea (🔵📅🏪👤📍🔢 + 💰 venta + 📅 último pedido) y
+  separadores `─────` entre secciones con emoji+título, bullets `•`. Emojis siguen
+  vía Unicode. Ver sección 9. (commit `0eaac77`)
+- No volver a cambiar la estructura sin pedido explícito.
 
 ### 2026-09-04 (cont.)
 - **Emojis SÍ van en el informe.** El problema no era WhatsApp (los soporta) sino
