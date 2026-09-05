@@ -989,6 +989,28 @@
 
       const SEP = '━━━━━━━━━━━━━━━━━━━━';
 
+      // Emojis definidos por código Unicode (\u...) para que NUNCA se corrompan
+      // según la codificación con que se guarde el archivo. Se ven perfecto en WhatsApp.
+      const EMO = {
+        titulo:  '\uD83D\uDCCB',  // 📋 portapapeles
+        tienda:  '\uD83C\uDFEA',  // 🏪 comercio
+        pin:     '\uD83D\uDCCD',  // 📍 ubicación
+        plata:   '\uD83D\uDCB0',  // 💰 dinero
+        calen:   '\uD83D\uDCC5',  // 📅 calendario
+        alerta:  '\uD83D\uDEA9',  // 🚩 bandera (resumen ejecutivo)
+        ok:      '\u2705',        // ✅ check verde
+        rojo:    '\uD83D\uDD34',  // 🔴 círculo rojo
+        verde:   '\uD83D\uDFE2',  // 🟢 círculo verde
+        naranja: '\uD83D\uDD36',  // 🔶 rombo naranja
+        pend:    '\u23F3',        // ⏳ reloj de arena
+        precio:  '\uD83D\uDCB2',  // 💲 signo dólar
+        versus:  '\u2694\uFE0F',  // ⚔️ espadas (competencia)
+        cafe:    '\u2615',        // ☕ café
+        oferta:  '\uD83C\uDFF7\uFE0F', // 🏷️ etiqueta
+        nota:    '\uD83D\uDCDD',  // 📝 nota
+        freezer: '\uD83E\uDDCA',  // 🧊 cubo de hielo
+      };
+
       // ── Recolección de hallazgos para el resumen ejecutivo ────
       const discrepancias = [];
       const extras = [];
@@ -1007,15 +1029,15 @@
 
       let t = '';
       // ── Encabezado institucional ──────────────────────────────
-      t += `*INFORME DE AUDITORÍA COMERCIAL*\n`;
+      t += `${EMO.titulo} *INFORME DE AUDITORÍA COMERCIAL*\n`;
       t += `Patricio Bustamante-SUP.\n`;
-      t += `${fechaFmt}\n`;
+      t += `${EMO.calen} ${fechaFmt}\n`;
 
       // ── Identificación del punto de venta ─────────────────────
       t += `\n${SEP}\n`;
-      t += `*${tc(d.comercio || d.cliente)}*\n`;
+      t += `${EMO.tienda} *${tc(d.comercio || d.cliente)}*\n`;
       if (d.comercio && tc(d.comercio) !== tc(d.cliente)) t += `Razón social: ${tc(d.cliente)}\n`;
-      t += `Domicilio: ${tc(d.direccion)}, ${tc(d.ciudad)}\n`;
+      t += `${EMO.pin} ${tc(d.direccion)}, ${tc(d.ciudad)}\n`;
       t += `Cliente N° ${d.clienteId}  ·  Vendedor ${d.vendedor}\n`;
       // Ventas del cliente (vienen del maestro generado desde DuckDB)
       if (d.ventas) {
@@ -1025,8 +1047,8 @@
           const fu = new Date(d.ventas.ultima_compra + 'T00:00:00');
           ultimaFmt = fu.toLocaleDateString('es-AR', { day: '2-digit', month: '2-digit', year: '2-digit' });
         }
-        t += `Venta del mes: ${ventaMesFmt}\n`;
-        t += `Último pedido: ${ultimaFmt}\n`;
+        t += `${EMO.plata} Venta del mes: ${ventaMesFmt}\n`;
+        t += `${EMO.calen} Último pedido: ${ultimaFmt}\n`;
       }
       t += `${SEP}\n`;
 
@@ -1037,48 +1059,48 @@
       if (cobertNC.length)      alertas.push(`Sin cobertura: ${cobertNC.join(', ')}`);
       if (compDetectada)        alertas.push(`${compDetectada} activo(s) de la competencia`);
 
-      t += `\n*RESUMEN EJECUTIVO*\n`;
+      t += `\n${EMO.alerta} *RESUMEN EJECUTIVO*\n`;
       if (alertas.length) {
         alertas.forEach(a => { t += `▸ ${a}\n`; });
       } else {
-        t += `▸ Sin novedades. Punto de venta conforme.\n`;
+        t += `${EMO.ok} Sin novedades. Punto de venta conforme.\n`;
       }
 
       // ── 1. Activos Friosur ────────────────────────────────────
-      t += `\n*1 · ACTIVOS FRIOSUR*\n`;
+      t += `\n${EMO.freezer} *1 · ACTIVOS FRIOSUR*\n`;
       let hayActivos = false;
       for (let uid in d.activos) {
         const a = d.activos[uid];
         hayActivos = true;
         if (a.estado === 'ok') {
-          t += `[OK] ${a.tipo}${a.serieOriginal ? ' — S/N ' + a.serieOriginal : ''}\n`;
+          t += `${EMO.ok} ${a.tipo}${a.serieOriginal ? ' — S/N ' + a.serieOriginal : ''}\n`;
         } else if (a.estado === 'disc') {
           if (!a.serieOriginal) {
-            t += `[EXTRA] No registrado — ${a.tipo} — S/N ${a.serieReal || 'sin dato'}\n`;
+            t += `${EMO.naranja} No registrado — ${a.tipo} — S/N ${a.serieReal || 'sin dato'}\n`;
           } else {
-            t += `[!] Discrepancia — ${a.tipo}\n   Registrado: ${a.serieOriginal}  →  Hallado: *${a.serieReal || 'no localizado'}*\n`;
+            t += `${EMO.rojo} Discrepancia — ${a.tipo}\n   Registrado: ${a.serieOriginal}  →  Hallado: *${a.serieReal || 'no localizado'}*\n`;
           }
         } else {
-          t += `[PEND.] ${a.tipo}${a.serieOriginal ? ' — S/N ' + a.serieOriginal : ''}\n`;
+          t += `${EMO.pend} ${a.tipo}${a.serieOriginal ? ' — S/N ' + a.serieOriginal : ''}\n`;
         }
         if (a.obs) t += `   _Obs.: ${a.obs}_\n`;
       }
       if (!hayActivos) t += `Sin activos registrados.\n`;
 
       // ── 2. Cobertura de productos ─────────────────────────────
-      t += `\n*2 · COBERTURA DE PRODUCTOS*\n`;
+      t += `\n${EMO.tienda} *2 · COBERTURA DE PRODUCTOS*\n`;
       for (let m in d.cobertura) {
         const label = m === 'marfrig' ? 'Marfrig' : 'Froneri';
         if (d.cobertura[m] === 'NC') {
-          t += `[!] ${label}: sin cobertura\n`;
+          t += `${EMO.rojo} ${label}: sin cobertura\n`;
         } else {
           const items = d.cobertura[m];
-          t += `[OK] ${label}: ${items.length ? items.join(', ') : 'presente (sin detalle)'}\n`;
+          t += `${EMO.verde} ${label}: ${items.length ? items.join(', ') : 'presente (sin detalle)'}\n`;
         }
       }
 
       // ── 3. Precios de competencia ─────────────────────────────
-      t += `\n*3 · PRECIOS DE COMPETENCIA*\n`;
+      t += `\n${EMO.precio} *3 · PRECIOS DE COMPETENCIA*\n`;
       const preciosKeys = Object.keys(d.precios);
       if (preciosKeys.length === 0) {
         t += `No relevados.\n`;
@@ -1091,7 +1113,7 @@
       }
 
       // ── 4. Activos de la competencia ──────────────────────────
-      t += `\n*4 · ACTIVOS DE COMPETENCIA*\n`;
+      t += `\n${EMO.versus} *4 · ACTIVOS DE COMPETENCIA*\n`;
       const compKeys = Object.keys(d.competencia);
       if (compKeys.length === 0) {
         t += `Sin activos observados.\n`;
@@ -1104,24 +1126,24 @@
       // ── 5. Servicio máquina de café (solo si hay algo marcado) ─
       const sc = d.serviciosCafe;
       if (sc && (sc.contadores || sc.mantenimiento || sc.reparacion)) {
-        t += `\n*5 · SERVICIO MÁQUINA DE CAFÉ*\n`;
-        if (sc.contadores)    t += `[OK] Auditoría de contadores\n`;
-        if (sc.mantenimiento) t += `[OK] Mantenimiento preventivo\n`;
+        t += `\n${EMO.cafe} *5 · SERVICIO MÁQUINA DE CAFÉ*\n`;
+        if (sc.contadores)    t += `${EMO.ok} Auditoría de contadores\n`;
+        if (sc.mantenimiento) t += `${EMO.ok} Mantenimiento preventivo\n`;
         if (sc.reparacion) {
-          t += `[OK] Reparación de equipo\n`;
+          t += `${EMO.ok} Reparación de equipo\n`;
           if (sc.reparacionDetalle?.trim()) t += `   _Detalle: ${sc.reparacionDetalle.trim()}_\n`;
         }
       }
 
       // ── Ofertas ───────────────────────────────────────────────
       if (d.ofertas && d.ofertas.length > 0) {
-        t += `\n*OFERTAS / PRECIOS ESPECIALES*\n`;
+        t += `\n${EMO.oferta} *OFERTAS / PRECIOS ESPECIALES*\n`;
         d.ofertas.forEach(o => { t += `▸ ${o.texto}\n`; });
       }
 
       // ── Notas ─────────────────────────────────────────────────
       if (d.notas) {
-        t += `\n*OBSERVACIONES*\n`;
+        t += `\n${EMO.nota} *OBSERVACIONES*\n`;
         t += `${d.notas}\n`;
       }
 
