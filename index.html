@@ -982,63 +982,47 @@
 
       // Hora en formato 24h limpio, sin "a. m." ni "p. m."
       const now = new Date();
-      const DIAS  = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
-      const MESES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
       const horaFmt = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
-      const fechaFmt = `${DIAS[now.getDay()]} ${now.getDate()} de ${MESES[now.getMonth()]} de ${now.getFullYear()} · ${horaFmt} h`;
 
-      const SEP = '━━━━━━━━━━━━━━━━━━━━';
+      // Fecha corta y sobria: "Vie 04 sep · 16:51 hs"
+      const DIAS_C  = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+      const MESES_C = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+      const fechaCorta = `${DIAS_C[now.getDay()]} ${String(now.getDate()).padStart(2,'0')} ${MESES_C[now.getMonth()]} · ${horaFmt} hs`;
+
+      const SEP = '─────────────────────';
 
       // Emojis definidos por código Unicode (\u...) para que NUNCA se corrompan
       // según la codificación con que se guarde el archivo. Se ven perfecto en WhatsApp.
       const EMO = {
-        titulo:  '\uD83D\uDCCB',  // 📋 portapapeles
+        azul:    '\uD83D\uDD35',  // 🔵 título
+        calen:   '\uD83D\uDCC5',  // 📅 fecha
         tienda:  '\uD83C\uDFEA',  // 🏪 comercio
-        pin:     '\uD83D\uDCCD',  // 📍 ubicación
-        plata:   '\uD83D\uDCB0',  // 💰 dinero
-        calen:   '\uD83D\uDCC5',  // 📅 calendario
-        alerta:  '\uD83D\uDEA9',  // 🚩 bandera (resumen ejecutivo)
-        ok:      '\u2705',        // ✅ check verde
-        rojo:    '\uD83D\uDD34',  // 🔴 círculo rojo
-        verde:   '\uD83D\uDFE2',  // 🟢 círculo verde
-        naranja: '\uD83D\uDD36',  // 🔶 rombo naranja
-        pend:    '\u23F3',        // ⏳ reloj de arena
-        precio:  '\uD83D\uDCB2',  // 💲 signo dólar
-        versus:  '\u2694\uFE0F',  // ⚔️ espadas (competencia)
-        cafe:    '\u2615',        // ☕ café
-        oferta:  '\uD83C\uDFF7\uFE0F', // 🏷️ etiqueta
-        nota:    '\uD83D\uDCDD',  // 📝 nota
-        freezer: '\uD83E\uDDCA',  // 🧊 cubo de hielo
+        persona: '\uD83D\uDC64',  // 👤 razón social
+        pin:     '\uD83D\uDCCD',  // 📍 dirección
+        num:     '\uD83D\uDD22',  // 🔢 cliente/vendedor
+        plata:   '\uD83D\uDCB0',  // 💰 venta del mes
+        escudo:  '\uD83D\uDEE1\uFE0F', // 🛡️ activos Friosur
+        ok:      '\u2705',        // ✅ activo OK
+        rojo:    '\uD83D\uDD34',  // 🔴 sin cobertura / discrepancia
+        verde:   '\uD83D\uDFE2',  // 🟢 cobertura presente
+        naranja: '\uD83D\uDD36',  // 🔶 activo no registrado
+        pend:    '\u23F3',        // ⏳ pendiente
+        caja:    '\uD83D\uDCE6',  // 📦 cobertura
+        precio:  '\uD83D\uDCB2',  // 💲 precios competencia
+        versus:  '\u2694\uFE0F',  // ⚔️ activos competencia
+        cafe:    '\u2615',        // ☕ servicio café
+        oferta:  '\uD83C\uDFF7\uFE0F', // 🏷️ ofertas
+        nota:    '\uD83D\uDCDD',  // 📝 notas
       };
 
-      // ── Recolección de hallazgos para el resumen ejecutivo ────
-      const discrepancias = [];
-      const extras = [];
-      for (let uid in d.activos) {
-        const a = d.activos[uid];
-        if (a.estado === 'disc') {
-          if (!a.serieOriginal) extras.push(a.tipo);
-          else discrepancias.push(a.tipo);
-        }
-      }
-      const cobertNC = [];
-      for (let m in d.cobertura) {
-        if (d.cobertura[m] === 'NC') cobertNC.push(m === 'marfrig' ? 'Marfrig' : 'Froneri');
-      }
-      const compDetectada = Object.keys(d.competencia).length;
-
       let t = '';
-      // ── Encabezado institucional ──────────────────────────────
-      t += `${EMO.titulo} *INFORME DE AUDITORÍA COMERCIAL*\n`;
-      t += `Patricio Bustamante-SUP.\n`;
-      t += `${EMO.calen} ${fechaFmt}\n`;
-
-      // ── Identificación del punto de venta ─────────────────────
-      t += `\n${SEP}\n`;
+      // ── Encabezado ────────────────────────────────────────────
+      t += `${EMO.azul} *AUDITORÍA FRIOSUR*\n`;
+      t += `${EMO.calen} ${fechaCorta}\n`;
       t += `${EMO.tienda} *${tc(d.comercio || d.cliente)}*\n`;
-      if (d.comercio && tc(d.comercio) !== tc(d.cliente)) t += `Razón social: ${tc(d.cliente)}\n`;
-      t += `${EMO.pin} ${tc(d.direccion)}, ${tc(d.ciudad)}\n`;
-      t += `Cliente N° ${d.clienteId}  ·  Vendedor ${d.vendedor}\n`;
+      t += `${EMO.persona} ${tc(d.cliente)}\n`;
+      t += `${EMO.pin} ${tc(d.direccion)} · ${tc(d.ciudad)}\n`;
+      t += `${EMO.num} Cliente #${d.clienteId} · Vendedor ${d.vendedor}\n`;
       // Ventas del cliente (vienen del maestro generado desde DuckDB)
       if (d.ventas) {
         const ventaMesFmt = `$${Math.round(d.ventas.venta_mes || 0).toLocaleString('es-AR')}`;
@@ -1050,106 +1034,87 @@
         t += `${EMO.plata} Venta del mes: ${ventaMesFmt}\n`;
         t += `${EMO.calen} Último pedido: ${ultimaFmt}\n`;
       }
-      t += `${SEP}\n`;
 
-      // ── Resumen ejecutivo ─────────────────────────────────────
-      const alertas = [];
-      if (discrepancias.length) alertas.push(`${discrepancias.length} discrepancia(s) de activos`);
-      if (extras.length)        alertas.push(`${extras.length} activo(s) no registrado(s)`);
-      if (cobertNC.length)      alertas.push(`Sin cobertura: ${cobertNC.join(', ')}`);
-      if (compDetectada)        alertas.push(`${compDetectada} activo(s) de la competencia`);
-
-      t += `\n${EMO.alerta} *RESUMEN EJECUTIVO*\n`;
-      if (alertas.length) {
-        alertas.forEach(a => { t += `▸ ${a}\n`; });
-      } else {
-        t += `${EMO.ok} Sin novedades. Punto de venta conforme.\n`;
-      }
-
-      // ── 1. Activos Friosur ────────────────────────────────────
-      t += `\n${EMO.freezer} *1 · ACTIVOS FRIOSUR*\n`;
+      // ── Activos Friosur ───────────────────────────────────────
+      t += `\n${SEP}\n${EMO.escudo} *ACTIVOS FRIOSUR*\n${SEP}\n`;
       let hayActivos = false;
       for (let uid in d.activos) {
         const a = d.activos[uid];
         hayActivos = true;
         if (a.estado === 'ok') {
-          t += `${EMO.ok} ${a.tipo}${a.serieOriginal ? ' — S/N ' + a.serieOriginal : ''}\n`;
+          t += `${EMO.ok} ${a.tipo}${a.serieOriginal ? ' · SN ' + a.serieOriginal : ''}\n`;
         } else if (a.estado === 'disc') {
           if (!a.serieOriginal) {
-            t += `${EMO.naranja} No registrado — ${a.tipo} — S/N ${a.serieReal || 'sin dato'}\n`;
+            t += `${EMO.naranja} No registrado · ${a.tipo} · SN ${a.serieReal || 'sin dato'}\n`;
           } else {
-            t += `${EMO.rojo} Discrepancia — ${a.tipo}\n   Registrado: ${a.serieOriginal}  →  Hallado: *${a.serieReal || 'no localizado'}*\n`;
+            t += `${EMO.rojo} Discrepancia · ${a.tipo}\n   ${a.serieOriginal} → *${a.serieReal || 'no localizado'}*\n`;
           }
         } else {
-          t += `${EMO.pend} ${a.tipo}${a.serieOriginal ? ' — S/N ' + a.serieOriginal : ''}\n`;
+          t += `${EMO.pend} ${a.tipo}${a.serieOriginal ? ' · SN ' + a.serieOriginal : ''} — pendiente\n`;
         }
-        if (a.obs) t += `   _Obs.: ${a.obs}_\n`;
+        if (a.obs) t += `   _↳ ${a.obs}_\n`;
       }
-      if (!hayActivos) t += `Sin activos registrados.\n`;
+      if (!hayActivos) t += `— Sin activos registrados\n`;
 
-      // ── 2. Cobertura de productos ─────────────────────────────
-      t += `\n${EMO.tienda} *2 · COBERTURA DE PRODUCTOS*\n`;
+      // ── Cobertura ─────────────────────────────────────────────
+      t += `\n${SEP}\n${EMO.caja} *COBERTURA DE PRODUCTOS*\n${SEP}\n`;
       for (let m in d.cobertura) {
         const label = m === 'marfrig' ? 'Marfrig' : 'Froneri';
         if (d.cobertura[m] === 'NC') {
-          t += `${EMO.rojo} ${label}: sin cobertura\n`;
+          t += `${EMO.rojo} ${label}: No encontrado\n`;
         } else {
           const items = d.cobertura[m];
-          t += `${EMO.verde} ${label}: ${items.length ? items.join(', ') : 'presente (sin detalle)'}\n`;
+          t += `${EMO.verde} ${label}: ${items.length ? items.join(' · ') : 'Sin detalle'}\n`;
         }
       }
 
-      // ── 3. Precios de competencia ─────────────────────────────
-      t += `\n${EMO.precio} *3 · PRECIOS DE COMPETENCIA*\n`;
+      // ── Precios competencia ───────────────────────────────────
+      t += `\n${SEP}\n${EMO.precio} *PRECIOS COMPETENCIA*\n${SEP}\n`;
       const preciosKeys = Object.keys(d.precios);
       if (preciosKeys.length === 0) {
-        t += `No relevados.\n`;
+        t += `— No relevados\n`;
       } else {
         for (let k in d.precios) {
           const p = d.precios[k];
           const mStr = p.marca ? ` (${p.marca})` : '';
-          t += `▸ ${k}${mStr}: *$${p.precio.toLocaleString('es-AR')}*\n`;
+          t += `• ${k}${mStr}: $${p.precio.toLocaleString('es-AR')}\n`;
         }
       }
 
-      // ── 4. Activos de la competencia ──────────────────────────
-      t += `\n${EMO.versus} *4 · ACTIVOS DE COMPETENCIA*\n`;
+      // ── Activos competencia ───────────────────────────────────
+      t += `\n${SEP}\n${EMO.versus} *ACTIVOS COMPETENCIA*\n${SEP}\n`;
       const compKeys = Object.keys(d.competencia);
       if (compKeys.length === 0) {
-        t += `Sin activos observados.\n`;
+        t += `— Sin activos observados\n`;
       } else {
         for (let k in d.competencia) {
-          t += `▸ ${k} — nivel de stock: ${d.competencia[k]}\n`;
+          t += `• ${k}: ${d.competencia[k]}\n`;
         }
       }
 
-      // ── 5. Servicio máquina de café (solo si hay algo marcado) ─
+      // ── Servicio máquina de café (solo si hay algo marcado) ────
       const sc = d.serviciosCafe;
       if (sc && (sc.contadores || sc.mantenimiento || sc.reparacion)) {
-        t += `\n${EMO.cafe} *5 · SERVICIO MÁQUINA DE CAFÉ*\n`;
+        t += `\n${SEP}\n${EMO.cafe} *SERVICIO MÁQUINA DE CAFÉ*\n${SEP}\n`;
         if (sc.contadores)    t += `${EMO.ok} Auditoría de contadores\n`;
         if (sc.mantenimiento) t += `${EMO.ok} Mantenimiento preventivo\n`;
         if (sc.reparacion) {
           t += `${EMO.ok} Reparación de equipo\n`;
-          if (sc.reparacionDetalle?.trim()) t += `   _Detalle: ${sc.reparacionDetalle.trim()}_\n`;
+          if (sc.reparacionDetalle?.trim()) t += `   _↳ ${sc.reparacionDetalle.trim()}_\n`;
         }
       }
 
       // ── Ofertas ───────────────────────────────────────────────
       if (d.ofertas && d.ofertas.length > 0) {
-        t += `\n${EMO.oferta} *OFERTAS / PRECIOS ESPECIALES*\n`;
-        d.ofertas.forEach(o => { t += `▸ ${o.texto}\n`; });
+        t += `\n${SEP}\n${EMO.oferta} *OFERTAS / PRECIOS ESPECIALES*\n${SEP}\n`;
+        d.ofertas.forEach(o => { t += `• ${o.texto}\n`; });
       }
 
       // ── Notas ─────────────────────────────────────────────────
       if (d.notas) {
-        t += `\n${EMO.nota} *OBSERVACIONES*\n`;
+        t += `\n${SEP}\n${EMO.nota} *NOTAS*\n${SEP}\n`;
         t += `${d.notas}\n`;
       }
-
-      // ── Pie ───────────────────────────────────────────────────
-      t += `\n${SEP}\n`;
-      t += `_Generado desde App Auditoría Friosur_\n`;
 
       return t;
     }
