@@ -209,6 +209,20 @@ Para `sw.js`: `node --check sw.js`.
 
 ## 11. Bitácora de sesiones
 
+### 2026-09-15 (cont. 2) — Filtro/resaltado "Sin compra" (Fase 1)
+- **Chip "Sin compra"** en `#chipsActivo` → `filtrarPorActivo('sincompra')`.
+  Filtra clientes con `ventas.venta_mes <= 0` (helper `sinCompraEnElMes(c)`).
+- **Resaltado en la tarjeta**: badge rojo `Sin compra` (colores `error-container`/
+  `on-error-container`, ya definidos en el tema) + borde `border-error/50` en la
+  tarjeta del cliente. El badge va en la columna derecha, arriba del de activos.
+- Todo en `index.html`, sin tocar el maestro (el dato `venta_mes` ya venía).
+- **Fase 2 PENDIENTE — "Saldo vencido":** el maestro NO trae saldo/cuenta
+  corriente. Para hacerlo hay que agregar una consulta en
+  `generar_maestro_desde_duckdb.py` (tabla de cuenta corriente/vencimientos de la
+  DuckDB, que está en `../02-data-engine/` fuera de este workspace) que calcule un
+  campo `saldo_vencido` por cliente, sumarlo al JSON, y recién ahí agregar el chip
+  + badge en la app (mismo patrón que "Sin compra").
+
 ### 2026-09-15 (cont.)
 - **Lista de clientes acotada a Río Gallegos + chips por tipo de activo.**
   - La app ahora muestra **solo clientes de RIO GALLEGOS**. Filtro fijo en

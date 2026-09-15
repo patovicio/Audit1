@@ -164,6 +164,8 @@
           class="chip-activo flex-shrink-0 px-4 py-2 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-surface-container-high text-on-surface-variant active:scale-95 transition-transform">Cafetera</button>
         <button onclick="filtrarPorActivo('freezer')"
           class="chip-activo flex-shrink-0 px-4 py-2 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-surface-container-high text-on-surface-variant active:scale-95 transition-transform">Freezer</button>
+        <button onclick="filtrarPorActivo('sincompra')"
+          class="chip-activo flex-shrink-0 px-4 py-2 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-surface-container-high text-on-surface-variant active:scale-95 transition-transform">Sin compra</button>
       </div>
 
       <div class="flex justify-between items-center">
@@ -597,6 +599,11 @@
     // ===================================================================
     // LISTA DE CLIENTES
     // ===================================================================
+    // Cliente sin compra en el mes: venta_mes <= 0 (dato del maestro DuckDB)
+    function sinCompraEnElMes(c) {
+      return (c?.ventas?.venta_mes || 0) <= 0;
+    }
+
     function renderizarLista(lista) {
       const cont = document.getElementById("listaClientes");
       cont.innerHTML = "";
@@ -616,9 +623,15 @@
       lista.forEach(c => {
         const totalActivos = (c.freezers?.length || 0) + (c.cafe_maquinas?.length || 0);
         const ultimaVisita = visitasPorCliente[String(c.idcli)];
+        const sinCompra = sinCompraEnElMes(c);
         const div = document.createElement("div");
-        div.className = `bg-surface-container-lowest rounded-xl border card-shadow p-3 active:scale-[0.98] transition-transform cursor-pointer ${ultimaVisita ? 'border-secondary/50' : 'border-outline-variant/50'}`;
+        const borde = sinCompra ? 'border-error/50' : (ultimaVisita ? 'border-secondary/50' : 'border-outline-variant/50');
+        div.className = `bg-surface-container-lowest rounded-xl border card-shadow p-3 active:scale-[0.98] transition-transform cursor-pointer ${borde}`;
         div.onclick = () => seleccionarCliente(c);
+
+        const sinCompraBadge = sinCompra
+          ? `<span class="text-[9px] bg-error-container px-2 py-0.5 rounded-full font-semibold text-on-error-container flex items-center gap-0.5"><span class="material-symbols-outlined text-[10px]">shopping_cart_off</span>Sin compra</span>`
+          : '';
 
         let visitaBadge = '';
         if (ultimaVisita) {
@@ -637,6 +650,7 @@
         </div>
         <div class="flex flex-col items-end gap-1">
           <span class="text-[9px] bg-surface-container-high px-2 py-0.5 rounded-full font-semibold text-on-surface-variant uppercase">${c.ciudad.length > 12 ? c.ciudad.substring(0, 12) : c.ciudad}</span>
+          ${sinCompraBadge}
           ${totalActivos > 0 ? `<span class="text-[9px] bg-primary-container px-2 py-0.5 rounded-full font-semibold text-on-primary-container">${totalActivos} activo${totalActivos > 1 ? 's' : ''}</span>` : ''}
           ${visitaBadge}
         </div>
@@ -650,9 +664,10 @@
       // Filtro fijo: solo clientes de Río Gallegos
       let f = clientes.filter(c => (c.ciudad || '').trim().toUpperCase() === CIUDAD_FIJA);
       if (t) f = f.filter(c => c.cliente.toLowerCase().includes(t) || (c.nombre_comercio || '').toLowerCase().includes(t) || c.direccion.toLowerCase().includes(t) || String(c.idcli).includes(t));
-      // Filtro por tipo de activo
+      // Filtro por tipo de activo / estado comercial
       if (activoFiltro === 'cafe') f = f.filter(c => (c.cafe_maquinas?.length || 0) > 0);
       else if (activoFiltro === 'freezer') f = f.filter(c => (c.freezers?.length || 0) > 0);
+      else if (activoFiltro === 'sincompra') f = f.filter(sinCompraEnElMes);
       renderizarLista(f);
     }
 
