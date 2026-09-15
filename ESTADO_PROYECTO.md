@@ -161,27 +161,33 @@ Reglas de negocio aplicadas (respetan la directiva FrioSur):
 
 ---
 
-## 9. Informe de WhatsApp — formato SOBRIO (definitivo)
+## 9. Informe de WhatsApp — formato MINIMALISTA (definitivo)
 
 > ⚠️ El usuario definió este formato como el bueno: **lo ven directivos y gerentes
-> todos los días.** Es sobrio, con un dato por línea en el encabezado y separadores
-> `─────` entre secciones. **NO** volver al formato "ejecutivo numerado"
+> todos los días.** Es sobrio y **minimalista** (pensado para leerse en el celular
+> sin scroll de más). **NO** volver al formato "ejecutivo numerado"
 > (`1 ·`, `2 ·`, resumen ejecutivo, `INFORME DE AUDITORÍA COMERCIAL`) — se probó y
-> se descartó.
+> se descartó. **Tampoco** volver a los separadores `─────` entre secciones — se
+> quitaron para acortar el mensaje (ver bitácora 2026-09-15).
 
 Función `generarTextoWhatsApp()` en `index.html`. Estructura:
 
-1. Encabezado (una línea por dato):
+1. Encabezado (una línea por dato), con una línea en blanco tras la fecha:
    `🔵 *AUDITORÍA FRIOSUR*` / `📅 fecha corta (Vie 04 sep · 16:51 hs)` /
    `🏪 comercio` / `👤 razón social` / `📍 dirección · ciudad` /
-   `🔢 Cliente #ID · Vendedor` / `💰 Venta del mes` / `📅 Último pedido`.
-2. Secciones separadas por `─────` con emoji + título (sin numeración):
-   `🛡️ ACTIVOS FRIOSUR`, `📦 COBERTURA DE PRODUCTOS`, `💲 PRECIOS COMPETENCIA`,
-   `⚔️ ACTIVOS COMPETENCIA`, `☕ SERVICIO MÁQUINA DE CAFÉ` (si aplica),
-   `🏷️ OFERTAS / PRECIOS ESPECIALES` (si hay), `📝 NOTAS` (si hay).
-3. Estados de activos: ✅ OK · 🔴 discrepancia · 🔶 no registrado · ⏳ pendiente.
+   `🔢 #ID · Vend. XXX` / `💰 $venta · último dd/mm/aa` (venta y último pedido
+   en **una sola línea**).
+2. Secciones con emoji + título en negrita, **sin separadores** (helper `sec()`).
+   Una línea en blanco separa cada sección:
+   `🛡️ ACTIVOS FRIOSUR`, `📦 COBERTURA`, `💲 PRECIOS COMPETENCIA`,
+   `⚔️ ACTIVOS COMPETENCIA`, `☕ SERVICIO MÁQUINA DE CAFÉ`,
+   `🏷️ OFERTAS / PRECIOS ESPECIALES`, `📝 NOTAS`.
+3. **Secciones vacías se OMITEN** (precios, activos competencia, café, ofertas,
+   notas). Solo `ACTIVOS FRIOSUR` y `COBERTURA` aparecen siempre (núcleo de la
+   auditoría; si no hay activos muestran `— Sin activos registrados`).
+4. Estados de activos: ✅ OK · 🔴 discrepancia · 🔶 no registrado · ⏳ pendiente.
    Cobertura: 🟢 presente · 🔴 no encontrado. Bullets `•` en precios/competencia/ofertas.
-4. Sin pie de firma (se sacó para dejarlo más limpio).
+5. Sin pie de firma (se sacó para dejarlo más limpio).
 
 **Emojis:** definidos en el objeto `EMO` al inicio de `generarTextoWhatsApp()`,
 por **escape Unicode** (`'\uD83D\uDD35'`...) para que no se corrompan según la
@@ -202,6 +208,21 @@ Para `sw.js`: `node --check sw.js`.
 ---
 
 ## 11. Bitácora de sesiones
+
+### 2026-09-15
+- **Informe WhatsApp → formato MINIMALISTA** para que se lea mejor en el celular.
+  Cambios en `generarTextoWhatsApp()`:
+  - Se **quitaron los separadores `─────`** entre secciones. Ahora cada sección es
+    solo emoji + título en negrita (helper `sec(emo, titulo)`), separada por una
+    línea en blanco. Esto solo ahorra ~10-12 líneas.
+  - Encabezado más compacto: `🔢 #ID · Vend. XXX` (antes `Cliente #ID · Vendedor`)
+    y venta + último pedido en **una sola línea** (`💰 $monto · último dd/mm/aa`).
+    Línea en blanco tras la fecha para que respire.
+  - **Secciones vacías se omiten** (precios, activos competencia, café, ofertas,
+    notas). `ACTIVOS FRIOSUR` y `COBERTURA` siguen apareciendo siempre.
+  - Emojis por Unicode intactos, sin numeración, sin pie de firma (se respetó todo
+    lo definido como intocable). JS validado OK.
+  - ⚠️ **NO volver a meter los separadores `─────` ni a imprimir secciones vacías.**
 
 ### 2026-09-05
 - **Formato del informe: DEFINITIVO = sobrio.** Se descartó el formato ejecutivo
