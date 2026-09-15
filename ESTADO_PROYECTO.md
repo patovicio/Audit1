@@ -116,7 +116,8 @@ Generado por `generar_maestro_desde_duckdb.py` (DuckDB read-only). Cada cliente:
     "ultima_compra": "2026-07-10",
     "venta_mes": 0.0,
     "venta_3m": 126573.05,
-    "top_productos": [{"producto": "...", "neto": 39708.6}]
+    "top_productos": [{"producto": "...", "neto": 39708.6}],
+    "saldo_vencido": 83523.16
   }
 }
 ```
@@ -125,8 +126,9 @@ Reglas de negocio aplicadas (respetan la directiva FrioSur):
 - **Vendedor** = `customer.Collector` (NO `SalesMan`, que está vacío).
 - **Neto facturado (como OO)** = `SUM(SubTotal) WHERE DocType IN (0,1)`.
 - **Top productos** = `SUM(invoiceitemrow.RowNet)` (NO SubTotal post-JOIN), 90 días.
+- **Saldo vencido** = `SUM(invoice.Saldo) WHERE OpenFlag=1 AND Saldo>0 AND DueDate < hoy` (con IVA).
 - Clientes activos = `(Closed=0 OR NULL) AND GroupCode!='PERSO'`.
-- Última corrida: 466 clientes activos, 455 con ventas, datos hasta 05/09/2026.
+- Última corrida: 470 clientes activos, 458 con ventas, 30 con saldo vencido, datos al 15/09/2026.
 
 ---
 
@@ -208,6 +210,26 @@ Para `sw.js`: `node --check sw.js`.
 ---
 
 ## 11. Bitácora de sesiones
+
+### 2026-09-15 (cont. 3) — Fase 2 "Saldo vencido" COMPLETADA
+- **Backend (`generar_maestro_desde_duckdb.py`):** nuevo paso 4b que calcula
+  `saldo_vencido` por cliente desde `invoice` (regla dura: `OpenFlag=1 AND Saldo>0
+  AND DueDate < current_date`; `Saldo` ya incluye IVA). Se agrega al bloque `ventas`
+  del JSON como `saldo_vencido` (0.0 si el cliente no tiene deuda; campo siempre
+  presente). Fuente confirmada vía MCP DuckDB: 30 clientes con saldo vencido.
+- **Frontend (`index.html`), patrón idéntico a "Sin compra":**
+  - Helper `conSaldoVencido(c)` = `c.ventas.saldo_vencido > 0`. Helper `montoCompacto()`
+    para formatear el monto en el badge ($1,2M / $850k / $500).
+  - Chip nuevo `Saldo vencido` en `#chipsActivo` → `filtrarPorActivo('saldovencido')`
+    + rama en `filtrarClientes()`.
+  - Badge en la tarjeta con color **`tertiary-container`** (distinto del rojo `error`
+    de "Sin compra"), ícono `warning`, muestra el monto: `Deuda $XXk`. Borde
+    `border-tertiary/60`. Prioridad de borde: saldo vencido > sin compra > visitado.
+- **SW v6** (bump de caché; index.html igual es network-first).
+- Validado: `py_compile` OK, JS OK, `node --check sw.js` OK. Maestro regenerado
+  (470 activos, 30 con saldo vencido, datos al 15/09).
+- **PENDIENTE de publicar:** subir "nueva versión" del `clientes_maestro.json` a
+  Drive (File ID `1HdG5W...`, NUNCA archivo nuevo) + `git push origin master:main`.
 
 ### 2026-09-15 (cont. 2) — Filtro/resaltado "Sin compra" (Fase 1)
 - **Chip "Sin compra"** en `#chipsActivo` → `filtrarPorActivo('sincompra')`.
@@ -298,12 +320,14 @@ Para `sw.js`: `node --check sw.js`.
 
 ---
 
-## 11.b. PRÓXIMA SESIÓN — Fase 2: "Saldo vencido" (arrancar acá)
+## 11.b. Fase 2 "Saldo vencido" — ✅ COMPLETADA (2026-09-15 cont. 3)
 
-> Sesión abierta en la **PC con acceso a SQL Server y DuckDB**. El objetivo es
-> agregar el dato de **saldo vencido** al maestro y luego el chip + badge en la app
-> (mismo patrón ya hecho para "Sin compra"). Todo lo de la app (Río Gallegos, chips
-> Todos/Cafetera/Freezer/Sin compra, informe minimalista) ya está hecho y publicado.
+> Implementada en código y validada. **Solo falta publicar** (subir maestro a Drive
+> + `git push origin master:main`). Detalle en la bitácora del 2026-09-15 (cont. 3).
+> El campo `ventas.saldo_vencido` ya sale del generador y la app tiene chip + badge.
+
+<details>
+<summary>Notas originales de planificación (referencia histórica)</summary>
 
 **Estado actual (lo que YA funciona):**
 - App muestra solo Río Gallegos. Chips: `Todos · Cafetera · Freezer · Sin compra`.
@@ -363,6 +387,8 @@ Para `sw.js`: `node --check sw.js`.
 > Referencia del código ya hecho para "Sin compra" (patrón a copiar): helper
 > `sinCompraEnElMes()`, chip en `#chipsActivo`, rama en `filtrarClientes()`, y
 > `sinCompraBadge` + `border-error/50` en `renderizarLista()` de `index.html`.
+
+</details>
 
 ---
 
