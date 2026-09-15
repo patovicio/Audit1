@@ -209,6 +209,23 @@ Para `sw.js`: `node --check sw.js`.
 
 ## 11. Bitácora de sesiones
 
+### 2026-09-15 (cont.)
+- **Lista de clientes acotada a Río Gallegos + chips por tipo de activo.**
+  - La app ahora muestra **solo clientes de RIO GALLEGOS**. Filtro fijo en
+    `filtrarClientes()` (constante `CIUDAD_FIJA = "RIO GALLEGOS"`). La carga inicial
+    llama a `filtrarClientes()` en vez de `renderizarLista(clientes)` para que el
+    filtro aplique desde el arranque.
+  - Se **reemplazaron los chips de ciudad** (Todos, Río Gallegos, El Calafate, …)
+    por chips de **tipo de activo**: `Todos` · `Cafetera` · `Freezer`. Contenedor
+    `#chipsActivo`, clase `.chip-activo`, función `filtrarPorActivo(tipo)` con
+    estado `activoFiltro` (`''` | `'cafe'` | `'freezer'`).
+  - `Cafetera` = clientes con `cafe_maquinas.length > 0`; `Freezer` = clientes con
+    `freezers.length > 0`; `Todos` = todos los de Río Gallegos. La búsqueda por
+    texto sigue funcionando combinada con el chip activo.
+  - Se eliminaron `filtrarPorCiudad()` y la variable `ciudadFiltro` (ya no se usan).
+  - ⚠️ Si en el futuro se quiere volver a operar sobre otras ciudades, revisar
+    `CIUDAD_FIJA` y los chips en `#chipsActivo`.
+
 ### 2026-09-15
 - **Informe WhatsApp → formato MINIMALISTA** para que se lea mejor en el celular.
   Cambios en `generarTextoWhatsApp()`:

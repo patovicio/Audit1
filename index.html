@@ -157,31 +157,13 @@
           oninput="filtrarClientes()" />
       </div>
 
-      <div class="flex gap-2 overflow-x-auto hide-scrollbar -mx-safe px-safe py-1" id="chipsCiudad">
-        <button onclick="filtrarPorCiudad('')"
-          class="chip-ciudad flex-shrink-0 px-4 py-2 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-primary text-on-primary active:scale-95 transition-transform">Todos</button>
-        <button onclick="filtrarPorCiudad('RIO GALLEGOS')"
-          class="chip-ciudad flex-shrink-0 px-4 py-2 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-surface-container-high text-on-surface-variant active:scale-95 transition-transform">Río
-          Gallegos</button>
-        <button onclick="filtrarPorCiudad('EL CALAFATE')"
-          class="chip-ciudad flex-shrink-0 px-4 py-2 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-surface-container-high text-on-surface-variant active:scale-95 transition-transform">El
-          Calafate</button>
-        <button onclick="filtrarPorCiudad('RIO TURBIO')"
-          class="chip-ciudad flex-shrink-0 px-4 py-2 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-surface-container-high text-on-surface-variant active:scale-95 transition-transform">Río
-          Turbio</button>
-        <button onclick="filtrarPorCiudad('28 DE NOVIEMBRE')"
-          class="chip-ciudad flex-shrink-0 px-4 py-2 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-surface-container-high text-on-surface-variant active:scale-95 transition-transform">28
-          Nov</button>
-        <button onclick="filtrarPorCiudad('PTO SAN JULIAN')"
-          class="chip-ciudad flex-shrink-0 px-4 py-2 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-surface-container-high text-on-surface-variant active:scale-95 transition-transform">San
-          Julián</button>
-        <button onclick="filtrarPorCiudad('PIEDRABUENA')"
-          class="chip-ciudad flex-shrink-0 px-4 py-2 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-surface-container-high text-on-surface-variant active:scale-95 transition-transform">Piedrabuena</button>
-        <button onclick="filtrarPorCiudad('GOB. GREGORES')"
-          class="chip-ciudad flex-shrink-0 px-4 py-2 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-surface-container-high text-on-surface-variant active:scale-95 transition-transform">Gregores</button>
-        <button onclick="filtrarPorCiudad('PTO SANTA CRUZ')"
-          class="chip-ciudad flex-shrink-0 px-4 py-2 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-surface-container-high text-on-surface-variant active:scale-95 transition-transform">Sta.
-          Cruz</button>
+      <div class="flex gap-2 overflow-x-auto hide-scrollbar -mx-safe px-safe py-1" id="chipsActivo">
+        <button onclick="filtrarPorActivo('')"
+          class="chip-activo flex-shrink-0 px-4 py-2 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-primary text-on-primary active:scale-95 transition-transform">Todos</button>
+        <button onclick="filtrarPorActivo('cafe')"
+          class="chip-activo flex-shrink-0 px-4 py-2 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-surface-container-high text-on-surface-variant active:scale-95 transition-transform">Cafetera</button>
+        <button onclick="filtrarPorActivo('freezer')"
+          class="chip-activo flex-shrink-0 px-4 py-2 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-surface-container-high text-on-surface-variant active:scale-95 transition-transform">Freezer</button>
       </div>
 
       <div class="flex justify-between items-center">
@@ -462,7 +444,9 @@
     // ===================================================================
     let clientes = [];
     let clienteSeleccionado = null;
-    let ciudadFiltro = "";
+    // La app opera solo sobre Río Gallegos (filtro fijo). Los chips filtran por tipo de activo.
+    const CIUDAD_FIJA = "RIO GALLEGOS";
+    let activoFiltro = ""; // '' = todos · 'cafe' · 'freezer'
     let auditoriaActivos = {};
     let coberturaEstado = { marfrig: "nc", froneri: "nc" };
 
@@ -579,7 +563,7 @@
         }
       }
 
-      renderizarLista(clientes);
+      filtrarClientes(); // aplica el filtro fijo de Río Gallegos desde el arranque
       renderizarPrecios();
       renderizarCompetencia();
       actualizarContadorVisitas();
@@ -663,15 +647,18 @@
 
     function filtrarClientes() {
       const t = document.getElementById("inputBusqueda").value.toLowerCase().trim();
-      let f = clientes;
+      // Filtro fijo: solo clientes de Río Gallegos
+      let f = clientes.filter(c => (c.ciudad || '').trim().toUpperCase() === CIUDAD_FIJA);
       if (t) f = f.filter(c => c.cliente.toLowerCase().includes(t) || (c.nombre_comercio || '').toLowerCase().includes(t) || c.direccion.toLowerCase().includes(t) || String(c.idcli).includes(t));
-      if (ciudadFiltro) f = f.filter(c => c.ciudad.trim().toUpperCase() === ciudadFiltro.trim().toUpperCase());
+      // Filtro por tipo de activo
+      if (activoFiltro === 'cafe') f = f.filter(c => (c.cafe_maquinas?.length || 0) > 0);
+      else if (activoFiltro === 'freezer') f = f.filter(c => (c.freezers?.length || 0) > 0);
       renderizarLista(f);
     }
 
-    function filtrarPorCiudad(ciudad) {
-      ciudadFiltro = ciudad;
-      document.querySelectorAll('.chip-ciudad').forEach(btn => { btn.classList.remove('bg-primary', 'text-on-primary'); btn.classList.add('bg-surface-container-high', 'text-on-surface-variant'); });
+    function filtrarPorActivo(tipo) {
+      activoFiltro = tipo;
+      document.querySelectorAll('.chip-activo').forEach(btn => { btn.classList.remove('bg-primary', 'text-on-primary'); btn.classList.add('bg-surface-container-high', 'text-on-surface-variant'); });
       event.currentTarget.classList.remove('bg-surface-container-high', 'text-on-surface-variant');
       event.currentTarget.classList.add('bg-primary', 'text-on-primary');
       filtrarClientes();
