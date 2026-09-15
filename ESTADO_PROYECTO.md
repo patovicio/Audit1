@@ -298,6 +298,74 @@ Para `sw.js`: `node --check sw.js`.
 
 ---
 
+## 11.b. PRÓXIMA SESIÓN — Fase 2: "Saldo vencido" (arrancar acá)
+
+> Sesión abierta en la **PC con acceso a SQL Server y DuckDB**. El objetivo es
+> agregar el dato de **saldo vencido** al maestro y luego el chip + badge en la app
+> (mismo patrón ya hecho para "Sin compra"). Todo lo de la app (Río Gallegos, chips
+> Todos/Cafetera/Freezer/Sin compra, informe minimalista) ya está hecho y publicado.
+
+**Estado actual (lo que YA funciona):**
+- App muestra solo Río Gallegos. Chips: `Todos · Cafetera · Freezer · Sin compra`.
+- "Sin compra" = `ventas.venta_mes <= 0`. Badge rojo + borde rojo en la tarjeta.
+- El maestro (`clientes_maestro.json`) lo genera `generar_maestro_desde_duckdb.py`
+  desde `../02-data-engine/friosur_analytics.duckdb` (read-only). Bloque `ventas`
+  por cliente: `ultima_compra`, `venta_mes`, `venta_3m`, `top_productos`.
+- El maestro **NO** tiene saldo ni cuenta corriente. Eso es lo que falta.
+
+**Pasos concretos para la Fase 2:**
+
+1. **Encontrar la fuente del saldo vencido** en la DuckDB (o en SQL Server, si la
+   ETL la trae de ahí). Inspeccionar tablas candidatas de cuenta corriente /
+   cuentas por cobrar / vencimientos. Comandos útiles (read-only):
+   ```python
+   import duckdb
+   con = duckdb.connect(r"..\02-data-engine\friosur_analytics.duckdb", read_only=True)
+   print(con.execute("SHOW TABLES").fetchall())
+   # buscar tablas tipo: cuenta_corriente, saldos, account*, receivable, vencim*
+   # inspeccionar columnas de la candidata:
+   print(con.execute("DESCRIBE <tabla_candidata>").fetchall())
+   ```
+   Se necesita, por cliente: importe impago + fecha de vencimiento (para filtrar
+   `vencimiento < hoy`). Confirmar la columna que liga al cliente (probablemente
+   `CustCode`/`cliente_codigo`, igual que en `invoice`/`ext_freezers`).
+
+2. **Agregar la consulta en `generar_maestro_desde_duckdb.py`** (junto al paso 4 de
+   ventas). Armar un `saldo_map[CustCode] = suma de impago vencido`. Ejemplo de la
+   forma esperada (ajustar nombres reales de tabla/columnas):
+   ```sql
+   SELECT CustCode, SUM(<importe_pendiente>) AS saldo_vencido
+   FROM <tabla_cta_cte>
+   WHERE <fecha_vencimiento> < current_date
+     AND <importe_pendiente> > 0
+   GROUP BY CustCode
+   ```
+
+3. **Sumar el campo al JSON.** Recomendado: dentro del bloque `ventas`, agregar
+   `"saldo_vencido": round(float(...), 2)` (0.0 si el cliente no está en el map).
+   Mantiene el contrato y la app lo lee igual que `venta_mes`.
+
+4. **En `index.html` (mismo patrón que "Sin compra"):**
+   - Helper: `function conSaldoVencido(c){ return (c?.ventas?.saldo_vencido||0) > 0; }`
+   - Chip nuevo en `#chipsActivo`: `filtrarPorActivo('saldovencido')` y en
+     `filtrarClientes()` agregar `else if (activoFiltro==='saldovencido') f = f.filter(conSaldoVencido);`
+   - Badge en la tarjeta (usar color de alerta, p.ej. `tertiary`/`error` para
+     distinguirlo del rojo de "Sin compra"). Ícono sugerido: `payments` o `warning`.
+   - Opcional: mostrar el monto del saldo vencido en el badge o en la ficha del
+     cliente al seleccionarlo.
+
+5. **Regenerar y publicar:**
+   - Correr `GENERAR_MAESTRO.bat` → subir "nueva versión" del JSON a Drive (mantener
+     File ID `1HdG5W33zP8jafrL0XhXpHAWXYb85HmAz`, NUNCA como archivo nuevo).
+   - Validar el JS: comando de la sección 10.
+   - `git push origin master:main` para publicar el cambio de la app.
+
+> Referencia del código ya hecho para "Sin compra" (patrón a copiar): helper
+> `sinCompraEnElMes()`, chip en `#chipsActivo`, rama en `filtrarClientes()`, y
+> `sinCompraBadge` + `border-error/50` en `renderizarLista()` de `index.html`.
+
+---
+
 ## 12. Pendientes / ideas
 
 - [ ] (Opcional) Script que suba el maestro a Drive automáticamente sobre el mismo
