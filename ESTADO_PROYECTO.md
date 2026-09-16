@@ -13,10 +13,19 @@ Friosur visitan clientes en la Patagonia). Toda la lógica vive en `index.html`.
 Sin frameworks, sin build, sin bundler. Backend = Google Apps Script + Google
 Sheets + Google Drive. Hosting = GitHub Pages.
 
-En cada visita se registra: activos Friosur (freezers/máquinas café), cobertura
-de productos (Marfrig/Froneri), precios y activos de la competencia, servicio de
-máquina de café, ofertas, notas y fotos. Al finalizar se genera un **informe para
-WhatsApp** y se guarda en Google Sheets (con cola offline).
+La app arranca en un **HOME con 4 modos** (`modoApp`): **Auditoría de Visita**,
+**Vista 360° del Cliente** (solo lectura), **Auditoría de Café** y **Auditoría de
+Freezer** (estas dos en construcción). Cada modo lleva al mismo listado de clientes
+(Río Gallegos) pero filtra y actúa distinto al tocar un cliente.
+
+En la **Auditoría de Visita** se registra: activos Friosur (freezers/máquinas café),
+cobertura de productos (Marfrig/Froneri), precios y activos de la competencia,
+servicio de máquina de café, ofertas, notas y fotos. Al finalizar se genera un
+**informe para WhatsApp** y se guarda en Google Sheets (con cola offline).
+
+La **Vista 360°** es solo consulta: estado de cuenta (bloqueada/activa), compras del
+mes, saldo en CC y vencido, comportamiento de pago, historial de facturas con detalle
+de artículos y facturas en cuenta corriente con días de vencido en vivo.
 
 ---
 
@@ -229,6 +238,37 @@ Para `sw.js`: `node --check sw.js`.
 ---
 
 ## 11. Bitácora de sesiones
+
+### 2026-09-15 (cont. 5) — Fase A: HOME de 4 modos + Vista 360° enriquecida
+- **Reestructuración de navegación.** La app ahora arranca en una **pantalla HOME**
+  (`pantallaHome`) con 4 botones que definen un `modoApp`:
+  - `visita` → listado → formulario de auditoría (comportamiento ORIGINAL intacto).
+  - `360` → listado → **Vista 360° solo lectura** (nueva).
+  - `cafe` → listado SOLO clientes con máquina de café → placeholder "en construcción".
+  - `freezer` → listado SOLO clientes con freezer → placeholder "en construcción".
+- **Navegación:** `entrarModo(modo)` va del home al listado; `seleccionarCliente()` es
+  ahora un **router** que bifurca según `modoApp` (`abrirAuditoriaVisita` /
+  `abrirVista360` / `abrirConstruccion`). Botón **Volver contextual**
+  (`mostrarListaClientes`): si hay cliente abierto vuelve al listado, si estás en el
+  listado vuelve al home (`irAlHome`). Helper `ocultarTodasLasPantallas()`.
+  `filtrarClientes()` fuerza el filtro café/freezer según el modo.
+- **Vista 360° (solo lectura, sin auditoría/guardar/WhatsApp)** — pantalla `pantalla360`:
+  - Cabecera + **estado de cuenta**: 🔴 "Cuenta bloqueada" si tiene saldo vencido,
+    🟢 "Activo" si no.
+  - 4 indicadores (todo con IVA): compras del mes, última compra, saldo en cuenta,
+    saldo vencido (rojo si >0).
+  - Comportamiento de pago (días promedio + badge puntual/lento/moroso).
+  - **Historial de facturas**: acordeón, al tocar una se ven sus **artículos**
+    (cantidad × nombre + importe c/IVA). `toggleFactura360(idx)`.
+  - **Facturas en cuenta corriente**: nro, vto, importe y **días de vencido
+    calculados EN VIVO** en la app (no congelados) — "Vencida hace Xd" / "Vence en Xd".
+- **Backend (`generar_maestro_desde_duckdb.py`):** bloque `historial` ampliado con
+  `compras_mes_neto/iva`, `saldo_cc_total`, `estado_cuenta`, `facturas_cc[]`
+  (nro/emision/vencimiento/importe) y `articulos[]` dentro de cada `ultimas_facturas`
+  (cantidad + importe c/IVA vía `RowTotal`). Queries validadas con el MCP DuckDB.
+- **SW v8.** Validado: JS OK, `node --check sw.js` OK, maestro regenerado (470 clientes).
+- **Café y Freezer**: solo placeholders. Se desarrollan en fases siguientes.
+- **PENDIENTE de publicar:** subir "nueva versión" del maestro a Drive + `git push`.
 
 ### 2026-09-15 (cont. 4) — Ficha 360° del cliente (historial compras + cobranzas)
 - **Backend (`generar_maestro_desde_duckdb.py`):** nuevo bloque `historial` por

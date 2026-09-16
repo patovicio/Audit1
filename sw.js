@@ -1,5 +1,5 @@
 // Service Worker - Auditoría Friosur PWA
-const CACHE_NAME = 'friosur-audit-v7'; // ← v7: ficha 360 (historial compras + cobranzas). index.html network-first.
+const CACHE_NAME = 'friosur-audit-v8'; // ← v8: home 4 modos + Vista 360 solo lectura. index.html network-first.
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
