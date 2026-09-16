@@ -15,8 +15,9 @@ Sheets + Google Drive. Hosting = GitHub Pages.
 
 La app arranca en un **HOME con 4 modos** (`modoApp`): **Auditoría de Visita**,
 **Vista 360° del Cliente** (solo lectura), **Auditoría de Café** (contadores de
-máquinas) y **Auditoría de Freezer** (en construcción). Cada modo lleva al mismo
-listado de clientes (Río Gallegos) pero filtra y actúa distinto al tocar un cliente.
+máquinas) y **Auditoría de Freezer** (volumen, invasión, categorías por freezer).
+Cada modo lleva al mismo listado de clientes (Río Gallegos) pero filtra y actúa
+distinto al tocar un cliente.
 
 En la **Auditoría de Visita** se registra: activos Friosur (freezers/máquinas café),
 cobertura de productos (Marfrig/Froneri), precios y activos de la competencia,
@@ -73,6 +74,7 @@ App (index.html) descarga maestro:  ?action=clientes&token=...&callback=...
 | Spreadsheet ID (auditorías) | `Codigo.gs` `SPREADSHEET_ID` | `1Za8ZKGGn1jbQ-4QamXcv1PRKhTu_UYKK0pkJhCoZVwo` |
 | Hoja de auditorías (visita) | `Codigo.gs` `SHEET_NAME` | `Auditorías` |
 | Hoja de auditorías de café | `Codigo.gs` `SHEET_CAFE` | `Auditorías Café` (se crea sola al primer guardado) |
+| Hoja de auditorías de freezer | `Codigo.gs` `SHEET_FREEZER` | `Auditorías Freezer` (se crea sola al primer guardado) |
 | Repo GitHub | remoto `origin` | `https://github.com/patovicio/Audit1.git` |
 
 > **Rama local `master` → rama remota `main`.** Se pushea con
@@ -239,6 +241,32 @@ Para `sw.js`: `node --check sw.js`.
 ---
 
 ## 11. Bitácora de sesiones
+
+### 2026-09-15 (cont. 7) — Módulo Auditoría de Freezer
+- **Objetivo:** auditar cada freezer del cliente (por serie) en calle.
+- **Frontend (`index.html`):** pantalla `pantallaFreezer`. `abrirAuditoriaFreezer()`
+  arma una tarjeta por freezer (de `cliente.freezers`) con:
+  - **Nivel de volumen**: Bajo / Medio / Alto.
+  - **Funcionando** (checkbox, por defecto sí).
+  - **Invasión de competencia** (checkbox; al tildar aparece textarea de detalle).
+  - **Categorías**: Helados con chips **Premium / Media / Económica** (cono y palito,
+    multi-selección) + categorías sueltas **Postres / Bandejas / Bombones**.
+  - **Observaciones** (texto libre).
+  Estado en `freezerEstado[]`. Helpers `setFrzVolumen`, `toggleFrzInvasion`,
+  `toggleHeladoSeg`, `toggleFrzCategoria`. `guardarFreezer()` valida que haya nivel de
+  volumen, envía cada freezer por `enviarFreezerJSONP` (`action=guardarFreezer`) con
+  cola offline `freezer_pendientes`. `generarTextoFreezer()` para WhatsApp.
+- **Apps Script (`Codigo.gs`):** `action=guardarFreezer` → hoja nueva
+  **"Auditorías Freezer"** (cols: Timestamp, Fecha, ID Cliente, Cliente, Comercio,
+  Serie, Nivel Volumen, Invasión, Detalle Invasión, Funcionando, Categorías,
+  Observaciones). Una fila por freezer. Soporta JSONP.
+- Colas de freezer integradas en `sincronizarPendientes()` y `verificarPendientes()`.
+- **SW v10.** Validado: JS OK, `node --check` de Codigo.gs OK.
+- **Naming:** el segmento premium de helados se llama **"Premium"** (el usuario
+  descartó "helados caros"). Segmentos: Premium / Media / Económica.
+- **PENDIENTE de publicar:** pegar `Codigo.gs` en script.google.com y **re-implementar
+  la Web App** (nueva versión) + `git push`. (El maestro NO cambió — freezer usa
+  `cliente.freezers` que ya existía.)
 
 ### 2026-09-15 (cont. 6) — Módulo Auditoría de Café
 - **Objetivo:** relevar contadores de vasos de las máquinas de café por cliente,

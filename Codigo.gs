@@ -169,6 +169,11 @@ function doGet(e) {
     return ultimaAuditoriaCafe(e);
   }
 
+  // --- action=guardarFreezer: registrar auditoría de un freezer ---
+  if (e && e.parameter && e.parameter.action === "guardarFreezer" && e.parameter.data) {
+    return guardarAuditoriaFreezer(e);
+  }
+
   // Si no tiene action, es solo un health check
   return ContentService.createTextOutput(JSON.stringify({
     status: "ok",
@@ -290,6 +295,66 @@ function ultimaAuditoriaCafe(e) {
       fecha: ultima[COL_FECHA],
       contadores: contadores
     });
+  } catch (error) {
+    return responder({ status: "error", message: error.toString() });
+  }
+}
+
+// ============ AUDITORÍA DE FREEZER ============
+// Hoja dedicada, una fila por freezer auditado.
+const SHEET_FREEZER = "Auditorías Freezer";
+
+function _freezerSheet() {
+  const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+  let sheet = ss.getSheetByName(SHEET_FREEZER);
+  if (!sheet) {
+    sheet = ss.insertSheet(SHEET_FREEZER);
+  }
+  if (sheet.getLastRow() === 0) {
+    const headers = ["Timestamp", "Fecha", "ID Cliente", "Cliente", "Comercio",
+                     "Serie", "Nivel Volumen", "Invasión", "Detalle Invasión",
+                     "Funcionando", "Categorías", "Observaciones"];
+    sheet.appendRow(headers);
+    sheet.getRange(1, 1, 1, headers.length)
+      .setFontWeight("bold").setBackground("#0d4f6c").setFontColor("#ffffff");
+  }
+  return sheet;
+}
+
+function guardarAuditoriaFreezer(e) {
+  const callback = e.parameter.callback || "";
+  const responder = function (obj) {
+    const cuerpo = JSON.stringify(obj);
+    if (callback) {
+      return ContentService.createTextOutput(callback + "(" + cuerpo + ")")
+        .setMimeType(ContentService.MimeType.JAVASCRIPT);
+    }
+    return ContentService.createTextOutput(cuerpo).setMimeType(ContentService.MimeType.JSON);
+  };
+
+  try {
+    const data = JSON.parse(e.parameter.data);
+    const sheet = _freezerSheet();
+
+    // categorias = array de strings (ej: ["Helados: Premium", "Postres"])
+    const categorias = (data.categorias || []).join(", ");
+
+    sheet.appendRow([
+      data.timestamp || new Date().toISOString(),
+      data.fecha || "",
+      data.clienteId || "",
+      data.cliente || "",
+      data.comercio || "",
+      data.serie || "",
+      data.nivelVolumen || "",
+      data.invasion ? "SÍ" : "No",
+      data.invasionDetalle || "",
+      data.funcionando ? "SÍ" : "No",
+      categorias,
+      data.observaciones || ""
+    ]);
+
+    return responder({ status: "ok", message: "Auditoría de freezer registrada", row: sheet.getLastRow() });
   } catch (error) {
     return responder({ status: "error", message: error.toString() });
   }

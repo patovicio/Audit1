@@ -609,6 +609,36 @@
         </button>
       </div>
     </div><!-- fin pantallaCafe -->
+
+    <!-- ============ PANTALLA AUDITORÍA DE FREEZER ============ -->
+    <div id="pantallaFreezer" class="hidden px-safe space-y-4 pb-8">
+      <!-- Cabecera cliente -->
+      <section class="bg-surface-container-lowest rounded-xl p-md shadow-sm border border-outline-variant/30">
+        <div class="flex justify-between items-start gap-2">
+          <div class="flex-1 min-w-0">
+            <h2 id="frzNombre" class="text-[17px] font-bold text-primary leading-tight"></h2>
+            <p id="frzComercio" class="text-[13px] font-medium text-on-surface-variant mt-1"></p>
+            <p id="frzMeta" class="text-[11px] text-outline mt-0.5"></p>
+          </div>
+          <div class="bg-blue-500/15 p-2 rounded-lg"><span class="material-symbols-outlined text-blue-500">kitchen</span></div>
+        </div>
+      </section>
+
+      <!-- Contenedor de freezers (una tarjeta por equipo) -->
+      <div id="frzFreezers" class="space-y-4"></div>
+
+      <!-- Acciones -->
+      <div class="space-y-2 pt-2">
+        <button onclick="guardarFreezer()"
+          class="w-full h-12 bg-primary text-on-primary rounded-xl text-[14px] font-bold active:scale-95 transition-transform flex items-center justify-center gap-2">
+          <span class="material-symbols-outlined">save</span> Guardar auditoría
+        </button>
+        <button onclick="guardarFreezerYWhatsApp()"
+          class="w-full h-12 border-2 border-primary text-primary rounded-xl text-[13px] font-bold active:scale-95 transition-transform flex items-center justify-center gap-2">
+          <span class="material-symbols-outlined">send</span> Guardar + Enviar WhatsApp
+        </button>
+      </div>
+    </div><!-- fin pantallaFreezer -->
   </main>
   <script>
     // ===================================================================
@@ -903,7 +933,7 @@
 
     // Oculta todas las pantallas (helper de navegación)
     function ocultarTodasLasPantallas() {
-      ['pantallaHome', 'pantallaLista', 'pantallaFormulario', 'pantalla360', 'pantallaConstruccion', 'pantallaCafe']
+      ['pantallaHome', 'pantallaLista', 'pantallaFormulario', 'pantalla360', 'pantallaConstruccion', 'pantallaCafe', 'pantallaFreezer']
         .forEach(id => document.getElementById(id).classList.add('hidden'));
     }
 
@@ -942,7 +972,7 @@
       clienteSeleccionado = cliente;
       if (modoApp === '360')      return abrirVista360(cliente);
       if (modoApp === 'cafe')     return abrirAuditoriaCafe(cliente);
-      if (modoApp === 'freezer')  return abrirConstruccion(cliente, 'Auditoría de Freezer', 'kitchen');
+      if (modoApp === 'freezer')  return abrirAuditoriaFreezer(cliente);
       return abrirAuditoriaVisita(cliente);  // modo 'visita' (default)
     }
 
@@ -1539,6 +1569,258 @@
       }
     }
 
+    // ===================================================================
+    // MODO FREEZER — auditoría de freezers de helados
+    // ===================================================================
+    // Categorías sueltas (además de los segmentos de helado)
+    const FREEZER_CATEGORIAS = ['Postres', 'Bandejas', 'Bombones'];
+    const FREEZER_SEGMENTOS_HELADO = ['Premium', 'Media', 'Económica'];
+    // Estado en memoria de los freezers de la pantalla actual
+    let freezerEstado = [];
+
+    function abrirAuditoriaFreezer(cliente) {
+      clienteSeleccionado = cliente;
+      ocultarTodasLasPantallas();
+      document.getElementById("pantallaFreezer").classList.remove("hidden");
+      document.getElementById("btnVolver").classList.remove("hidden");
+
+      document.getElementById('frzNombre').textContent = cliente.nombre_comercio || cliente.cliente;
+      document.getElementById('frzComercio').textContent = cliente.cliente;
+      document.getElementById('frzMeta').textContent = `ID ${cliente.idcli} · Vend. ${cliente.idvend}`;
+
+      const cont = document.getElementById('frzFreezers');
+      cont.innerHTML = '';
+      const freezers = cliente.freezers || [];
+      if (freezers.length === 0) {
+        cont.innerHTML = `<p class="text-[13px] text-outline text-center py-6">Este cliente no tiene freezers registrados.</p>`;
+        freezerEstado = [];
+        return;
+      }
+
+      // Estado inicial por freezer
+      freezerEstado = freezers.map(() => ({
+        nivelVolumen: '', invasion: false, funcionando: true,
+        helados: [], categorias: [],
+      }));
+
+      freezers.forEach((serie, fi) => {
+        const segHelados = FREEZER_SEGMENTOS_HELADO.map(seg =>
+          `<button type="button" onclick="toggleHeladoSeg(${fi}, '${seg}')" id="frzHel-${fi}-${seg}"
+            class="frz-chip flex-1 h-8 rounded-lg text-[11px] font-semibold border border-outline-variant text-on-surface-variant active:scale-95 transition-transform">${seg}</button>`
+        ).join('');
+        const catSueltas = FREEZER_CATEGORIAS.map(cat =>
+          `<button type="button" onclick="toggleFrzCategoria(${fi}, '${cat}')" id="frzCat-${fi}-${cat}"
+            class="frz-chip px-3 h-8 rounded-lg text-[11px] font-semibold border border-outline-variant text-on-surface-variant active:scale-95 transition-transform">${cat}</button>`
+        ).join('');
+
+        const card = document.createElement('div');
+        card.className = 'bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-sm overflow-hidden';
+        card.innerHTML = `
+          <div class="bg-surface-container-high px-4 py-3 flex justify-between items-center">
+            <p class="text-[13px] font-bold text-on-surface">Freezer ${fi + 1}</p>
+            <p class="text-[11px] text-on-surface-variant font-mono">S/N ${serie}</p>
+          </div>
+          <div class="px-4 py-3 space-y-4">
+            <!-- Nivel de volumen -->
+            <div>
+              <p class="text-[10px] text-outline uppercase font-semibold mb-1.5">Nivel de volumen de mercadería</p>
+              <div class="flex gap-2">
+                ${['Bajo', 'Medio', 'Alto'].map(nv =>
+                  `<button type="button" onclick="setFrzVolumen(${fi}, '${nv}')" id="frzVol-${fi}-${nv}"
+                    class="flex-1 h-9 rounded-lg text-[12px] font-bold border border-outline-variant text-on-surface-variant active:scale-95 transition-transform">${nv}</button>`
+                ).join('')}
+              </div>
+            </div>
+
+            <!-- Funcionando -->
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" id="frzFunc-${fi}" checked onchange="freezerEstado[${fi}].funcionando = this.checked"
+                class="w-5 h-5 rounded accent-secondary" />
+              <span class="text-[13px] text-on-surface">Freezer en buenas condiciones / funcionando</span>
+            </label>
+
+            <!-- Invasión -->
+            <div>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" id="frzInv-${fi}" onchange="toggleFrzInvasion(${fi}, this.checked)"
+                  class="w-5 h-5 rounded accent-error" />
+                <span class="text-[13px] text-on-surface">Se encontró invasión de competencia</span>
+              </label>
+              <textarea id="frzInvDet-${fi}" rows="2" placeholder="¿Qué se encontró?"
+                class="hidden w-full mt-2 bg-surface-container-high border border-outline-variant rounded-lg p-2 text-[12px] focus:ring-2 focus:ring-primary outline-none resize-none"></textarea>
+            </div>
+
+            <!-- Categorías -->
+            <div>
+              <p class="text-[10px] text-outline uppercase font-semibold mb-1.5">Helados encontrados</p>
+              <div class="flex gap-2">${segHelados}</div>
+              <p class="text-[10px] text-outline uppercase font-semibold mt-3 mb-1.5">Otras categorías</p>
+              <div class="flex flex-wrap gap-2">${catSueltas}</div>
+            </div>
+
+            <!-- Observaciones -->
+            <textarea id="frzObs-${fi}" rows="2" placeholder="Observaciones..."
+              class="w-full bg-surface-container-high border border-outline-variant rounded-lg p-2 text-[12px] focus:ring-2 focus:ring-primary outline-none resize-none"></textarea>
+          </div>`;
+        cont.appendChild(card);
+      });
+    }
+
+    function setFrzVolumen(fi, nivel) {
+      if (!freezerEstado[fi]) return;
+      freezerEstado[fi].nivelVolumen = nivel;
+      ['Bajo', 'Medio', 'Alto'].forEach(nv => {
+        const btn = document.getElementById(`frzVol-${fi}-${nv}`);
+        const activo = nv === nivel;
+        btn.className = `flex-1 h-9 rounded-lg text-[12px] font-bold border active:scale-95 transition-transform ${activo ? 'border-primary bg-primary text-on-primary' : 'border-outline-variant text-on-surface-variant'}`;
+      });
+    }
+
+    function toggleFrzInvasion(fi, checked) {
+      if (!freezerEstado[fi]) return;
+      freezerEstado[fi].invasion = checked;
+      document.getElementById(`frzInvDet-${fi}`).classList.toggle('hidden', !checked);
+    }
+
+    function toggleHeladoSeg(fi, seg) {
+      if (!freezerEstado[fi]) return;
+      const arr = freezerEstado[fi].helados;
+      const idx = arr.indexOf(seg);
+      if (idx >= 0) arr.splice(idx, 1); else arr.push(seg);
+      const btn = document.getElementById(`frzHel-${fi}-${seg}`);
+      const activo = arr.includes(seg);
+      btn.className = `frz-chip flex-1 h-8 rounded-lg text-[11px] font-semibold border active:scale-95 transition-transform ${activo ? 'border-primary bg-primary-container text-on-primary-container' : 'border-outline-variant text-on-surface-variant'}`;
+    }
+
+    function toggleFrzCategoria(fi, cat) {
+      if (!freezerEstado[fi]) return;
+      const arr = freezerEstado[fi].categorias;
+      const idx = arr.indexOf(cat);
+      if (idx >= 0) arr.splice(idx, 1); else arr.push(cat);
+      const btn = document.getElementById(`frzCat-${fi}-${cat}`);
+      const activo = arr.includes(cat);
+      btn.className = `frz-chip px-3 h-8 rounded-lg text-[11px] font-semibold border active:scale-95 transition-transform ${activo ? 'border-primary bg-primary-container text-on-primary-container' : 'border-outline-variant text-on-surface-variant'}`;
+    }
+
+    // Recolecta un registro por freezer. Devuelve array de registros para guardar.
+    function recolectarDatosFreezer() {
+      const c = clienteSeleccionado;
+      const freezers = c.freezers || [];
+      const ahora = new Date();
+      return freezers.map((serie, fi) => {
+        const est = freezerEstado[fi] || {};
+        // Categorías finales: helados con prefijo + sueltas
+        const categorias = [];
+        (est.helados || []).forEach(seg => categorias.push('Helados: ' + seg));
+        (est.categorias || []).forEach(cat => categorias.push(cat));
+        return {
+          timestamp: ahora.toISOString(),
+          fecha: ahora.toLocaleDateString('es-AR', { day: '2-digit', month: '2-digit', year: 'numeric' }),
+          clienteId: c.idcli,
+          cliente: c.cliente,
+          comercio: c.nombre_comercio || c.cliente,
+          serie: serie,
+          nivelVolumen: est.nivelVolumen || '',
+          invasion: !!est.invasion,
+          invasionDetalle: (document.getElementById(`frzInvDet-${fi}`) || {}).value || '',
+          funcionando: est.funcionando !== false,
+          categorias: categorias,
+          observaciones: (document.getElementById(`frzObs-${fi}`) || {}).value || '',
+        };
+      });
+    }
+
+    function enviarFreezerJSONP(reg, timeoutMs = 15000) {
+      return new Promise((resolve, reject) => {
+        const cbName = 'onGuardarFrz_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
+        let done = false;
+        const cleanup = () => { delete window[cbName]; const s = document.getElementById(cbName); if (s) s.remove(); };
+        const timer = setTimeout(() => { if (!done) { done = true; cleanup(); reject(new Error('timeout')); } }, timeoutMs);
+        window[cbName] = (data) => {
+          if (done) return;
+          done = true; clearTimeout(timer); cleanup();
+          if (data && data.status === 'ok') resolve(data);
+          else reject(new Error(data && data.message ? data.message : 'error'));
+        };
+        const payload = encodeURIComponent(JSON.stringify(reg));
+        const url = `${CONFIG.SHEETS_API_URL}?action=guardarFreezer&data=${payload}&callback=${cbName}`;
+        const script = document.createElement('script');
+        script.id = cbName; script.src = url;
+        script.onerror = () => { if (!done) { done = true; clearTimeout(timer); cleanup(); reject(new Error('script error')); } };
+        document.body.appendChild(script);
+      });
+    }
+
+    function guardarFreezerEnColaPendiente(regs) {
+      let cola = JSON.parse(localStorage.getItem('freezer_pendientes') || '[]');
+      cola = cola.concat(regs);
+      localStorage.setItem('freezer_pendientes', JSON.stringify(cola));
+    }
+
+    async function guardarFreezer() {
+      if (!clienteSeleccionado) return false;
+      const registros = recolectarDatosFreezer();
+      // Validar que al menos un freezer tenga nivel de volumen cargado
+      const conCarga = registros.filter(r => r.nivelVolumen);
+      if (conCarga.length === 0) {
+        mostrarToast('Marcá al menos el nivel de volumen', 'error');
+        return false;
+      }
+
+      if (navigator.onLine) {
+        try {
+          for (const reg of registros) await enviarFreezerJSONP(reg);
+          mostrarToast(`${registros.length} freezer(s) guardado(s) en la nube`);
+        } catch (e) {
+          console.error('Error guardando freezer:', e);
+          guardarFreezerEnColaPendiente(registros);
+          mostrarToast('Guardado local. Se enviará cuando haya conexión', 'info');
+        }
+      } else {
+        guardarFreezerEnColaPendiente(registros);
+        mostrarToast('Guardado localmente (sin conexión)', 'info');
+      }
+      return true;
+    }
+
+    // Reporte de WhatsApp de la auditoría de freezers (formato sobrio).
+    function generarTextoFreezer() {
+      const c = clienteSeleccionado;
+      const registros = recolectarDatosFreezer();
+      const EMO = {
+        frz: '\u2744\uFE0F', pin: '\uD83D\uDCCD', ok: '\u2705',
+        warn: '\uD83D\uDD34', caja: '\uD83D\uDCE6',
+      };
+      const L = [];
+      L.push(`${EMO.frz} *AUDITORÍA DE FREEZER*`);
+      L.push(`${new Date().toLocaleDateString('es-AR', { weekday: 'short', day: '2-digit', month: 'short' })}`);
+      L.push('');
+      L.push(`${EMO.pin} ${c.nombre_comercio || c.cliente}`);
+      L.push(`#${c.idcli} · Vend. ${c.idvend}`);
+      registros.forEach((r, i) => {
+        L.push('');
+        L.push(`${EMO.caja} *Freezer ${i + 1}* — S/N ${r.serie}`);
+        if (r.nivelVolumen) L.push(`Volumen: ${r.nivelVolumen}`);
+        L.push(`${r.funcionando ? EMO.ok : EMO.warn} ${r.funcionando ? 'Funcionando OK' : 'Con problemas'}`);
+        if (r.invasion) L.push(`${EMO.warn} Invasión: ${r.invasionDetalle || 'sí'}`);
+        if (r.categorias.length) L.push(`Categorías: ${r.categorias.join(', ')}`);
+        if (r.observaciones) L.push(`Obs: ${r.observaciones}`);
+      });
+      return L.join('\n');
+    }
+
+    async function guardarFreezerYWhatsApp() {
+      const ok = await guardarFreezer();
+      if (!ok) return;
+      const texto = generarTextoFreezer();
+      const isAndroid = /android/i.test(navigator.userAgent);
+      if (isAndroid) {
+        window.location.href = `intent://send?text=${encodeURIComponent(texto)}#Intent;package=com.whatsapp.w4b;scheme=whatsapp;end`;
+      } else {
+        window.open(`https://wa.me/?text=${encodeURIComponent(texto)}`, '_blank');
+      }
+    }
+
     // Botón Volver contextual:
     //  - si hay un cliente abierto (formulario/360/construcción) → vuelve al listado del modo
     //  - si estás en el listado → vuelve al home (menú de modos)
@@ -2011,7 +2293,8 @@
     function verificarPendientes() {
       const cola = JSON.parse(localStorage.getItem('auditorias_pendientes') || '[]');
       const colaCafe = JSON.parse(localStorage.getItem('cafe_pendientes') || '[]');
-      const total = cola.length + colaCafe.length;
+      const colaFrz = JSON.parse(localStorage.getItem('freezer_pendientes') || '[]');
+      const total = cola.length + colaCafe.length + colaFrz.length;
       const btn = document.getElementById('btnSync');
       if (total > 0) { btn.classList.remove('hidden'); btn.textContent = `Enviar ${total} pendiente${total > 1 ? 's' : ''}`; }
       else btn.classList.add('hidden');
@@ -2038,6 +2321,15 @@
         catch (e) { fallidosCafe.push(reg); }
       }
       localStorage.setItem('cafe_pendientes', JSON.stringify(fallidosCafe));
+
+      // Y la cola de auditorías de freezer
+      let colaFrz = JSON.parse(localStorage.getItem('freezer_pendientes') || '[]');
+      const fallidosFrz = [];
+      for (const reg of colaFrz) {
+        try { await enviarFreezerJSONP(reg); enviados++; }
+        catch (e) { fallidosFrz.push(reg); }
+      }
+      localStorage.setItem('freezer_pendientes', JSON.stringify(fallidosFrz));
 
       mostrarToast(`${enviados} registro(s) sincronizado(s)`);
       verificarPendientes();

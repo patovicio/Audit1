@@ -1,5 +1,5 @@
 // Service Worker - Auditoría Friosur PWA
-const CACHE_NAME = 'friosur-audit-v9'; // ← v9: módulo Auditoría de Café (contadores por modelo). index.html network-first.
+const CACHE_NAME = 'friosur-audit-v10'; // ← v10: módulo Auditoría de Freezer. index.html network-first.
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
