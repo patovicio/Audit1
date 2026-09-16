@@ -159,12 +159,140 @@ function doGet(e) {
     }
   }
 
+  // --- action=guardarCafe: registrar auditoría de máquina de café ---
+  if (e && e.parameter && e.parameter.action === "guardarCafe" && e.parameter.data) {
+    return guardarAuditoriaCafe(e);
+  }
+
+  // --- action=ultimaCafe: último contador guardado de una máquina (por serie) ---
+  if (e && e.parameter && e.parameter.action === "ultimaCafe") {
+    return ultimaAuditoriaCafe(e);
+  }
+
   // Si no tiene action, es solo un health check
   return ContentService.createTextOutput(JSON.stringify({
     status: "ok",
     service: "Auditoría Friosur API",
     timestamp: new Date().toISOString()
   })).setMimeType(ContentService.MimeType.JSON);
+}
+
+// ============ AUDITORÍA DE CAFÉ ============
+// Hoja dedicada, una fila por máquina auditada. Columnas de contadores fijas
+// (C1..C16); los modelos con menos contadores dejan las sobrantes vacías.
+// Pensada para exportar los valores al sistema de gestión de Nestlé.
+const SHEET_CAFE = "Auditorías Café";
+const CAFE_MAX_CONTADORES = 16;
+
+function _cafeSheet() {
+  const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+  let sheet = ss.getSheetByName(SHEET_CAFE);
+  if (!sheet) {
+    sheet = ss.insertSheet(SHEET_CAFE);
+  }
+  if (sheet.getLastRow() === 0) {
+    const headers = ["Timestamp", "Fecha", "ID Cliente", "Cliente", "Comercio",
+                     "Serie", "Modelo", "Estado", "Mantenimiento"];
+    for (let i = 1; i <= CAFE_MAX_CONTADORES; i++) headers.push("C" + i);
+    headers.push("Total Expendidos");
+    sheet.appendRow(headers);
+    sheet.getRange(1, 1, 1, headers.length)
+      .setFontWeight("bold").setBackground("#5a3921").setFontColor("#ffffff");
+  }
+  return sheet;
+}
+
+function guardarAuditoriaCafe(e) {
+  const callback = e.parameter.callback || "";
+  const responder = function (obj) {
+    const cuerpo = JSON.stringify(obj);
+    if (callback) {
+      return ContentService.createTextOutput(callback + "(" + cuerpo + ")")
+        .setMimeType(ContentService.MimeType.JAVASCRIPT);
+    }
+    return ContentService.createTextOutput(cuerpo).setMimeType(ContentService.MimeType.JSON);
+  };
+
+  try {
+    const data = JSON.parse(e.parameter.data);
+    const sheet = _cafeSheet();
+
+    // data.contadores = array de valores (índice 0 = C1, ...). Faltantes vacíos.
+    const contadores = data.contadores || [];
+    const fila = [
+      data.timestamp || new Date().toISOString(),
+      data.fecha || "",
+      data.clienteId || "",
+      data.cliente || "",
+      data.comercio || "",
+      data.serie || "",
+      data.modelo || "",
+      data.estado || "",
+      data.mantenimiento || ""
+    ];
+    for (let i = 0; i < CAFE_MAX_CONTADORES; i++) {
+      const v = contadores[i];
+      fila.push(v === undefined || v === null || v === "" ? "" : v);
+    }
+    fila.push(data.totalExpendidos === undefined ? "" : data.totalExpendidos);
+
+    sheet.appendRow(fila);
+
+    return responder({ status: "ok", message: "Auditoría de café registrada", row: sheet.getLastRow() });
+  } catch (error) {
+    return responder({ status: "error", message: error.toString() });
+  }
+}
+
+// Devuelve el último registro de contadores de una máquina (por serie), para
+// que la app muestre el "valor anterior" y calcule los vasos expendidos.
+function ultimaAuditoriaCafe(e) {
+  const callback = e.parameter.callback || "";
+  const responder = function (obj) {
+    const cuerpo = JSON.stringify(obj);
+    if (callback) {
+      return ContentService.createTextOutput(callback + "(" + cuerpo + ")")
+        .setMimeType(ContentService.MimeType.JAVASCRIPT);
+    }
+    return ContentService.createTextOutput(cuerpo).setMimeType(ContentService.MimeType.JSON);
+  };
+
+  try {
+    const serie = (e.parameter.serie || "").toString().trim();
+    if (!serie) return responder({ status: "error", message: "Falta serie" });
+
+    const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+    const sheet = ss.getSheetByName(SHEET_CAFE);
+    if (!sheet || sheet.getLastRow() < 2) {
+      return responder({ status: "ok", encontrado: false });
+    }
+
+    const values = sheet.getDataRange().getValues();
+    // Columnas: 0 Timestamp,1 Fecha,2 IDCliente,3 Cliente,4 Comercio,5 Serie,
+    //           6 Modelo,7 Estado,8 Mantenimiento,9.. C1..C16
+    const COL_SERIE = 5, COL_FECHA = 1, COL_C1 = 9;
+    let ultima = null;
+    for (let r = 1; r < values.length; r++) {
+      if (values[r][COL_SERIE].toString().trim() === serie) {
+        ultima = values[r]; // se queda con la última coincidencia (más reciente al final)
+      }
+    }
+    if (!ultima) return responder({ status: "ok", encontrado: false });
+
+    const contadores = [];
+    for (let i = 0; i < CAFE_MAX_CONTADORES; i++) {
+      const v = ultima[COL_C1 + i];
+      contadores.push(v === "" || v === null || v === undefined ? null : Number(v));
+    }
+    return responder({
+      status: "ok",
+      encontrado: true,
+      fecha: ultima[COL_FECHA],
+      contadores: contadores
+    });
+  } catch (error) {
+    return responder({ status: "error", message: error.toString() });
+  }
 }
 
 // ============ HELPERS ============

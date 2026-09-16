@@ -579,6 +579,36 @@
         <p class="text-[12px] text-outline max-w-xs">Este módulo está en construcción. Próximamente vas a poder registrar la auditoría desde acá.</p>
       </div>
     </div><!-- fin pantallaConstruccion -->
+
+    <!-- ============ PANTALLA AUDITORÍA DE CAFÉ ============ -->
+    <div id="pantallaCafe" class="hidden px-safe space-y-4 pb-8">
+      <!-- Cabecera cliente -->
+      <section class="bg-surface-container-lowest rounded-xl p-md shadow-sm border border-outline-variant/30">
+        <div class="flex justify-between items-start gap-2">
+          <div class="flex-1 min-w-0">
+            <h2 id="cafeNombre" class="text-[17px] font-bold text-primary leading-tight"></h2>
+            <p id="cafeComercio" class="text-[13px] font-medium text-on-surface-variant mt-1"></p>
+            <p id="cafeMeta" class="text-[11px] text-outline mt-0.5"></p>
+          </div>
+          <div class="bg-tertiary/15 p-2 rounded-lg"><span class="material-symbols-outlined text-tertiary">coffee</span></div>
+        </div>
+      </section>
+
+      <!-- Contenedor de máquinas (una tarjeta por equipo) -->
+      <div id="cafeMaquinas" class="space-y-4"></div>
+
+      <!-- Acciones -->
+      <div class="space-y-2 pt-2">
+        <button onclick="guardarCafe()"
+          class="w-full h-12 bg-primary text-on-primary rounded-xl text-[14px] font-bold active:scale-95 transition-transform flex items-center justify-center gap-2">
+          <span class="material-symbols-outlined">save</span> Guardar contadores
+        </button>
+        <button onclick="guardarCafeYWhatsApp()"
+          class="w-full h-12 border-2 border-primary text-primary rounded-xl text-[13px] font-bold active:scale-95 transition-transform flex items-center justify-center gap-2">
+          <span class="material-symbols-outlined">send</span> Guardar + Enviar WhatsApp
+        </button>
+      </div>
+    </div><!-- fin pantallaCafe -->
   </main>
   <script>
     // ===================================================================
@@ -873,7 +903,7 @@
 
     // Oculta todas las pantallas (helper de navegación)
     function ocultarTodasLasPantallas() {
-      ['pantallaHome', 'pantallaLista', 'pantallaFormulario', 'pantalla360', 'pantallaConstruccion']
+      ['pantallaHome', 'pantallaLista', 'pantallaFormulario', 'pantalla360', 'pantallaConstruccion', 'pantallaCafe']
         .forEach(id => document.getElementById(id).classList.add('hidden'));
     }
 
@@ -911,7 +941,7 @@
     function seleccionarCliente(cliente) {
       clienteSeleccionado = cliente;
       if (modoApp === '360')      return abrirVista360(cliente);
-      if (modoApp === 'cafe')     return abrirConstruccion(cliente, 'Auditoría de Café', 'coffee');
+      if (modoApp === 'cafe')     return abrirAuditoriaCafe(cliente);
       if (modoApp === 'freezer')  return abrirConstruccion(cliente, 'Auditoría de Freezer', 'kitchen');
       return abrirAuditoriaVisita(cliente);  // modo 'visita' (default)
     }
@@ -1206,6 +1236,307 @@
       document.getElementById("construccionIcono").textContent = icono;
       document.getElementById("construccionTitulo").textContent = titulo;
       document.getElementById("construccionCliente").textContent = cliente.nombre_comercio || cliente.cliente;
+    }
+
+    // ===================================================================
+    // MODO CAFÉ — auditoría de contadores de máquinas
+    // ===================================================================
+    // Cantidad de contadores por modelo (definido por Nestlé/uso real).
+    const CAFE_CONTADORES_POR_MODELO = {
+      'Rhea 860': 8, 'Rhea 630': 6, 'FTP30': 12, 'Alegria A840': 8,
+      'Combi': 16, 'A8130': 8, 'Fusion': 16,
+    };
+    const CAFE_CONTADORES_DEFAULT = 16; // si el modelo no está en el mapa
+
+    function cafeNumContadores(modelo) {
+      return CAFE_CONTADORES_POR_MODELO[(modelo || '').trim()] || CAFE_CONTADORES_DEFAULT;
+    }
+
+    // Llama al backend por JSONP para traer los contadores de la última visita.
+    function cafeUltimaVisitaJSONP(serie, timeoutMs = 12000) {
+      return new Promise((resolve) => {
+        const cbName = 'onUltimaCafe_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
+        let done = false;
+        const cleanup = () => {
+          delete window[cbName];
+          const s = document.getElementById(cbName);
+          if (s) s.remove();
+        };
+        const timer = setTimeout(() => { if (!done) { done = true; cleanup(); resolve(null); } }, timeoutMs);
+        window[cbName] = (data) => {
+          if (done) return;
+          done = true; clearTimeout(timer); cleanup();
+          resolve(data && data.status === 'ok' && data.encontrado ? data : null);
+        };
+        const url = `${CONFIG.SHEETS_API_URL}?action=ultimaCafe&serie=${encodeURIComponent(serie)}&callback=${cbName}`;
+        const script = document.createElement('script');
+        script.id = cbName; script.src = url;
+        script.onerror = () => { if (!done) { done = true; clearTimeout(timer); cleanup(); resolve(null); } };
+        document.body.appendChild(script);
+      });
+    }
+
+    async function abrirAuditoriaCafe(cliente) {
+      clienteSeleccionado = cliente;
+      ocultarTodasLasPantallas();
+      document.getElementById("pantallaCafe").classList.remove("hidden");
+      document.getElementById("btnVolver").classList.remove("hidden");
+
+      document.getElementById('cafeNombre').textContent = cliente.nombre_comercio || cliente.cliente;
+      document.getElementById('cafeComercio').textContent = cliente.cliente;
+      document.getElementById('cafeMeta').textContent = `ID ${cliente.idcli} · Vend. ${cliente.idvend}`;
+
+      const cont = document.getElementById('cafeMaquinas');
+      cont.innerHTML = '';
+      const equipos = cliente.cafe_equipos || [];
+      if (equipos.length === 0) {
+        cont.innerHTML = `<p class="text-[13px] text-outline text-center py-6">Este cliente no tiene máquinas de café registradas.</p>`;
+        return;
+      }
+
+      // Render de cada máquina (con placeholder "cargando anterior")
+      equipos.forEach((eq, mi) => {
+        const n = cafeNumContadores(eq.modelo);
+        const filas = [];
+        for (let i = 0; i < n; i++) {
+          filas.push(`
+            <div class="grid grid-cols-[auto_1fr_1fr_auto] items-center gap-2 py-1.5 border-b border-outline-variant/20">
+              <span class="text-[11px] font-bold text-on-surface-variant w-7">C${i + 1}</span>
+              <span class="text-[11px] text-outline" id="cafeAnt-${mi}-${i}">—</span>
+              <input type="number" inputmode="numeric" min="0" id="cafeAct-${mi}-${i}"
+                oninput="recalcularExpendidos(${mi})"
+                class="h-9 bg-surface-container-high border border-outline-variant rounded-lg px-2 text-[13px] text-right focus:ring-2 focus:ring-primary outline-none" placeholder="actual" />
+              <span class="text-[11px] font-semibold text-secondary w-12 text-right" id="cafeDif-${mi}-${i}"></span>
+            </div>`);
+        }
+        const card = document.createElement('div');
+        card.className = 'bg-surface-container-lowest rounded-xl border border-outline-variant/30 shadow-sm overflow-hidden';
+        card.innerHTML = `
+          <div class="bg-surface-container-high px-4 py-3">
+            <div class="flex justify-between items-center gap-2">
+              <div>
+                <p class="text-[13px] font-bold text-on-surface">${eq.modelo || 'Modelo desconocido'}</p>
+                <p class="text-[11px] text-on-surface-variant font-mono">S/N ${eq.serie}</p>
+              </div>
+              <span class="text-[10px] text-outline" id="cafeUltFecha-${mi}">Sin visita previa</span>
+            </div>
+          </div>
+          <div class="px-4 py-3">
+            <div class="grid grid-cols-[auto_1fr_1fr_auto] gap-2 text-[9px] text-outline uppercase font-semibold pb-1">
+              <span class="w-7">Cont.</span><span>Anterior</span><span class="text-right pr-1">Actual</span><span class="w-12 text-right">Vasos</span>
+            </div>
+            ${filas.join('')}
+            <div class="flex justify-between items-center mt-3 pt-2 border-t border-outline-variant/30">
+              <span class="text-[12px] font-semibold text-on-surface-variant">Total expendidos</span>
+              <span class="text-[15px] font-bold text-secondary" id="cafeTotal-${mi}">0</span>
+            </div>
+
+            <!-- Estado + mantenimiento -->
+            <div class="mt-4 space-y-2">
+              <div class="flex gap-2">
+                <button type="button" onclick="setCafeEstado(${mi}, 'ok')" id="cafeEstadoOk-${mi}"
+                  class="flex-1 h-9 rounded-lg text-[12px] font-bold border-2 border-secondary text-secondary active:scale-95 transition-transform">Todo OK</button>
+                <button type="button" onclick="setCafeEstado(${mi}, 'intervencion')" id="cafeEstadoInt-${mi}"
+                  class="flex-1 h-9 rounded-lg text-[12px] font-bold border-2 border-outline-variant text-on-surface-variant active:scale-95 transition-transform">Requiere intervención</button>
+              </div>
+              <textarea id="cafeMant-${mi}" rows="2" placeholder="Mantenimiento realizado u observaciones..."
+                class="w-full bg-surface-container-high border border-outline-variant rounded-lg p-2 text-[12px] focus:ring-2 focus:ring-primary outline-none resize-none"></textarea>
+            </div>
+          </div>`;
+        cont.appendChild(card);
+      });
+
+      // Estado inicial de cada máquina en memoria
+      cafeEstadoMaquinas = equipos.map(() => ({ estado: 'ok', anteriores: null }));
+
+      // Traer la última visita de cada máquina (en paralelo) y pintar los anteriores
+      equipos.forEach(async (eq, mi) => {
+        const ult = await cafeUltimaVisitaJSONP(eq.serie);
+        if (!ult) return;
+        cafeEstadoMaquinas[mi].anteriores = ult.contadores || [];
+        const fechaEl = document.getElementById(`cafeUltFecha-${mi}`);
+        if (fechaEl && ult.fecha) {
+          const f = new Date(ult.fecha);
+          fechaEl.textContent = 'Últ.: ' + (isNaN(f) ? ult.fecha : f.toLocaleDateString('es-AR', { day: '2-digit', month: '2-digit', year: '2-digit' }));
+        }
+        const n = cafeNumContadores(eq.modelo);
+        for (let i = 0; i < n; i++) {
+          const ant = (ult.contadores || [])[i];
+          const el = document.getElementById(`cafeAnt-${mi}-${i}`);
+          if (el && ant != null) el.textContent = ant;
+        }
+        recalcularExpendidos(mi);
+      });
+    }
+
+    // Estado en memoria de las máquinas de la pantalla café actual
+    let cafeEstadoMaquinas = [];
+
+    function setCafeEstado(mi, estado) {
+      if (!cafeEstadoMaquinas[mi]) return;
+      cafeEstadoMaquinas[mi].estado = estado;
+      const ok = document.getElementById(`cafeEstadoOk-${mi}`);
+      const int = document.getElementById(`cafeEstadoInt-${mi}`);
+      const activo = estado === 'ok';
+      ok.className = `flex-1 h-9 rounded-lg text-[12px] font-bold border-2 active:scale-95 transition-transform ${activo ? 'border-secondary bg-secondary text-on-secondary' : 'border-secondary text-secondary'}`;
+      int.className = `flex-1 h-9 rounded-lg text-[12px] font-bold border-2 active:scale-95 transition-transform ${!activo ? 'border-error bg-error text-on-error' : 'border-outline-variant text-on-surface-variant'}`;
+    }
+
+    // Recalcula los vasos expendidos (actual - anterior) por contador y total.
+    function recalcularExpendidos(mi) {
+      const eq = (clienteSeleccionado.cafe_equipos || [])[mi];
+      if (!eq) return;
+      const n = cafeNumContadores(eq.modelo);
+      const anteriores = (cafeEstadoMaquinas[mi] && cafeEstadoMaquinas[mi].anteriores) || [];
+      let total = 0;
+      for (let i = 0; i < n; i++) {
+        const inp = document.getElementById(`cafeAct-${mi}-${i}`);
+        const difEl = document.getElementById(`cafeDif-${mi}-${i}`);
+        const actual = inp && inp.value !== '' ? Number(inp.value) : null;
+        const anterior = anteriores[i];
+        if (actual != null && anterior != null && actual >= anterior) {
+          const dif = actual - anterior;
+          difEl.textContent = '+' + dif;
+          total += dif;
+        } else {
+          difEl.textContent = '';
+        }
+      }
+      const totEl = document.getElementById(`cafeTotal-${mi}`);
+      if (totEl) totEl.textContent = total.toLocaleString('es-AR');
+    }
+
+    // Recolecta los datos de todas las máquinas de la pantalla café actual.
+    // Devuelve un array de registros (uno por máquina) listos para guardar.
+    function recolectarDatosCafe() {
+      const c = clienteSeleccionado;
+      const equipos = c.cafe_equipos || [];
+      const ahora = new Date();
+      const registros = [];
+      equipos.forEach((eq, mi) => {
+        const n = cafeNumContadores(eq.modelo);
+        const anteriores = (cafeEstadoMaquinas[mi] && cafeEstadoMaquinas[mi].anteriores) || [];
+        const contadores = [];
+        let total = 0, tieneValor = false;
+        for (let i = 0; i < n; i++) {
+          const inp = document.getElementById(`cafeAct-${mi}-${i}`);
+          const actual = inp && inp.value !== '' ? Number(inp.value) : null;
+          contadores.push(actual);
+          if (actual != null) tieneValor = true;
+          const anterior = anteriores[i];
+          if (actual != null && anterior != null && actual >= anterior) total += (actual - anterior);
+        }
+        registros.push({
+          timestamp: ahora.toISOString(),
+          fecha: ahora.toLocaleDateString('es-AR', { day: '2-digit', month: '2-digit', year: 'numeric' }),
+          clienteId: c.idcli,
+          cliente: c.cliente,
+          comercio: c.nombre_comercio || c.cliente,
+          serie: eq.serie,
+          modelo: eq.modelo || '',
+          estado: (cafeEstadoMaquinas[mi] && cafeEstadoMaquinas[mi].estado) === 'intervencion' ? 'Requiere intervención' : 'OK',
+          mantenimiento: (document.getElementById(`cafeMant-${mi}`) || {}).value || '',
+          contadores: contadores,
+          totalExpendidos: total,
+          _tieneValor: tieneValor,
+        });
+      });
+      return registros;
+    }
+
+    // Envía un registro de café por JSONP (evita el problema de CORS de Apps Script).
+    function enviarCafeJSONP(reg, timeoutMs = 15000) {
+      return new Promise((resolve, reject) => {
+        const cbName = 'onGuardarCafe_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
+        let done = false;
+        const cleanup = () => { delete window[cbName]; const s = document.getElementById(cbName); if (s) s.remove(); };
+        const timer = setTimeout(() => { if (!done) { done = true; cleanup(); reject(new Error('timeout')); } }, timeoutMs);
+        window[cbName] = (data) => {
+          if (done) return;
+          done = true; clearTimeout(timer); cleanup();
+          if (data && data.status === 'ok') resolve(data);
+          else reject(new Error(data && data.message ? data.message : 'error'));
+        };
+        const payload = encodeURIComponent(JSON.stringify(reg));
+        const url = `${CONFIG.SHEETS_API_URL}?action=guardarCafe&data=${payload}&callback=${cbName}`;
+        const script = document.createElement('script');
+        script.id = cbName; script.src = url;
+        script.onerror = () => { if (!done) { done = true; clearTimeout(timer); cleanup(); reject(new Error('script error')); } };
+        document.body.appendChild(script);
+      });
+    }
+
+    function guardarCafeEnColaPendiente(regs) {
+      let cola = JSON.parse(localStorage.getItem('cafe_pendientes') || '[]');
+      cola = cola.concat(regs);
+      localStorage.setItem('cafe_pendientes', JSON.stringify(cola));
+    }
+
+    async function guardarCafe() {
+      if (!clienteSeleccionado) return false;
+      const registros = recolectarDatosCafe();
+      const conCarga = registros.filter(r => r._tieneValor);
+      if (conCarga.length === 0) {
+        mostrarToast('Cargá al menos un contador antes de guardar', 'error');
+        return false;
+      }
+      // Quitar el flag interno antes de enviar
+      const limpios = conCarga.map(({ _tieneValor, ...r }) => r);
+
+      if (navigator.onLine) {
+        try {
+          for (const reg of limpios) await enviarCafeJSONP(reg);
+          mostrarToast(`${limpios.length} máquina(s) guardada(s) en la nube`);
+        } catch (e) {
+          console.error('Error guardando café:', e);
+          guardarCafeEnColaPendiente(limpios);
+          mostrarToast('Guardado local. Se enviará cuando haya conexión', 'info');
+        }
+      } else {
+        guardarCafeEnColaPendiente(limpios);
+        mostrarToast('Guardado localmente (sin conexión)', 'info');
+      }
+      return true;
+    }
+
+    // Reporte de WhatsApp de los contadores de café (formato sobrio).
+    function generarTextoCafe() {
+      const c = clienteSeleccionado;
+      const registros = recolectarDatosCafe().filter(r => r._tieneValor);
+      const EMO = {
+        cafe: '\u2615', pin: '\uD83D\uDCCD', doc: '\uD83D\uDCC4',
+        ok: '\u2705', warn: '\uD83D\uDD34', vaso: '\uD83E\uDD64',
+      };
+      const L = [];
+      L.push(`${EMO.cafe} *AUDITORÍA DE CAFÉ*`);
+      L.push(`${new Date().toLocaleDateString('es-AR', { weekday: 'short', day: '2-digit', month: 'short' })}`);
+      L.push('');
+      L.push(`${EMO.pin} ${c.nombre_comercio || c.cliente}`);
+      L.push(`#${c.idcli} · Vend. ${c.idvend}`);
+      registros.forEach(r => {
+        L.push('');
+        L.push(`${EMO.doc} *${r.modelo}* — S/N ${r.serie}`);
+        const conts = r.contadores
+          .map((v, i) => v != null ? `C${i + 1}:${v}` : null)
+          .filter(Boolean).join(' · ');
+        L.push(conts || 'Sin contadores cargados');
+        L.push(`${EMO.vaso} Expendidos: ${r.totalExpendidos.toLocaleString('es-AR')}`);
+        L.push(`${r.estado === 'OK' ? EMO.ok : EMO.warn} ${r.estado}`);
+        if (r.mantenimiento) L.push(`Obs: ${r.mantenimiento}`);
+      });
+      return L.join('\n');
+    }
+
+    async function guardarCafeYWhatsApp() {
+      const ok = await guardarCafe();
+      if (!ok) return;
+      const texto = generarTextoCafe();
+      const isAndroid = /android/i.test(navigator.userAgent);
+      if (isAndroid) {
+        window.location.href = `intent://send?text=${encodeURIComponent(texto)}#Intent;package=com.whatsapp.w4b;scheme=whatsapp;end`;
+      } else {
+        window.open(`https://wa.me/?text=${encodeURIComponent(texto)}`, '_blank');
+      }
     }
 
     // Botón Volver contextual:
@@ -1679,8 +2010,10 @@
 
     function verificarPendientes() {
       const cola = JSON.parse(localStorage.getItem('auditorias_pendientes') || '[]');
+      const colaCafe = JSON.parse(localStorage.getItem('cafe_pendientes') || '[]');
+      const total = cola.length + colaCafe.length;
       const btn = document.getElementById('btnSync');
-      if (cola.length > 0) { btn.classList.remove('hidden'); btn.textContent = `Enviar ${cola.length} pendiente${cola.length > 1 ? 's' : ''}`; }
+      if (total > 0) { btn.classList.remove('hidden'); btn.textContent = `Enviar ${total} pendiente${total > 1 ? 's' : ''}`; }
       else btn.classList.add('hidden');
     }
 
@@ -1696,7 +2029,17 @@
         catch (e) { fallidos.push(datos); }
       }
       localStorage.setItem('auditorias_pendientes', JSON.stringify(fallidos));
-      mostrarToast(`${enviados} auditoría(s) sincronizada(s)`);
+
+      // También sincronizar la cola de auditorías de café
+      let colaCafe = JSON.parse(localStorage.getItem('cafe_pendientes') || '[]');
+      const fallidosCafe = [];
+      for (const reg of colaCafe) {
+        try { await enviarCafeJSONP(reg); enviados++; }
+        catch (e) { fallidosCafe.push(reg); }
+      }
+      localStorage.setItem('cafe_pendientes', JSON.stringify(fallidosCafe));
+
+      mostrarToast(`${enviados} registro(s) sincronizado(s)`);
       verificarPendientes();
     }
 

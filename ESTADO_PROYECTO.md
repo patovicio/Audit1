@@ -14,9 +14,9 @@ Sin frameworks, sin build, sin bundler. Backend = Google Apps Script + Google
 Sheets + Google Drive. Hosting = GitHub Pages.
 
 La app arranca en un **HOME con 4 modos** (`modoApp`): **Auditoría de Visita**,
-**Vista 360° del Cliente** (solo lectura), **Auditoría de Café** y **Auditoría de
-Freezer** (estas dos en construcción). Cada modo lleva al mismo listado de clientes
-(Río Gallegos) pero filtra y actúa distinto al tocar un cliente.
+**Vista 360° del Cliente** (solo lectura), **Auditoría de Café** (contadores de
+máquinas) y **Auditoría de Freezer** (en construcción). Cada modo lleva al mismo
+listado de clientes (Río Gallegos) pero filtra y actúa distinto al tocar un cliente.
 
 En la **Auditoría de Visita** se registra: activos Friosur (freezers/máquinas café),
 cobertura de productos (Marfrig/Froneri), precios y activos de la competencia,
@@ -71,7 +71,8 @@ App (index.html) descarga maestro:  ?action=clientes&token=...&callback=...
 | Token del maestro | `index.html` `CONFIG.CLIENTES_TOKEN` **y** propiedad `CLIENTES_TOKEN` en Apps Script | `friosur-a7f3d9c2e1b4-2026` |
 | File ID del maestro en Drive | propiedad `CLIENTES_FILE_ID` en Apps Script | `1HdG5W33zP8jafrL0XhXpHAWXYb85HmAz` |
 | Spreadsheet ID (auditorías) | `Codigo.gs` `SPREADSHEET_ID` | `1Za8ZKGGn1jbQ-4QamXcv1PRKhTu_UYKK0pkJhCoZVwo` |
-| Hoja de auditorías | `Codigo.gs` `SHEET_NAME` | `Auditorías` |
+| Hoja de auditorías (visita) | `Codigo.gs` `SHEET_NAME` | `Auditorías` |
+| Hoja de auditorías de café | `Codigo.gs` `SHEET_CAFE` | `Auditorías Café` (se crea sola al primer guardado) |
 | Repo GitHub | remoto `origin` | `https://github.com/patovicio/Audit1.git` |
 
 > **Rama local `master` → rama remota `main`.** Se pushea con
@@ -238,6 +239,41 @@ Para `sw.js`: `node --check sw.js`.
 ---
 
 ## 11. Bitácora de sesiones
+
+### 2026-09-15 (cont. 6) — Módulo Auditoría de Café
+- **Objetivo:** relevar contadores de vasos de las máquinas de café por cliente,
+  calcular vasos expendidos desde la última visita y guardar en Sheets para cargar
+  después al sistema de Nestlé.
+- **Contadores por modelo** (constante `CAFE_CONTADORES_POR_MODELO`):
+  Rhea 860=8 · Rhea 630=6 · FTP30=12 · Alegria A840=8 · Combi=16 · A8130=8 · Fusion=16.
+  Si el modelo no está en el mapa → 16 por defecto.
+- **Backend (`generar_maestro_desde_duckdb.py`):** nuevo campo `cafe_equipos` =
+  `[{serie, modelo}]` por cliente (mapea serie→modelo desde `ext_maquinas_cafe`).
+  `cafe_maquinas` (lista de seriales) se mantiene por compatibilidad. El modelo viene
+  por fila del CSV (si un cliente tiene varias máquinas en la misma fila comparten
+  modelo — limitación conocida del CSV, afecta a casi nadie).
+- **Apps Script (`Codigo.gs`):**
+  - `action=guardarCafe` → hoja nueva **"Auditorías Café"** (cols: Timestamp, Fecha,
+    ID Cliente, Cliente, Comercio, Serie, Modelo, Estado, Mantenimiento, C1..C16,
+    Total Expendidos). Una fila por máquina. Soporta JSONP.
+  - `action=ultimaCafe&serie=XXX` → devuelve `{encontrado, fecha, contadores[16]}`
+    del último registro de esa serie (para mostrar el "anterior" y calcular expendidos).
+- **Frontend (`index.html`):** pantalla `pantallaCafe`. `abrirAuditoriaCafe()` arma
+  una tarjeta por máquina con: contadores según modelo (anterior traído por JSONP +
+  input actual + diferencia por contador), total de vasos expendidos, estado
+  Todo OK / Requiere intervención, y textarea de mantenimiento. `recalcularExpendidos()`
+  hace actual−anterior. `guardarCafe()` valida y envía cada máquina (`enviarCafeJSONP`)
+  con cola offline `cafe_pendientes`. `guardarCafeYWhatsApp()` + `generarTextoCafe()`
+  (reporte sobrio con contadores, expendidos, estado, obs). Las colas de café se
+  integran en `sincronizarPendientes()` y `verificarPendientes()`.
+- **"Última visita":** se arranca SIN histórico. La primera auditoría de cada máquina
+  queda de base; a partir de la 2ª, la app muestra el anterior y calcula expendidos.
+- **SW v9.** Validado: JS OK, `node --check` de Codigo.gs OK, maestro regenerado
+  (46 clientes con `cafe_equipos`).
+- **PENDIENTE de publicar (2 pasos):**
+  1. Pegar `Codigo.gs` en script.google.com y **re-implementar la Web App**
+     (nueva versión de la implementación). Sin esto, `guardarCafe`/`ultimaCafe` no existen.
+  2. Subir "nueva versión" del maestro a Drive + `git push`.
 
 ### 2026-09-15 (cont. 5) — Fase A: HOME de 4 modos + Vista 360° enriquecida
 - **Reestructuración de navegación.** La app ahora arranca en una **pantalla HOME**
