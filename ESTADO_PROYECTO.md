@@ -118,6 +118,17 @@ Generado por `generar_maestro_desde_duckdb.py` (DuckDB read-only). Cada cliente:
     "venta_3m": 126573.05,
     "top_productos": [{"producto": "...", "neto": 39708.6}],
     "saldo_vencido": 83523.16
+  },
+  "historial": {
+    "ultimas_facturas": [
+      {"nro": "124190159", "fecha": "2026-09-07", "neto": 581727.6, "con_iva": 721342.23, "es_nc": false}
+    ],
+    "frecuencia_dias": 7.2,
+    "compras_recientes": 25,
+    "cobranzas": {
+      "fact_pagadas": 152, "dias_promedio_pago": 15.8, "dias_vs_vto": -5.2, "ultimo_cobro": "2026-09-14"
+    },
+    "comportamiento_pago": "puntual"
   }
 }
 ```
@@ -127,8 +138,16 @@ Reglas de negocio aplicadas (respetan la directiva FrioSur):
 - **Neto facturado (como OO)** = `SUM(SubTotal) WHERE DocType IN (0,1)`.
 - **Top productos** = `SUM(invoiceitemrow.RowNet)` (NO SubTotal post-JOIN), 90 días.
 - **Saldo vencido** = `SUM(invoice.Saldo) WHERE OpenFlag=1 AND Saldo>0 AND DueDate < hoy` (con IVA).
+- **Historial 360** (bloque `historial`):
+  - `ultimas_facturas` = últimas 8 de `invoice` (DocType IN 0,1); NC de reparto marcadas `es_nc`.
+  - `frecuencia_dias` = 180 / días distintos con compra en ventana 180 días (DocType=0, SubTotal>0).
+  - `cobranzas` = vía `receiptinvoicerow` (InvoiceNr→invoice.SerNr, masterId→receipt.internalId):
+    `dias_promedio_pago` (cobro − emisión), `dias_vs_vto` (cobro − vencimiento, negativo = paga antes).
+    Solo crédito (`PayTerm<>'EF'`), pagos 0..365 días. `null` si nunca operó a crédito.
+  - `comportamiento_pago`: 🟢 puntual (`dias_vs_vto<=0`) · 🟡 lento (1-10) · 🔴 moroso (>10 o con saldo vencido hoy).
 - Clientes activos = `(Closed=0 OR NULL) AND GroupCode!='PERSO'`.
 - Última corrida: 470 clientes activos, 458 con ventas, 30 con saldo vencido, datos al 15/09/2026.
+  Comportamiento de pago: 334 puntual, 50 lento, 39 moroso, 47 sin crédito.
 
 ---
 
@@ -210,6 +229,26 @@ Para `sw.js`: `node --check sw.js`.
 ---
 
 ## 11. Bitácora de sesiones
+
+### 2026-09-15 (cont. 4) — Ficha 360° del cliente (historial compras + cobranzas)
+- **Backend (`generar_maestro_desde_duckdb.py`):** nuevo bloque `historial` por
+  cliente (queries validadas con el MCP DuckDB antes de codear):
+  - `ultimas_facturas` (8): `invoice` DocType IN (0,1), NC de reparto marcadas `es_nc`.
+  - `frecuencia_dias` (ventana 180 d, más representativa que la histórica).
+  - `cobranzas`: liga recibo→factura vía `receiptinvoicerow`; calcula días de pago
+    (cobro−emisión) y días vs vencimiento (cobro−DueDate). Solo crédito, 0..365 d.
+  - `comportamiento_pago`: puntual/lento/moroso (moroso también si tiene saldo
+    vencido hoy). Constantes `ULTIMAS_FACTURAS=8`, `VENTANA_FRECUENCIA=180`.
+- **Frontend (`index.html`):** sección **"Historial 360°"** desplegable dentro del
+  panel de ventas (`frmVentas`). Colapsada por defecto en cada cliente. Muestra:
+  badge de pagador (color por clasificación), "compra cada X días", "paga en X días"
+  + detalle vs vencimiento + último cobro, y lista de últimas facturas (NC en rojo
+  con etiqueta). Funciones `renderizarHistorial()`, `toggleHistorial()`, objeto
+  `PAGADOR_INFO`. Reutiliza `fmtPesos()`.
+- **SW v7.** Validado: `py_compile` OK, JS OK, `node --check sw.js` OK. Maestro
+  regenerado (470 clientes; 334 puntual / 50 lento / 39 moroso / 47 sin crédito).
+- **PENDIENTE de publicar:** subir "nueva versión" del maestro a Drive (File ID
+  `1HdG5W...`) + `git push origin master:main`.
 
 ### 2026-09-15 (cont. 3) — Fase 2 "Saldo vencido" COMPLETADA
 - **Backend (`generar_maestro_desde_duckdb.py`):** nuevo paso 4b que calcula

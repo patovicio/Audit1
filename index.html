@@ -228,6 +228,40 @@
             <p class="text-[9px] text-outline uppercase font-semibold mb-1">Más comprados (90 días)</p>
             <ul id="ventaTop" class="space-y-1"></ul>
           </div>
+
+          <!-- Ficha 360: historial de compras + cobranzas (desplegable) -->
+          <div id="frmHistorial" class="mt-3 pt-3 border-t border-outline-variant hidden">
+            <button type="button" id="btnToggleHistorial" onclick="toggleHistorial()"
+              class="w-full flex items-center justify-between gap-2 active:scale-[0.99] transition-transform">
+              <span class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[16px] text-primary">history</span>
+                <span class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider">Historial 360°</span>
+                <span id="histPagadorBadge"></span>
+              </span>
+              <span id="histChevron" class="material-symbols-outlined text-[18px] text-outline transition-transform">expand_more</span>
+            </button>
+
+            <div id="histContenido" class="hidden mt-3 space-y-3">
+              <!-- Métricas: frecuencia + cómo paga -->
+              <div class="grid grid-cols-2 gap-2">
+                <div class="bg-surface-container-high rounded-lg p-2 text-center">
+                  <p class="text-[9px] text-outline uppercase font-semibold">Compra cada</p>
+                  <p id="histFrecuencia" class="text-[12px] font-bold text-on-surface mt-0.5">—</p>
+                </div>
+                <div class="bg-surface-container-high rounded-lg p-2 text-center">
+                  <p class="text-[9px] text-outline uppercase font-semibold">Paga en</p>
+                  <p id="histDiasPago" class="text-[12px] font-bold text-on-surface mt-0.5">—</p>
+                </div>
+              </div>
+              <p id="histPagoDetalle" class="text-[10px] text-on-surface-variant text-center"></p>
+
+              <!-- Últimas facturas -->
+              <div id="histFacturasWrap" class="hidden">
+                <p class="text-[9px] text-outline uppercase font-semibold mb-1">Últimas facturas</p>
+                <ul id="histFacturas" class="space-y-1"></ul>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -719,8 +753,95 @@
       // Mostrar sección café solo si el cliente tiene máquinas
       document.getElementById('seccionCafe').classList.toggle('hidden', !(cliente.cafe_maquinas?.length > 0));
       renderizarVentasCliente(cliente);
+      renderizarHistorial(cliente);
       resetFormulario();
       renderizarActivos(cliente);
+    }
+
+    // Config visual de la clasificación de pagador (viene del maestro)
+    const PAGADOR_INFO = {
+      puntual: { txt: 'Puntual', cls: 'bg-secondary-container text-on-secondary-container', ico: 'verified' },
+      lento:   { txt: 'Lento',   cls: 'bg-tertiary-container text-on-tertiary-container', ico: 'schedule' },
+      moroso:  { txt: 'Moroso',  cls: 'bg-error-container text-on-error-container', ico: 'warning' },
+    };
+
+    // Colapsa/expande la sección de historial 360
+    function toggleHistorial() {
+      const cont = document.getElementById('histContenido');
+      const chev = document.getElementById('histChevron');
+      const abierto = !cont.classList.contains('hidden');
+      cont.classList.toggle('hidden', abierto);
+      chev.style.transform = abierto ? '' : 'rotate(180deg)';
+    }
+
+    // Rellena la ficha 360: frecuencia de compra, comportamiento de pago y
+    // últimas facturas. Todo viene del bloque "historial" del maestro.
+    function renderizarHistorial(cliente) {
+      const panel = document.getElementById('frmHistorial');
+      const h = cliente.historial;
+      if (!h) { panel.classList.add('hidden'); return; }
+      panel.classList.remove('hidden');
+
+      // Colapsado por defecto al abrir cada cliente
+      document.getElementById('histContenido').classList.add('hidden');
+      document.getElementById('histChevron').style.transform = '';
+
+      // Badge de comportamiento de pago
+      const badge = document.getElementById('histPagadorBadge');
+      const info = PAGADOR_INFO[h.comportamiento_pago];
+      badge.innerHTML = info
+        ? `<span class="text-[9px] ${info.cls} px-2 py-0.5 rounded-full font-semibold flex items-center gap-0.5"><span class="material-symbols-outlined text-[10px]">${info.ico}</span>${info.txt}</span>`
+        : '';
+
+      // Frecuencia de compra
+      document.getElementById('histFrecuencia').textContent =
+        h.frecuencia_dias ? `${h.frecuencia_dias} días` : '—';
+
+      // Cómo paga (días promedio) + detalle vs vencimiento
+      const cob = h.cobranzas;
+      const elDias = document.getElementById('histDiasPago');
+      const elDet = document.getElementById('histPagoDetalle');
+      if (cob && cob.dias_promedio_pago != null) {
+        elDias.textContent = `${cob.dias_promedio_pago} días`;
+        const vs = cob.dias_vs_vto;
+        let txtVto = '';
+        if (vs != null) {
+          if (vs <= 0) txtVto = `Paga ${Math.abs(vs)} día(s) antes del vencimiento`;
+          else txtVto = `Paga ${vs} día(s) después del vencimiento`;
+        }
+        let ultimo = '';
+        if (cob.ultimo_cobro) {
+          const d = new Date(cob.ultimo_cobro + 'T00:00:00');
+          ultimo = ' · Último cobro: ' + d.toLocaleDateString('es-AR', { day: '2-digit', month: '2-digit', year: '2-digit' });
+        }
+        elDet.textContent = txtVto + ultimo;
+      } else {
+        elDias.textContent = 'Contado';
+        elDet.textContent = 'Sin operaciones a crédito registradas';
+      }
+
+      // Últimas facturas
+      const wrap = document.getElementById('histFacturasWrap');
+      const ul = document.getElementById('histFacturas');
+      ul.innerHTML = '';
+      const facts = h.ultimas_facturas || [];
+      if (facts.length === 0) {
+        wrap.classList.add('hidden');
+      } else {
+        wrap.classList.remove('hidden');
+        facts.forEach(f => {
+          const d = f.fecha ? new Date(f.fecha + 'T00:00:00').toLocaleDateString('es-AR', { day: '2-digit', month: '2-digit', year: '2-digit' }) : '—';
+          const li = document.createElement('li');
+          li.className = 'flex justify-between items-center gap-2 text-[11px]';
+          const etiqueta = f.es_nc
+            ? `<span class="text-[8px] bg-error-container text-on-error-container px-1 py-0.5 rounded font-semibold">NC</span>`
+            : '';
+          const montoCls = f.es_nc ? 'text-error' : 'text-on-surface';
+          li.innerHTML = `<span class="text-on-surface-variant flex items-center gap-1"><span class="text-outline">${d}</span> ${etiqueta}</span>` +
+                         `<span class="font-bold ${montoCls} flex-shrink-0">${fmtPesos(f.con_iva)}</span>`;
+          ul.appendChild(li);
+        });
+      }
     }
 
     // Formatea pesos de forma compacta para pantalla chica ($1,2M / $340K / $0)

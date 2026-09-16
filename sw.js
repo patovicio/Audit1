@@ -1,5 +1,5 @@
 // Service Worker - Auditoría Friosur PWA
-const CACHE_NAME = 'friosur-audit-v6'; // ← v6: chip/badge "Saldo vencido" (Fase 2). index.html network-first.
+const CACHE_NAME = 'friosur-audit-v7'; // ← v7: ficha 360 (historial compras + cobranzas). index.html network-first.
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
